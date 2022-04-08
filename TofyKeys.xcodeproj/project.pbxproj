@@ -1,0 +1,523 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */; };
+		970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97EE27F1B1B900FAE05B /* Assets.xcassets */; };
+		970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */; };
+		970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97FA27F1B69900FAE05B /* LandingView.swift */; };
+		970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97FE27F1B71E00FAE05B /* LandingTopView.swift */; };
+		970F980227F1B97800FAE05B /* TofyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980127F1B97800FAE05B /* TofyText.swift */; };
+		970F980627F1BF1E00FAE05B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980527F1BF1E00FAE05B /* User.swift */; };
+		970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980927F1C05100FAE05B /* UserViewModel.swift */; };
+		970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980B27F1C40F00FAE05B /* UserSettingsView.swift */; };
+		970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980E27F1C5CB00FAE05B /* LoggedUser.swift */; };
+		970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981027F1C5D700FAE05B /* NoLoggedUser.swift */; };
+		970F981327F1C67600FAE05B /* TofyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981227F1C67600FAE05B /* TofyButton.swift */; };
+		970F981527F1C75800FAE05B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F981427F1C75800FAE05B /* Colors.xcassets */; };
+		970F981727F1C7B700FAE05B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981627F1C7B700FAE05B /* Colors.swift */; };
+		970F981B27F1C8D100FAE05B /* LocalizableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981A27F1C8D100FAE05B /* LocalizableHelper.swift */; };
+		970F981C27F1C98B00FAE05B /* Localizables.strings in Resources */ = {isa = PBXBuildFile; fileRef = 970F981E27F1C98B00FAE05B /* Localizables.strings */; };
+		970F982D27F63F1900FAE05B /* Clave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F982C27F63F1900FAE05B /* Clave.swift */; };
+		970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */; };
+		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		970F97E727F1B1B700FAE05B /* TofyKeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TofyKeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyKeysApp.swift; sourceTree = "<group>"; };
+		970F97EE27F1B1B900FAE05B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		970F97FA27F1B69900FAE05B /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		970F97FE27F1B71E00FAE05B /* LandingTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingTopView.swift; sourceTree = "<group>"; };
+		970F980127F1B97800FAE05B /* TofyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyText.swift; sourceTree = "<group>"; };
+		970F980527F1BF1E00FAE05B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		970F980927F1C05100FAE05B /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		970F980B27F1C40F00FAE05B /* UserSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsView.swift; sourceTree = "<group>"; };
+		970F980E27F1C5CB00FAE05B /* LoggedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedUser.swift; sourceTree = "<group>"; };
+		970F981027F1C5D700FAE05B /* NoLoggedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLoggedUser.swift; sourceTree = "<group>"; };
+		970F981227F1C67600FAE05B /* TofyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyButton.swift; sourceTree = "<group>"; };
+		970F981427F1C75800FAE05B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		970F981627F1C7B700FAE05B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		970F981A27F1C8D100FAE05B /* LocalizableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableHelper.swift; sourceTree = "<group>"; };
+		970F981D27F1C98B00FAE05B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizables.strings; sourceTree = "<group>"; };
+		970F981F27F1C9B400FAE05B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizables.strings; sourceTree = "<group>"; };
+		970F982C27F63F1900FAE05B /* Clave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clave.swift; sourceTree = "<group>"; };
+		970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDatabase.xcdatamodel; sourceTree = "<group>"; };
+		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		970F97E427F1B1B700FAE05B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		970F97DE27F1B1B700FAE05B = {
+			isa = PBXGroup;
+			children = (
+				970F97E927F1B1B700FAE05B /* TofyKeys */,
+				970F97E827F1B1B700FAE05B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		970F97E827F1B1B700FAE05B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				970F97E727F1B1B700FAE05B /* TofyKeys.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		970F97E927F1B1B700FAE05B /* TofyKeys */ = {
+			isa = PBXGroup;
+			children = (
+				970F980827F1C02D00FAE05B /* Views */,
+				970F980727F1C02300FAE05B /* ViewModels */,
+				970F980327F1BEEF00FAE05B /* API */,
+				970F980027F1B96000FAE05B /* Helper */,
+				970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */,
+				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
+				970F97F027F1B1B900FAE05B /* Preview Content */,
+				970F981427F1C75800FAE05B /* Colors.xcassets */,
+			);
+			path = TofyKeys;
+			sourceTree = "<group>";
+		};
+		970F97F027F1B1B900FAE05B /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		970F97F827F1B66C00FAE05B /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				970F97FD27F1B70400FAE05B /* TopView */,
+				970F97FA27F1B69900FAE05B /* LandingView.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		970F97F927F1B68400FAE05B /* UserSettings */ = {
+			isa = PBXGroup;
+			children = (
+				970F980D27F1C48E00FAE05B /* Views */,
+				970F980B27F1C40F00FAE05B /* UserSettingsView.swift */,
+			);
+			path = UserSettings;
+			sourceTree = "<group>";
+		};
+		970F97FD27F1B70400FAE05B /* TopView */ = {
+			isa = PBXGroup;
+			children = (
+				970F97FE27F1B71E00FAE05B /* LandingTopView.swift */,
+			);
+			path = TopView;
+			sourceTree = "<group>";
+		};
+		970F980027F1B96000FAE05B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				970F980127F1B97800FAE05B /* TofyText.swift */,
+				970F981227F1C67600FAE05B /* TofyButton.swift */,
+				970F981627F1C7B700FAE05B /* Colors.swift */,
+				970F981E27F1C98B00FAE05B /* Localizables.strings */,
+				970F981A27F1C8D100FAE05B /* LocalizableHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		970F980327F1BEEF00FAE05B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				970F982F27F6406E00FAE05B /* Network */,
+				970F982E27F6406300FAE05B /* Local */,
+				970F980427F1BEF600FAE05B /* Models */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		970F980427F1BEF600FAE05B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				970F980527F1BF1E00FAE05B /* User.swift */,
+				970F982C27F63F1900FAE05B /* Clave.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		970F980727F1C02300FAE05B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				970F980927F1C05100FAE05B /* UserViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		970F980827F1C02D00FAE05B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				970F97F927F1B68400FAE05B /* UserSettings */,
+				970F97F827F1B66C00FAE05B /* Landing */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		970F980D27F1C48E00FAE05B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				970F980E27F1C5CB00FAE05B /* LoggedUser.swift */,
+				970F981027F1C5D700FAE05B /* NoLoggedUser.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		970F982E27F6406300FAE05B /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */,
+				970F983727F6456300FAE05B /* PersistenceController.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		970F982F27F6406E00FAE05B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		970F97E627F1B1B700FAE05B /* TofyKeys */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 970F97F527F1B1B900FAE05B /* Build configuration list for PBXNativeTarget "TofyKeys" */;
+			buildPhases = (
+				970F97E327F1B1B700FAE05B /* Sources */,
+				970F97E427F1B1B700FAE05B /* Frameworks */,
+				970F97E527F1B1B700FAE05B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TofyKeys;
+			productName = TofyKeys;
+			productReference = 970F97E727F1B1B700FAE05B /* TofyKeys.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		970F97DF27F1B1B700FAE05B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					970F97E627F1B1B700FAE05B = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 970F97E227F1B1B700FAE05B /* Build configuration list for PBXProject "TofyKeys" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				es,
+			);
+			mainGroup = 970F97DE27F1B1B700FAE05B;
+			productRefGroup = 970F97E827F1B1B700FAE05B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				970F97E627F1B1B700FAE05B /* TofyKeys */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		970F97E527F1B1B700FAE05B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				970F981527F1C75800FAE05B /* Colors.xcassets in Resources */,
+				970F981C27F1C98B00FAE05B /* Localizables.strings in Resources */,
+				970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */,
+				970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		970F97E327F1B1B700FAE05B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
+				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
+				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
+				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
+				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
+				970F981327F1C67600FAE05B /* TofyButton.swift in Sources */,
+				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
+				970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */,
+				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
+				970F981B27F1C8D100FAE05B /* LocalizableHelper.swift in Sources */,
+				970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */,
+				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
+				970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */,
+				970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */,
+				970F983827F6456300FAE05B /* PersistenceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		970F981E27F1C98B00FAE05B /* Localizables.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				970F981D27F1C98B00FAE05B /* en */,
+				970F981F27F1C9B400FAE05B /* es */,
+			);
+			name = Localizables.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		970F97F327F1B1B900FAE05B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		970F97F427F1B1B900FAE05B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		970F97F627F1B1B900FAE05B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KK4SFZZUX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codebounds.tofyKeys.TofyKeys;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		970F97F727F1B1B900FAE05B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
+				DEVELOPMENT_TEAM = 2KK4SFZZUX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codebounds.tofyKeys.TofyKeys;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		970F97E227F1B1B700FAE05B /* Build configuration list for PBXProject "TofyKeys" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				970F97F327F1B1B900FAE05B /* Debug */,
+				970F97F427F1B1B900FAE05B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		970F97F527F1B1B900FAE05B /* Build configuration list for PBXNativeTarget "TofyKeys" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				970F97F627F1B1B900FAE05B /* Debug */,
+				970F97F727F1B1B900FAE05B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */,
+			);
+			currentVersion = 970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */;
+			path = TofyKeys.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 970F97DF27F1B1B700FAE05B /* Project object */;
+}

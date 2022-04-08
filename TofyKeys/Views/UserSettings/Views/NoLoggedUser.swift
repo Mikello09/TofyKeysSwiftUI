@@ -1,0 +1,39 @@
+//
+//  NoLoggedUser.swift
+//  TofyKeys
+//
+//  Created by Mikel on 28/3/22.
+//
+
+import SwiftUI
+
+struct NoLoggedUser: View {
+    
+    @Binding var goToLogin: Bool
+    @Binding var goToRegister: Bool
+    
+    var body: some View {
+        VStack {
+            Image(systemName: "person.fill")
+                .resizable()
+                .foregroundColor(.red)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.black, lineWidth: 1))
+                .frame(width: 96, height: 96)
+            Spacer()
+            Button (action: {
+                self.goToLogin = true
+            }, label: {
+                textButton(text: "loginOrRegister".localized)
+            })
+
+
+        }
+    }
+}
+
+struct NoLoggedUser_Previews: PreviewProvider {
+    static var previews: some View {
+        NoLoggedUser(goToLogin: .constant(false), goToRegister: .constant(false))
+    }
+}
