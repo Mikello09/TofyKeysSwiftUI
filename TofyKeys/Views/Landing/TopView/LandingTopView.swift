@@ -13,10 +13,11 @@ struct LandingTopView: View {
     
     @Binding var showUserSettings: Bool
     
+    
     var body: some View {
         ZStack(alignment: .center) {
             HStack(alignment: .center) {
-                Text("Tofy Keys")
+                Text("Tofy")
                     .appTitle()
             }
             HStack {

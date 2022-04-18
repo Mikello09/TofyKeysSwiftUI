@@ -21,11 +21,10 @@
 		970F981327F1C67600FAE05B /* TofyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981227F1C67600FAE05B /* TofyButton.swift */; };
 		970F981527F1C75800FAE05B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F981427F1C75800FAE05B /* Colors.xcassets */; };
 		970F981727F1C7B700FAE05B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981627F1C7B700FAE05B /* Colors.swift */; };
-		970F981B27F1C8D100FAE05B /* LocalizableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981A27F1C8D100FAE05B /* LocalizableHelper.swift */; };
-		970F981C27F1C98B00FAE05B /* Localizables.strings in Resources */ = {isa = PBXBuildFile; fileRef = 970F981E27F1C98B00FAE05B /* Localizables.strings */; };
 		970F982D27F63F1900FAE05B /* Clave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F982C27F63F1900FAE05B /* Clave.swift */; };
 		970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */; };
 		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
+		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,12 +43,11 @@
 		970F981227F1C67600FAE05B /* TofyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyButton.swift; sourceTree = "<group>"; };
 		970F981427F1C75800FAE05B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		970F981627F1C7B700FAE05B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		970F981A27F1C8D100FAE05B /* LocalizableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableHelper.swift; sourceTree = "<group>"; };
-		970F981D27F1C98B00FAE05B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizables.strings; sourceTree = "<group>"; };
-		970F981F27F1C9B400FAE05B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizables.strings; sourceTree = "<group>"; };
 		970F982C27F63F1900FAE05B /* Clave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clave.swift; sourceTree = "<group>"; };
 		970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDatabase.xcdatamodel; sourceTree = "<group>"; };
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,11 +129,10 @@
 		970F980027F1B96000FAE05B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				977F4932280D92E100DE9BEC /* Localizables */,
 				970F980127F1B97800FAE05B /* TofyText.swift */,
 				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				970F981627F1C7B700FAE05B /* Colors.swift */,
-				970F981E27F1C98B00FAE05B /* Localizables.strings */,
-				970F981A27F1C8D100FAE05B /* LocalizableHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -201,6 +198,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		977F4932280D92E100DE9BEC /* Localizables */ = {
+			isa = PBXGroup;
+			children = (
+				977F4935280D92F300DE9BEC /* Localizable.strings */,
+			);
+			path = Localizables;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -261,7 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				970F981527F1C75800FAE05B /* Colors.xcassets in Resources */,
-				970F981C27F1C98B00FAE05B /* Localizables.strings in Resources */,
+				977F4933280D92F300DE9BEC /* Localizable.strings in Resources */,
 				970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */,
 				970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */,
 			);
@@ -283,7 +288,6 @@
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
 				970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
-				970F981B27F1C8D100FAE05B /* LocalizableHelper.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
 				970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */,
@@ -295,13 +299,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		970F981E27F1C98B00FAE05B /* Localizables.strings */ = {
+		977F4935280D92F300DE9BEC /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				970F981D27F1C98B00FAE05B /* en */,
-				970F981F27F1C9B400FAE05B /* es */,
+				977F4934280D92F300DE9BEC /* en */,
+				977F4936280D930400DE9BEC /* es */,
 			);
-			name = Localizables.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

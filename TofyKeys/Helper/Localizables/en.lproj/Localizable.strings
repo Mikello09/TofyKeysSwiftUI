@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  TofyKeys
+
+  Created by Mikel Lopez Salazar on 18/4/22.
+  
+*/
+
+
+"Mikel" = "Hola Mikel";
+"loginOrRegister" = "Login or Register";

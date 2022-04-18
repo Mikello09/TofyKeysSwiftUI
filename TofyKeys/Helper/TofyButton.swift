@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-func textButton(text: String) -> some View {
+func textButton(text: LocalizedStringKey) -> some View {
     return Text(text)
         .foregroundColor(.primaryColor)
         .font(.system(size: 18, weight: .bold, design: .default))
