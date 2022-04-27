@@ -25,6 +25,8 @@
 		970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */; };
 		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
 		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
+		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
+		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,9 @@
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		977F493A280D95AC00DE9BEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		977F493C280D9F2500DE9BEC /* TofyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyTextField.swift; sourceTree = "<group>"; };
+		977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TofyKeys.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,14 +85,14 @@
 		970F97E927F1B1B700FAE05B /* TofyKeys */ = {
 			isa = PBXGroup;
 			children = (
+				977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */,
+				977F493E280DA85800DE9BEC /* Resources */,
 				970F980827F1C02D00FAE05B /* Views */,
 				970F980727F1C02300FAE05B /* ViewModels */,
 				970F980327F1BEEF00FAE05B /* API */,
 				970F980027F1B96000FAE05B /* Helper */,
 				970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */,
-				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
 				970F97F027F1B1B900FAE05B /* Preview Content */,
-				970F981427F1C75800FAE05B /* Colors.xcassets */,
 			);
 			path = TofyKeys;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 				970F980127F1B97800FAE05B /* TofyText.swift */,
 				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				970F981627F1C7B700FAE05B /* Colors.swift */,
+				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -167,6 +173,7 @@
 		970F980827F1C02D00FAE05B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				977F4937280D957900DE9BEC /* Login */,
 				970F97F927F1B68400FAE05B /* UserSettings */,
 				970F97F827F1B66C00FAE05B /* Landing */,
 			);
@@ -204,6 +211,23 @@
 				977F4935280D92F300DE9BEC /* Localizable.strings */,
 			);
 			path = Localizables;
+			sourceTree = "<group>";
+		};
+		977F4937280D957900DE9BEC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				977F493A280D95AC00DE9BEC /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		977F493E280DA85800DE9BEC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				970F981427F1C75800FAE05B /* Colors.xcassets */,
+				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,11 +306,13 @@
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
+				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
 				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
 				970F981327F1C67600FAE05B /* TofyButton.swift in Sources */,
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
 				970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */,
+				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
@@ -434,6 +460,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeys.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
@@ -463,6 +490,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeys.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";

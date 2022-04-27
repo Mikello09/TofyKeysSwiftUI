@@ -9,3 +9,11 @@
 
 "Mikel" = "Adios Mikel";
 "loginOrRegister" = "Entra en el mundo Tofy";
+
+
+// MARK: LOGIN
+"Email" = "Email";
+"Password" = "Contraseña";
+"enter" = "Entrar";
+"no_account" = "¿No tienes cuenta todavía? ¡Regístrate!";
+"tofy_login" = "Logéate con Tofy";

@@ -34,9 +34,7 @@ struct UserSettingsView: View {
                     dismiss()
                 }, label: {
                     imageButton(systemName: "xmark", color: .primaryColor)
-                        .frame(width: 24, height: 24)
                 })
-                .padding()
             }
             // User info
             VStack {
@@ -50,6 +48,7 @@ struct UserSettingsView: View {
             }
             Spacer()
         }
+        .fullScreenCover(isPresented: $goToLogin, content: LoginView.init)
     }
 }
 
