@@ -24,6 +24,9 @@
 		970F982D27F63F1900FAE05B /* Clave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F982C27F63F1900FAE05B /* Clave.swift */; };
 		970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */; };
 		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
+		974E3D1E28197C9F00C5CA1F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 974E3D1D28197C9F00C5CA1F /* loading.json */; };
+		974E3D2128197CE700C5CA1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 974E3D2028197CE700C5CA1F /* Lottie */; };
+		974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2228197DAE00C5CA1F /* LottieView.swift */; };
 		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
@@ -48,6 +51,8 @@
 		970F982C27F63F1900FAE05B /* Clave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clave.swift; sourceTree = "<group>"; };
 		970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDatabase.xcdatamodel; sourceTree = "<group>"; };
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		974E3D1D28197C9F00C5CA1F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		974E3D2228197DAE00C5CA1F /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F493A280D95AC00DE9BEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				974E3D2128197CE700C5CA1F /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +145,7 @@
 				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				970F981627F1C7B700FAE05B /* Colors.swift */,
 				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
+				974E3D2228197DAE00C5CA1F /* LottieView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -205,6 +212,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		974E3D1C28197C8A00C5CA1F /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				974E3D1D28197C9F00C5CA1F /* loading.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		977F4932280D92E100DE9BEC /* Localizables */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +239,7 @@
 		977F493E280DA85800DE9BEC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				974E3D1C28197C8A00C5CA1F /* Lottie */,
 				970F981427F1C75800FAE05B /* Colors.xcassets */,
 				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
 			);
@@ -246,6 +262,9 @@
 			dependencies = (
 			);
 			name = TofyKeys;
+			packageProductDependencies = (
+				974E3D2028197CE700C5CA1F /* Lottie */,
+			);
 			productName = TofyKeys;
 			productReference = 970F97E727F1B1B700FAE05B /* TofyKeys.app */;
 			productType = "com.apple.product-type.application";
@@ -275,6 +294,9 @@
 				es,
 			);
 			mainGroup = 970F97DE27F1B1B700FAE05B;
+			packageReferences = (
+				974E3D1F28197CE700C5CA1F /* XCRemoteSwiftPackageReference "lottie-ios" */,
+			);
 			productRefGroup = 970F97E827F1B1B700FAE05B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -293,6 +315,7 @@
 				977F4933280D92F300DE9BEC /* Localizable.strings in Resources */,
 				970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */,
 				970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */,
+				974E3D1E28197C9F00C5CA1F /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
+				974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */,
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
@@ -537,6 +561,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		974E3D1F28197CE700C5CA1F /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		974E3D2028197CE700C5CA1F /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 974E3D1F28197CE700C5CA1F /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */ = {
