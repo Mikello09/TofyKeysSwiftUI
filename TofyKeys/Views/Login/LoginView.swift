@@ -69,7 +69,7 @@ struct LoginView: View {
             
             // MARK: REGISTER
             Button (action: {
-                print("hola")
+                print("Register")
             },label: {
                 SecondaryButtonText(LocalizedStringKey("no_account"))
             })
