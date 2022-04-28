@@ -18,3 +18,6 @@
 "enter" = "Log in";
 "no_account" = "Have no account yet? Register!";
 "tofy_login" = "Log in with Tofy";
+"emptyFieldError" = "There is an empty field";
+"invalidEmail" = "The email is invalid";
+"loginError" = "Incorrect user or password";

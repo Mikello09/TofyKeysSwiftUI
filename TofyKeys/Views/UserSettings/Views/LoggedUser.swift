@@ -21,7 +21,7 @@ struct LoggedUser: View {
                 .frame(width: 96, height: 96)
                 .padding(.trailing, 16)
             Spacer()
-            Text(user.name)
+            Text(user.name ?? "-")
 
         }
     }

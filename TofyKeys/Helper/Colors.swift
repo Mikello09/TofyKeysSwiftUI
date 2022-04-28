@@ -15,6 +15,8 @@ extension Color{
     public static let primaryColorHighlighted: Color = Color(.primaryColorHighlighted)
     public static let whiteHighlighted: Color = Color(.whiteHighlighted)
     public static let blackTofy: Color = Color(.blackTofy)
+    public static let screenBackground: Color = Color(.screenBackground)
+    public static let redTofy: Color = Color(.redTofy)
 }
 
 extension UIColor{
@@ -22,4 +24,6 @@ extension UIColor{
     public static let primaryColorHighlighted: UIColor = UIColor.init(named: "PrimaryColorHighlighted")!
     public static let whiteHighlighted: UIColor = UIColor.init(named: "WhiteHighlighted")!
     public static let blackTofy: UIColor = UIColor.init(named: "BlackTofy")!
+    public static let screenBackground: UIColor = UIColor.init(named: "ScreenBackground")!
+    public static let redTofy: UIColor = UIColor.init(named: "RedTofy")!
 }

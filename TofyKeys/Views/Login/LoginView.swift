@@ -17,8 +17,10 @@ struct LoginView: View {
     @State var showLoading: Bool = false
     
     // Tofy Login
+    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
     @State var email: String = ""
     @State var pass: String = ""
+    @State var loginErrorDescription: LocalizedStringKey = ""
     
     var body: some View {
         ZStack {
@@ -47,12 +49,18 @@ struct LoginView: View {
                             .textFieldStyle(LoginTextFieldStyle())
                         TextField(LocalizedStringKey("Password"), text: $pass)
                             .textFieldStyle(LoginTextFieldStyle())
+                        HStack {
+                            Text(loginErrorDescription)
+                                .errorMessage()
+                                .padding(.leading)
+                            Spacer()
+                        }
                     }.padding([.top, .bottom])
                     VStack {
                         Button (action: {
                             showLoading = true
+                            userViewModel.doLogin(email: email, password: pass)
                         }, label: {PrincipalButtonText(LocalizedStringKey("enter"))}).buttonStyle(PrincipalButton())
-
                     }
                 }
                 .padding()
@@ -90,6 +98,26 @@ struct LoginView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.whiteHighlighted)
+            }
+        }
+        .background(Color.screenBackground)
+        .onReceive(userViewModel.$loginError) { error in
+            self.showLoading = false
+            switch error {
+            case .none:
+                self.loginErrorDescription = ""
+            case .emptyInfo:
+                self.loginErrorDescription = LocalizedStringKey("emptyFieldError")
+            case.invalidEmail:
+                self.loginErrorDescription = LocalizedStringKey("invalidEmail")
+            case .errorInLogin:
+                self.loginErrorDescription = LocalizedStringKey("loginError")
+            }
+        }
+        .onReceive(userViewModel.$user) { user in
+            self.showLoading = false
+            if let _ = user {
+                dismiss()
             }
         }
     }

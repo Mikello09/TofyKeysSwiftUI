@@ -27,6 +27,8 @@
 		974E3D1E28197C9F00C5CA1F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 974E3D1D28197C9F00C5CA1F /* loading.json */; };
 		974E3D2128197CE700C5CA1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 974E3D2028197CE700C5CA1F /* Lottie */; };
 		974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2228197DAE00C5CA1F /* LottieView.swift */; };
+		974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D24281988D800C5CA1F /* ApiManager.swift */; };
+		974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2628198BA000C5CA1F /* Extensions.swift */; };
 		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
@@ -53,6 +55,8 @@
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		974E3D1D28197C9F00C5CA1F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		974E3D2228197DAE00C5CA1F /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		974E3D24281988D800C5CA1F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		974E3D2628198BA000C5CA1F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F493A280D95AC00DE9BEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				970F981627F1C7B700FAE05B /* Colors.swift */,
 				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
 				974E3D2228197DAE00C5CA1F /* LottieView.swift */,
+				974E3D2628198BA000C5CA1F /* Extensions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -208,6 +213,7 @@
 		970F982F27F6406E00FAE05B /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				974E3D24281988D800C5CA1F /* ApiManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -333,9 +339,11 @@
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
 				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
+				974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */,
 				970F981327F1C67600FAE05B /* TofyButton.swift in Sources */,
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
 				970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */,
+				974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */,
 				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */,
