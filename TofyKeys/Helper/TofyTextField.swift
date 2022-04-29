@@ -16,22 +16,12 @@ struct LoginTextFieldStyle: TextFieldStyle {
         configuration
             .padding(16)
             .background(RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .stroke(Color.gray, lineWidth: 1))
+                            .stroke(Color.blackTofy, lineWidth: 1))
+            .foregroundColor(Color.blackTofy)
             .font(Font.system(size: 17, weight: .regular))
             .padding([.leading, .trailing], 16)
             .padding([.top, .bottom], 8)
         
-    }
-    
-    
-}
-
-extension TextField {
-    
-    func loginTextField() -> some View{
-        self.padding()
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .frame(height: 56)
     }
     
 }

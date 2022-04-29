@@ -47,7 +47,7 @@ struct LoginView: View {
                     VStack(spacing: 0) {
                         TextField(LocalizedStringKey("Email"), text: $email)
                             .textFieldStyle(LoginTextFieldStyle())
-                        TextField(LocalizedStringKey("Password"), text: $pass)
+                        SecureField(LocalizedStringKey("Password"), text: $pass)
                             .textFieldStyle(LoginTextFieldStyle())
                         HStack {
                             Text(loginErrorDescription)
@@ -64,9 +64,9 @@ struct LoginView: View {
                     }
                 }
                 .padding()
-                .background(.white)
+                .background(Color.screenBackgroundDark)
                 .cornerRadius(8)
-                .shadow(color: .gray, radius: 8, x: 0, y: 0)
+                .shadow(color: .gray, radius: 4, x: 0, y: 0)
                 .padding()
                 
                 // MARK: CONTINUE WITH APPLE

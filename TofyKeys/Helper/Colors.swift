@@ -17,6 +17,7 @@ extension Color{
     public static let blackTofy: Color = Color(.blackTofy)
     public static let screenBackground: Color = Color(.screenBackground)
     public static let redTofy: Color = Color(.redTofy)
+    public static let screenBackgroundDark: Color = Color(.screenBackgroundDark)
 }
 
 extension UIColor{
@@ -26,4 +27,5 @@ extension UIColor{
     public static let blackTofy: UIColor = UIColor.init(named: "BlackTofy")!
     public static let screenBackground: UIColor = UIColor.init(named: "ScreenBackground")!
     public static let redTofy: UIColor = UIColor.init(named: "RedTofy")!
+    public static let screenBackgroundDark: UIColor = UIColor.init(named: "ScreenBackgroundDark")!
 }
