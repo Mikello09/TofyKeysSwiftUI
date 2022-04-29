@@ -22,86 +22,94 @@ struct LoginView: View {
     @State var pass: String = ""
     @State var loginErrorDescription: LocalizedStringKey = ""
     
+    // Register
+    @State var goToRegister: Bool = false
+    
     var body: some View {
-        ZStack {
-            VStack {
-                // MARK: NAVIGATION
+        NavigationView {
+            ZStack {
                 VStack {
-                    HStack {
-                        Spacer()
-                        Button (action: {
-                            dismiss()
-                        }, label: {
-                            imageButton(systemName: "xmark", color: .primaryColor)
-                        })
-                    }
-                }.frame(height: 50)
-                
-                // MARK: LOG IN WITH TOFY
-                VStack(spacing: 0) {
-                    HStack{
-                        Text(LocalizedStringKey("tofy_login"))
-                            .title()
-                        Spacer()
-                    }
-                    VStack(spacing: 0) {
-                        TextField(LocalizedStringKey("Email"), text: $email)
-                            .textFieldStyle(LoginTextFieldStyle())
-                        SecureField(LocalizedStringKey("Password"), text: $pass)
-                            .textFieldStyle(LoginTextFieldStyle())
+                    // MARK: NAVIGATION
+                    VStack {
                         HStack {
-                            Text(loginErrorDescription)
-                                .errorMessage()
-                                .padding(.leading)
+                            Spacer()
+                            Button (action: {
+                                dismiss()
+                            }, label: {
+                                imageButton(systemName: "xmark", color: .primaryColor)
+                            })
+                        }
+                    }.frame(height: 50)
+                    
+                    // MARK: LOG IN WITH TOFY
+                    VStack(spacing: 0) {
+                        HStack{
+                            Text(LocalizedStringKey("tofy_login"))
+                                .title()
                             Spacer()
                         }
-                    }.padding([.top, .bottom])
-                    VStack {
+                        VStack(spacing: 0) {
+                            TextField(LocalizedStringKey("Email"), text: $email)
+                                .textFieldStyle(LoginTextFieldStyle())
+                            SecureField(LocalizedStringKey("Password"), text: $pass)
+                                .textFieldStyle(LoginTextFieldStyle())
+                            HStack {
+                                Text(loginErrorDescription)
+                                    .errorMessage()
+                                    .padding(.leading)
+                                Spacer()
+                            }
+                        }.padding([.top, .bottom])
+                        VStack {
+                            Button (action: {
+                                showLoading = true
+                                userViewModel.doLogin(email: email, password: pass)
+                            }, label: {PrincipalButtonText(LocalizedStringKey("enter"))}).buttonStyle(PrincipalButton())
+                        }
+                    }
+                    .padding()
+                    .background(Color.screenBackgroundDark)
+                    .cornerRadius(8)
+                    .shadow(color: .gray, radius: 4, x: 0, y: 0)
+                    .padding()
+                    
+                    // MARK: CONTINUE WITH APPLE
+                    SignInWithAppleButton(.continue) { request in
+                        print("")
+                    } onCompletion: { result in
+                        print("")
+                    }
+                    .padding()
+                    .frame(height: 92)
+
+                    Spacer()
+                    
+                    // MARK: REGISTER
+                    NavigationLink(destination: RegisterView(), isActive: $goToRegister) {
                         Button (action: {
-                            showLoading = true
-                            userViewModel.doLogin(email: email, password: pass)
-                        }, label: {PrincipalButtonText(LocalizedStringKey("enter"))}).buttonStyle(PrincipalButton())
+                            self.goToRegister = true
+                        },label: {
+                            SecondaryButtonText(LocalizedStringKey("no_account"))
+                        })
+                        .buttonStyle(SecondaryButton())
                     }
                 }
-                .padding()
-                .background(Color.screenBackgroundDark)
-                .cornerRadius(8)
-                .shadow(color: .gray, radius: 4, x: 0, y: 0)
-                .padding()
                 
-                // MARK: CONTINUE WITH APPLE
-                SignInWithAppleButton(.continue) { request in
-                    print("")
-                } onCompletion: { result in
-                    print("")
+                // MARK: LOADING
+                if showLoading {
+                    VStack {
+                        LottieView(name: "loading", loopMode: .loop)
+                            .frame(width: 64, height: 64)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.whiteHighlighted)
                 }
-                .padding()
-                .frame(height: 92)
-
-                Spacer()
-                
-                // MARK: REGISTER
-                Button (action: {
-                    print("Register")
-                },label: {
-                    SecondaryButtonText(LocalizedStringKey("no_account"))
-                })
-                .buttonStyle(SecondaryButton())
                 
             }
-            
-            // MARK: LOADING
-            if showLoading {
-                VStack {
-                    LottieView(name: "loading", loopMode: .loop)
-                        .frame(width: 64, height: 64)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color.whiteHighlighted)
-            }
-        }
-        .background(Color.screenBackground)
-        .onReceive(userViewModel.$loginError) { error in
+            .background(Color.screenBackground)
+            .navigationBarTitle("",displayMode: .inline)
+            .navigationBarHidden(true)
+        }.onReceive(userViewModel.$loginError) { error in
             self.showLoading = false
             switch error {
             case .none:
