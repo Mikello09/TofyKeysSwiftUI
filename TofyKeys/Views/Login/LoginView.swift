@@ -116,7 +116,8 @@ struct LoginView: View {
         }
         .onReceive(userViewModel.$user) { user in
             self.showLoading = false
-            if let _ = user {
+            if let newUser = user {
+                PersistenceController.shared.saveUser(email: newUser.email, pass: newUser.pass)
                 dismiss()
             }
         }

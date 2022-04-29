@@ -8,6 +8,10 @@
 import Foundation
 
 
+struct UserResponse: Codable {
+    var usuario: User
+}
+
 struct User: Codable {
     var token: String
     var name: String?

@@ -35,7 +35,7 @@ class UserViewModel: ObservableObject {
                 case .finished: ()
                 }
             }, receiveValue: { user in
-                self.user = user
+                self.user = user.usuario
             })
         }
     }
@@ -52,11 +52,15 @@ class UserViewModel: ObservableObject {
         return true
     }
     
+    func saveUser(userToSave: User) {
+        
+    }
+    
 }
 
 // MARK: Login Call
 extension UserViewModel {
-    func loginCall(email: String, password: String) -> AnyPublisher<User,Error>{
+    func loginCall(email: String, password: String) -> AnyPublisher<UserResponse,Error>{
             return crearLlamada(url: loginUrl,
                          parametros: [
                             "email": email,

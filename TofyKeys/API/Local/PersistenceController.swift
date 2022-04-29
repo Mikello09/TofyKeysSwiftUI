@@ -45,7 +45,6 @@ struct PersistenceController {
     
     func save() {
         let context = container.viewContext
-
         if context.hasChanges {
             do {
                 try context.save()
@@ -55,3 +54,18 @@ struct PersistenceController {
         }
     }
 }
+
+// MARK: USER
+extension PersistenceController {
+    
+    func saveUser(email: String, pass: String) {
+        let newUser = UserDB(context: container.viewContext)
+
+        newUser.email = email
+        newUser.contrasena = pass
+
+        save()
+    }
+}
+    
+

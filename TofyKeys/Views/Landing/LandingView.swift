@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LandingView: View {
     
+    // ViewModels
     @EnvironmentObject var userViewModel: UserViewModel
     
     @State var showUserSettings: Bool = false
