@@ -21,6 +21,11 @@ extension Text {
             .font(.system(size: 18, weight: .semibold))
     }
     
+    func subtitle() -> some View {
+        self.foregroundColor(.blackTofy)
+            .font(.system(size: 16, weight: .regular))
+    }
+    
     func errorMessage() -> some View {
         self.foregroundColor(.redTofy)
             .font(.system(size: 14, weight: .semibold))

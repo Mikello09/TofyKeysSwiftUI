@@ -109,7 +109,8 @@ struct LoginView: View {
             .background(Color.screenBackground)
             .navigationBarTitle("",displayMode: .inline)
             .navigationBarHidden(true)
-        }.onReceive(userViewModel.$loginError) { error in
+        }.accentColor(.primaryColor)
+        .onReceive(userViewModel.$loginError) { error in
             self.showLoading = false
             switch error {
             case .none:

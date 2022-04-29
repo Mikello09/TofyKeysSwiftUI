@@ -20,3 +20,9 @@
 "emptyFieldError" = "Algún campo está vacío";
 "invalidEmail" = "El email es incorrecto";
 "loginError" = "Usuario o contraseña incorrectos";
+"register" = "Registro";
+"Name" = "Nombre";
+"Repeat_password" = "Repite la contraseña";
+"Register_explanation" = "Regístrate y llévate Tofy a cualquier dispositivo";
+"Character_election" = "Elige tu avatar";
+"Do_Register" = "Regístrate";

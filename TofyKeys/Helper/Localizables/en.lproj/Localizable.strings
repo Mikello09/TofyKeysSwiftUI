@@ -21,3 +21,9 @@
 "emptyFieldError" = "There is an empty field";
 "invalidEmail" = "The email is invalid";
 "loginError" = "Incorrect user or password";
+"register" = "Register";
+"Name" = "Name";
+"Repeat_password" = "Repeat password";
+"Register_explanation" = "Register and take Tofy everywhere with you";
+"Character_election" = "Choose your character avatar";
+"Do_Register" = "Do register";

@@ -31,6 +31,7 @@
 		974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2628198BA000C5CA1F /* Extensions.swift */; };
 		974E3D2A281B1BA700C5CA1F /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D29281B1BA700C5CA1F /* BottomSheet.swift */; };
 		974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2B281BF7A800C5CA1F /* RegisterView.swift */; };
+		974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */; };
 		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
@@ -61,6 +62,7 @@
 		974E3D2628198BA000C5CA1F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		974E3D29281B1BA700C5CA1F /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		974E3D2B281BF7A800C5CA1F /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCharacter.swift; sourceTree = "<group>"; };
 		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F493A280D95AC00DE9BEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -239,6 +241,15 @@
 			path = Items;
 			sourceTree = "<group>";
 		};
+		974E3D2D281C742700C5CA1F /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				974E3D2B281BF7A800C5CA1F /* RegisterView.swift */,
+				974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
 		977F4932280D92E100DE9BEC /* Localizables */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,8 +261,8 @@
 		977F4937280D957900DE9BEC /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				974E3D2D281C742700C5CA1F /* Register */,
 				977F493A280D95AC00DE9BEC /* LoginView.swift */,
-				974E3D2B281BF7A800C5CA1F /* RegisterView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -352,6 +363,7 @@
 				974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */,
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
+				974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
 				974E3D2A281B1BA700C5CA1F /* BottomSheet.swift in Sources */,
 				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
