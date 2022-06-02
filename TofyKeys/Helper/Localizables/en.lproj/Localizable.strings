@@ -27,3 +27,8 @@
 "Register_explanation" = "Register and take Tofy everywhere with you";
 "Character_election" = "Choose your character avatar";
 "Do_Register" = "Do register";
+"Logout" = "Log out";
+
+
+// MARK: KEYS
+"Add_new_key" = "Add new key";

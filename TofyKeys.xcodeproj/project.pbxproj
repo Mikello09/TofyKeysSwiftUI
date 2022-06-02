@@ -32,6 +32,8 @@
 		974E3D2A281B1BA700C5CA1F /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D29281B1BA700C5CA1F /* BottomSheet.swift */; };
 		974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2B281BF7A800C5CA1F /* RegisterView.swift */; };
 		974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */; };
+		974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */; };
+		974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D3528495A3E00C5CA1F /* GlobalManager.swift */; };
 		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
@@ -63,6 +65,8 @@
 		974E3D29281B1BA700C5CA1F /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		974E3D2B281BF7A800C5CA1F /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCharacter.swift; sourceTree = "<group>"; };
+		974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveViewModel.swift; sourceTree = "<group>"; };
+		974E3D3528495A3E00C5CA1F /* GlobalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalManager.swift; sourceTree = "<group>"; };
 		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F493A280D95AC00DE9BEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -150,14 +154,13 @@
 		970F980027F1B96000FAE05B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				974E3D332849596E00C5CA1F /* Lottie */,
+				974E3D322849595200C5CA1F /* UI */,
 				974E3D28281B1B9700C5CA1F /* Items */,
 				977F4932280D92E100DE9BEC /* Localizables */,
-				970F980127F1B97800FAE05B /* TofyText.swift */,
-				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				970F981627F1C7B700FAE05B /* Colors.swift */,
-				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
-				974E3D2228197DAE00C5CA1F /* LottieView.swift */,
 				974E3D2628198BA000C5CA1F /* Extensions.swift */,
+				974E3D3528495A3E00C5CA1F /* GlobalManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				970F980927F1C05100FAE05B /* UserViewModel.swift */,
+				974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -225,14 +229,6 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		974E3D1C28197C8A00C5CA1F /* Lottie */ = {
-			isa = PBXGroup;
-			children = (
-				974E3D1D28197C9F00C5CA1F /* loading.json */,
-			);
-			path = Lottie;
-			sourceTree = "<group>";
-		};
 		974E3D28281B1B9700C5CA1F /* Items */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,6 +244,33 @@
 				974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		974E3D322849595200C5CA1F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				970F980127F1B97800FAE05B /* TofyText.swift */,
+				970F981227F1C67600FAE05B /* TofyButton.swift */,
+				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		974E3D332849596E00C5CA1F /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				974E3D342849598C00C5CA1F /* JSON */,
+				974E3D2228197DAE00C5CA1F /* LottieView.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		974E3D342849598C00C5CA1F /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				974E3D1D28197C9F00C5CA1F /* loading.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		977F4932280D92E100DE9BEC /* Localizables */ = {
@@ -270,7 +293,6 @@
 		977F493E280DA85800DE9BEC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				974E3D1C28197C8A00C5CA1F /* Lottie */,
 				970F981427F1C75800FAE05B /* Colors.xcassets */,
 				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
 			);
@@ -367,6 +389,7 @@
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
 				974E3D2A281B1BA700C5CA1F /* BottomSheet.swift in Sources */,
 				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
+				974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */,
 				974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */,
 				970F981327F1C67600FAE05B /* TofyButton.swift in Sources */,
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
@@ -377,6 +400,7 @@
 				970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
 				970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */,
+				974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */,
 				970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */,
 				970F983827F6456300FAE05B /* PersistenceController.swift in Sources */,
 			);

@@ -10,35 +10,42 @@ import SwiftUI
 struct LandingView: View {
     
     // ViewModels
-    @EnvironmentObject var userViewModel: UserViewModel
+    @ObservedObject var userViewModel: UserViewModel
+    @ObservedObject var claveViewModel: ClaveViewModel
     
     @State var showUserSettings: Bool = false
     @State var showCreateKey: Bool = false
     
+    @State var user: User?
+    
     var body: some View {
         ZStack {
             VStack{
-                LandingTopView(showUserSettings: $showUserSettings)
-                    .environmentObject(userViewModel)
+                LandingTopView(showUserSettings: $showUserSettings, user: $user)
                     .frame(height: 60)
                 Spacer()
-                Button {
+                Button (action: {
                     showCreateKey = true
-                } label: {
-                    Text("New Key")
-                }
+                }, label: {
+                    PrincipalButtonText(LocalizedStringKey("Add_new_key"))
+                }).buttonStyle(PrincipalButton())
             }
             BottomSheetView(isOpen: $showCreateKey, maxHeight: 400) {
                 Color.red
             }.edgesIgnoringSafeArea(.all)
         }
-        .fullScreenCover(isPresented: $showUserSettings, content: UserSettingsView.init)
+        .fullScreenCover(isPresented: $showUserSettings){
+            UserSettingsView().environmentObject(userViewModel)
+        }
+        .onReceive(userViewModel.$user) { user in
+            self.user = user
+        }
     }
     
 }
 
-struct LandingView_Previews: PreviewProvider {
-    static var previews: some View {
-        LandingView()
-    }
-}
+//struct LandingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LandingView()
+//    }
+//}

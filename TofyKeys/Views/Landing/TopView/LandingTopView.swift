@@ -6,13 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct LandingTopView: View {
     
-    @EnvironmentObject var userViewModel: UserViewModel
-    
     @Binding var showUserSettings: Bool
-    
+    @Binding var user: User?
     
     var body: some View {
         ZStack(alignment: .center) {
@@ -23,9 +22,10 @@ struct LandingTopView: View {
             HStack {
                 Spacer()
                 .padding(.trailing, 16)
-                Image(systemName: "person.fill")
+                Image(user?.getUserImage() ?? "user")
                     .resizable()
-                    .foregroundColor(.green)
+                    .background(Color.gray)
+                    .foregroundColor(user?.character != nil ? .clear : .green)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.black, lineWidth: 1))
                     .frame(width: 32, height: 32)
@@ -35,11 +35,14 @@ struct LandingTopView: View {
                     }
             }
         }
+        .onAppear {
+            print("Landing Top View appeared")
+        }
     }
 }
 
-struct LandingTopView_Previews: PreviewProvider {
-    static var previews: some View {
-        LandingTopView(showUserSettings: .constant(false))
-    }
-}
+//struct LandingTopView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LandingTopView(showUserSettings: .constant(false), user: .constant)
+//    }
+//}

@@ -11,19 +11,12 @@ struct UserSettingsView: View {
     // ViewModels
     @EnvironmentObject var userViewModel: UserViewModel
     
-    // CoreData
-    @FetchRequest(
-        entity: UserDB.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \UserDB.name, ascending: true),
-        ]
-    )var user: FetchedResults<UserDB>
-    
     // View vars
     @Environment(\.dismiss) var dismiss
     @State var goToLogin: Bool = false
     @State var goToRegister: Bool = false
     
+    @State var user: User?
     
     var body: some View {
         VStack(alignment: .center) {
@@ -38,22 +31,36 @@ struct UserSettingsView: View {
             }
             // User info
             VStack {
-                if user.count != 0 {
-                    LoggedUser(user: User.parseUserDB(user.first))
+                if user?.isLogged() ?? false {
+                    LoggedUser(user: $user)
+                        .frame(height: 150)
                 } else {
                     NoLoggedUser(goToLogin: self.$goToLogin,
                                  goToRegister: self.$goToRegister)
                         .frame(height: 150)
                 }
+                
             }
             Spacer()
+            if user?.isLogged() ?? false {
+                Button {
+                    userViewModel.logout()
+                } label: {
+                    textButton(text: LocalizedStringKey("Logout"), foregroundColor: .redTofy)
+                }
+            }
         }
-        .fullScreenCover(isPresented: $goToLogin, content: LoginView.init)
+        .fullScreenCover(isPresented: $goToLogin){
+            LoginView().environmentObject(userViewModel)
+        }
+        .onReceive(userViewModel.$user) { user in
+            self.user = user
+        }
     }
 }
 
-struct UserSettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserSettingsView()
-    }
-}
+//struct UserSettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserSettingsView()
+//    }
+//}

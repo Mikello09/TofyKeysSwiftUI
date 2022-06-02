@@ -16,6 +16,7 @@ struct ChooseCharacter: View {
     
     @State var characters: [Character] = [Character(name: "man_1", selected: true),
                                    Character(name: "woman_1", selected: false)]
+    @Binding var choosenCharacter: String
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -33,6 +34,7 @@ struct ChooseCharacter: View {
                                 newCharacter.selected = ch.name == character.name
                                 return newCharacter
                             })
+                            self.choosenCharacter = self.characters.filter({$0.selected}).first?.name ?? "man_1"
                         }
                 }
             }
@@ -42,6 +44,6 @@ struct ChooseCharacter: View {
 
 struct ChooseCharacter_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseCharacter()
+        ChooseCharacter(choosenCharacter: .constant("man_1"))
     }
 }

@@ -14,9 +14,11 @@ struct NoLoggedUser: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "person.fill")
+            Image("user")
                 .resizable()
-                .foregroundColor(.red)
+                .aspectRatio(contentMode: .fill)
+                .tint(.red)
+                .background(Color.gray)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.black, lineWidth: 1))
                 .frame(width: 96, height: 96)

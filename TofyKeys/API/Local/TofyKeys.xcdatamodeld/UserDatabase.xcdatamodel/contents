@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ClaveDB" representedClassName="ClaveDB" syncable="YES" codeGenerationType="class">
+        <attribute name="actualizado" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="contrasena" optional="YES" attributeType="String"/>
+        <attribute name="fecha" optional="YES" attributeType="String"/>
+        <attribute name="titulo" optional="YES" attributeType="String"/>
+        <attribute name="token" optional="YES" attributeType="String"/>
+        <attribute name="tokenUsuario" optional="YES" attributeType="String"/>
+        <attribute name="usuario" optional="YES" attributeType="String"/>
+        <attribute name="valor" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="UserDB" representedClassName="UserDB" syncable="YES" codeGenerationType="class">
+        <attribute name="character" optional="YES" attributeType="String"/>
         <attribute name="contrasena" optional="YES" attributeType="String"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="grupo" optional="YES" attributeType="String"/>
@@ -8,6 +19,7 @@
         <attribute name="token" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="UserDB" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="UserDB" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="ClaveDB" positionX="-63" positionY="27" width="128" height="149"/>
     </elements>
 </model>

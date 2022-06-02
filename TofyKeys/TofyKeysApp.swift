@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 @main
 struct TofyKeysApp: App {
     
@@ -14,17 +15,25 @@ struct TofyKeysApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     // Global ViewModels
-    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
+    @StateObject var userViewModel: UserViewModel
+    @StateObject var claveViewModel: ClaveViewModel
     
     // CoreData
     let persistenceController = PersistenceController.shared
     
+    init() {
+        let managedObjectContext = persistenceController.container.viewContext
+        // CLAVE
+        let claveViewModel = ClaveViewModel(managedObjectContext: managedObjectContext)
+        self._claveViewModel = StateObject(wrappedValue: claveViewModel)
+        // USER
+        let userViewModel = UserViewModel(managedObjectContext: managedObjectContext, claveViewModel: claveViewModel)
+        self._userViewModel = StateObject(wrappedValue: userViewModel)
+      }
     
     var body: some Scene {
         WindowGroup {
-            LandingView()
-                .environmentObject(userViewModel)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            LandingView(userViewModel: userViewModel, claveViewModel: claveViewModel)
         }
         .onChange(of: scenePhase) { _ in // App to background
             persistenceController.save()

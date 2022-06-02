@@ -26,3 +26,8 @@
 "Register_explanation" = "Regístrate y llévate Tofy a cualquier dispositivo";
 "Character_election" = "Elige tu avatar";
 "Do_Register" = "Regístrate";
+"Logout" = "Cerrar sesión";
+
+// MARK: KEYS
+"Add_new_key" = "Añade una nueva clave";
+

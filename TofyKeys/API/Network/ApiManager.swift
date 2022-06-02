@@ -9,12 +9,19 @@ import Foundation
 import SwiftUI
 import Combine
 
-let baseUrl: String = "https://tofyserver.herokuapp.com"
+let baseUrl: String = "http://localhost:3000"//"https://tofy-app.herokuapp.com"
+// USUARIO
+let getUserUrl: String = "\(baseUrl)/usuario/getUser"
 let loginUrl: String = "\(baseUrl)/usuario/doLogin"
+let registerUrl: String = "\(baseUrl)/usuario/registro"
+// GRUPO
 let crearGrupoUrl: String = "\(baseUrl)/grupo/crearGrupo"
 let getGrupoUrl: String = "\(baseUrl)/grupo/getGrupo"
 let unirGrupoUrl: String = "\(baseUrl)/grupo/unirGrupo"
 let abandonarGrupoUrl: String = "\(baseUrl)/grupo/abandonarGrupo"
+// CLAVE
+let getAllClavesUrl: String = "\(baseUrl)/clave/getAllClaves"
+let addClaveUrl: String = "\(baseUrl)/clave/guardarClave"
 
 let SESION: URLSession = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: OperationQueue.main)
     

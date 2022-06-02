@@ -44,9 +44,9 @@ let SecondaryButtonText: (LocalizedStringKey) -> Text = { text in
 }
 
 
-func textButton(text: LocalizedStringKey) -> some View {
+func textButton(text: LocalizedStringKey, foregroundColor: Color = .primaryColor) -> some View {
     return Text(text)
-        .foregroundColor(.primaryColor)
+        .foregroundColor(foregroundColor)
         .font(.system(size: 18, weight: .bold, design: .default))
 }
 

@@ -9,15 +9,19 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
+    @Environment(\.dismiss) var dismiss
+    
+    @ObservedObject var userViewModel: UserViewModel
     
     // Loading
     @State var showLoading: Bool = false
     
+    // Default values
     @State var name: String = ""
     @State var email: String = ""
     @State var password1: String = ""
     @State var password2: String = ""
+    @State var character: String = "man_1"
     
     var body: some View {
         ZStack {
@@ -45,7 +49,7 @@ struct RegisterView: View {
                             .subtitle()
                         Spacer()
                     }
-                    ChooseCharacter()
+                    ChooseCharacter(choosenCharacter: $character)
                         .padding(.top, 8)
                 }
                 .padding([.leading, .trailing])
@@ -55,7 +59,7 @@ struct RegisterView: View {
                 VStack {
                     Button (action: {
                         showLoading = true
-                        
+                        userViewModel.doRegister(name: name, email: email, pass1: password1, pass2: password2, character: character)
                     }, label: {PrincipalButtonText(LocalizedStringKey("Do_Register"))}).buttonStyle(PrincipalButton())
                 }.padding()
                 Spacer()
@@ -73,11 +77,17 @@ struct RegisterView: View {
         }
         .background(Color.screenBackground)
         .navigationTitle(LocalizedStringKey("register"))
+        .onReceive(userViewModel.$user) { user in
+            self.showLoading = false
+            if let _ = user {
+                dismiss()
+            }
+        }
     }
 }
 
-struct RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterView()
-    }
-}
+//struct RegisterView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RegisterView()
+//    }
+//}

@@ -49,7 +49,7 @@ struct PersistenceController {
             do {
                 try context.save()
             } catch {
-                // Show some error here
+                print("Error in save process: \(error)")
             }
         }
     }
@@ -58,14 +58,37 @@ struct PersistenceController {
 // MARK: USER
 extension PersistenceController {
     
-    func saveUser(email: String, pass: String) {
+    func saveUser(user: User) {
         let newUser = UserDB(context: container.viewContext)
-
-        newUser.email = email
-        newUser.contrasena = pass
-
+        
+        newUser.token = user.token
+        newUser.email = user.email
+        newUser.contrasena = user.pass
+        newUser.name = user.nombre
+        newUser.grupo = user.grupo
+        newUser.character = user.character
+        
         save()
     }
 }
-    
 
+// MARK: CLAVE
+extension PersistenceController {
+    func saveClave(clave: Clave, allLocalClaves: [ClaveDB]) {
+        if let claveToUpdate = allLocalClaves.filter({$0.token == clave.token}).first {
+            claveToUpdate.actualizado = true
+        } else {
+            let newClave = ClaveDB(context: container.viewContext)
+            
+            newClave.tokenUsuario = clave.tokenUsuario
+            newClave.token = clave.token
+            newClave.titulo = clave.titulo
+            newClave.usuario = clave.usuario
+            newClave.contrasena = clave.contrasena
+            newClave.valor = clave.valor
+            newClave.fecha = clave.fecha
+            newClave.actualizado = clave.actualizado
+        }
+        save()
+    }
+}

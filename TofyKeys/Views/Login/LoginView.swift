@@ -17,7 +17,7 @@ struct LoginView: View {
     @State var showLoading: Bool = false
     
     // Tofy Login
-    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
+    @EnvironmentObject var userViewModel: UserViewModel
     @State var email: String = ""
     @State var pass: String = ""
     @State var loginErrorDescription: LocalizedStringKey = ""
@@ -85,14 +85,14 @@ struct LoginView: View {
                     Spacer()
                     
                     // MARK: REGISTER
-                    NavigationLink(destination: RegisterView(), isActive: $goToRegister) {
-                        Button (action: {
-                            self.goToRegister = true
-                        },label: {
-                            SecondaryButtonText(LocalizedStringKey("no_account"))
-                        })
-                        .buttonStyle(SecondaryButton())
-                    }
+//                    NavigationLink(destination: RegisterView(), isActive: $goToRegister) {
+//                        Button (action: {
+//                            self.goToRegister = true
+//                        },label: {
+//                            SecondaryButtonText(LocalizedStringKey("no_account"))
+//                        })
+//                        .buttonStyle(SecondaryButton())
+//                    }
                 }
                 
                 // MARK: LOADING
@@ -125,16 +125,15 @@ struct LoginView: View {
         }
         .onReceive(userViewModel.$user) { user in
             self.showLoading = false
-            if let newUser = user {
-                PersistenceController.shared.saveUser(email: newUser.email, pass: newUser.pass)
+            if let user = user, user.token != "" {
                 dismiss()
             }
         }
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
-    }
-}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginView()
+//    }
+//}
