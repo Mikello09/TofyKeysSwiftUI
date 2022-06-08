@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-
-
 struct LoginTextFieldStyle: TextFieldStyle {
     
     func _body(configuration: TextField<Self._Label>) -> some View {

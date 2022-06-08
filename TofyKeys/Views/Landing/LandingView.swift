@@ -18,6 +18,9 @@ struct LandingView: View {
     
     @State var user: User?
     
+    // ADD CLAVE VARS
+    @State var claveType: ClaveType = .value
+    
     var body: some View {
         ZStack {
             VStack{
@@ -30,8 +33,14 @@ struct LandingView: View {
                     PrincipalButtonText(LocalizedStringKey("Add_new_key"))
                 }).buttonStyle(PrincipalButton())
             }
-            BottomSheetView(isOpen: $showCreateKey, maxHeight: 400) {
-                Color.red
+            if showCreateKey {
+                DismissView()
+                    .onTapGesture {
+                        showCreateKey = false
+                    }
+            }
+            BottomSheetView(isOpen: $showCreateKey, maxHeight: 500) {
+                AddClaveView(claveType: $claveType)
             }.edgesIgnoringSafeArea(.all)
         }
         .fullScreenCover(isPresented: $showUserSettings){

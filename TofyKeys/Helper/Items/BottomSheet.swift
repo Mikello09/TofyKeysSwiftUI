@@ -42,10 +42,11 @@ struct BottomSheetView<Content: View>: View {
                 self.content
             }
             .frame(width: geometry.size.width, height: maxHeight, alignment: .top)
-            .background(Color.blue)
+            .background(Color.white)
             .cornerRadius(8)
             .frame(height: geometry.size.height, alignment: .bottom)
             .offset(y: isOpen ? max(self.offset +  self.translation, 0) : maxHeight)
+            .shadow(radius: 2)
             .animation(.interactiveSpring(), value: isOpen)
             .animation(.interactiveSpring(), value: translation)
             .gesture(

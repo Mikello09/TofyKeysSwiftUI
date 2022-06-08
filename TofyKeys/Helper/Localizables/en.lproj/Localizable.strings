@@ -32,3 +32,10 @@
 
 // MARK: KEYS
 "Add_new_key" = "Add new key";
+"Add_key" = "Add key";
+"ValueTitle" = "Value";
+"UserPassTitle" = "User/Password";
+"Title" = "Title";
+"Value" = "Value";
+"User" = "User";
+"Password" = "Password";

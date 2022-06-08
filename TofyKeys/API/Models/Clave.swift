@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 struct ClavesResponse: Codable {
     var claves: [Clave]
@@ -32,6 +33,19 @@ struct Clave: Codable {
                      fecha: claveDB.fecha ?? "",
                      actualizado: claveDB.actualizado ?? false)
     }
+}
+
+enum ClaveType {
+    case value
+    case userPass
+    
+    func getTitle() -> LocalizedStringKey {
+        switch self {
+        case .value: return LocalizedStringKey("ValueTitle")
+        case .userPass: return LocalizedStringKey("UserPassTitle")
+        }
+    }
+    
 }
 
 extension ClaveDB {
