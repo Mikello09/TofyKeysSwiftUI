@@ -39,6 +39,8 @@
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
 		9798C76F2850E3530044D11B /* AddClaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C76E2850E3530044D11B /* AddClaveView.swift */; };
 		9798C7712850F5F80044D11B /* DismissView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C7702850F5F80044D11B /* DismissView.swift */; };
+		9798C7732853C8570044D11B /* ClaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C7722853C8570044D11B /* ClaveCell.swift */; };
+		9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C7742857766A0044D11B /* ShowClaveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TofyKeys.entitlements; sourceTree = "<group>"; };
 		9798C76E2850E3530044D11B /* AddClaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClaveView.swift; sourceTree = "<group>"; };
 		9798C7702850F5F80044D11B /* DismissView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissView.swift; sourceTree = "<group>"; };
+		9798C7722853C8570044D11B /* ClaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveCell.swift; sourceTree = "<group>"; };
+		9798C7742857766A0044D11B /* ShowClaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowClaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +313,8 @@
 			isa = PBXGroup;
 			children = (
 				9798C76E2850E3530044D11B /* AddClaveView.swift */,
+				9798C7722853C8570044D11B /* ClaveCell.swift */,
+				9798C7742857766A0044D11B /* ShowClaveView.swift */,
 			);
 			path = Claves;
 			sourceTree = "<group>";
@@ -398,6 +404,7 @@
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */,
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
+				9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
 				974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
@@ -407,6 +414,7 @@
 				9798C7712850F5F80044D11B /* DismissView.swift in Sources */,
 				974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */,
 				974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */,
+				9798C7732853C8570044D11B /* ClaveCell.swift in Sources */,
 				970F981327F1C67600FAE05B /* TofyButton.swift in Sources */,
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
 				970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */,

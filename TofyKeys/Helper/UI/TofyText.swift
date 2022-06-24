@@ -18,12 +18,12 @@ extension Text {
     
     func title() -> some View {
         self.foregroundColor(.blackTofy)
-            .font(.system(size: 18, weight: .semibold))
+            .font(.system(size: 22, weight: .bold))
     }
     
     func subtitle() -> some View {
         self.foregroundColor(.blackTofy)
-            .font(.system(size: 16, weight: .regular))
+            .font(.system(size: 18, weight: .regular))
     }
     
     func errorMessage() -> some View {

@@ -10,10 +10,22 @@ import Combine
 import CoreData
 import SwiftUI
 
+enum ClaveSavingState {
+    case none
+    case saving
+    case locallySaved
+    case serverSaved
+    case errorSavingToServer
+}
+
 class ClaveViewModel: NSObject, ObservableObject {
     
     @Published var claves: [Clave] = []
     var dbClaves: [ClaveDB] = []
+    @Published var claveSavingState: ClaveSavingState = .none
+    
+    // Errors
+    @Published var emptyClaveValues: Bool = false
     
     var getClavesCancellable: Cancellable?
     var addClaveCancellable: Cancellable?
@@ -78,8 +90,9 @@ extension ClaveViewModel {
 
 // MARK: ADD CLAVE
 extension ClaveViewModel {
-    func addClave(titulo: String, usuario: String, contrasena: String, valor: String) {
-        if checkAddClaveParams(titulo: titulo, usuario: usuario, contrasena: contrasena, valor: valor) {
+    func addClave(titulo: String, valor: String, usuario: String, contrasena: String) {
+        if checkAddClaveParams(titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena) {
+            self.claveSavingState = .saving
             let claveToken = GlobalManager.generateToken()
             let claveFecha = Date().toString()
             self.saveClaveLocally(claveToSave: Clave(token: claveToken,
@@ -90,9 +103,11 @@ extension ClaveViewModel {
                                                      contrasena: contrasena,
                                                      fecha: claveFecha,
                                                      actualizado: false))
+            self.claveSavingState = .locallySaved
             addClaveCancellable = addClaveCall(token: claveToken, userToken: USER_TOKEN, titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena, fecha: claveFecha).sink(receiveCompletion: {
                 switch $0 {
-                case .failure(let err): ()
+                case .failure(let err):
+                    self.claveSavingState = .errorSavingToServer
                 case .finished: ()
                 }
             }, receiveValue: { clave in
@@ -104,12 +119,19 @@ extension ClaveViewModel {
                                                          contrasena: clave.contrasena,
                                                          fecha: clave.fecha,
                                                          actualizado: true))
+                self.claveSavingState = .serverSaved
             })
         }
     }
     
-    func checkAddClaveParams(titulo: String, usuario: String, contrasena: String, valor: String) -> Bool {
-        return !titulo.isEmpty
+    func checkAddClaveParams(titulo: String, valor: String, usuario: String, contrasena: String) -> Bool {
+        emptyClaveValues = false
+        if titulo.isEmpty || (valor.isEmpty && (usuario.isEmpty || contrasena.isEmpty)) {
+            emptyClaveValues = true
+            return false
+        } else {
+            return true
+        }
     }
     
     func addClaveCall(token: String, userToken: String, titulo: String, valor: String, usuario: String, contrasena: String, fecha: String) -> AnyPublisher<Clave, Error> {

@@ -10,14 +10,16 @@ import SwiftUI
 struct BottomSheetView<Content: View>: View {
     
     @Binding var isOpen: Bool
+    @Binding var claveType: ClaveType
     
     let maxHeight: CGFloat
     let minHeight: CGFloat
     let content: Content
     
-    init(isOpen: Binding<Bool>, maxHeight: CGFloat, @ViewBuilder content: () -> Content) {
-        self.minHeight = 0//maxHeight * 0.7
+    init(isOpen: Binding<Bool>, maxHeight: CGFloat, claveType: Binding<ClaveType>, @ViewBuilder content: () -> Content) {
+        self.minHeight = 0
         self.maxHeight = maxHeight
+        self._claveType = claveType
         self.content = content()
         self._isOpen = isOpen
     }
@@ -41,14 +43,15 @@ struct BottomSheetView<Content: View>: View {
                 self.indicator.padding()
                 self.content
             }
-            .frame(width: geometry.size.width, height: maxHeight, alignment: .top)
+            .frame(width: geometry.size.width, height: claveType == .value ? 450 : maxHeight, alignment: .top)
             .background(Color.white)
             .cornerRadius(8)
             .frame(height: geometry.size.height, alignment: .bottom)
-            .offset(y: isOpen ? max(self.offset +  self.translation, 0) : maxHeight)
+            .offset(y: isOpen ? max(self.offset + self.translation, 0) : maxHeight)
             .shadow(radius: 2)
             .animation(.interactiveSpring(), value: isOpen)
             .animation(.interactiveSpring(), value: translation)
+            .animation(.interactiveSpring(), value: claveType)
             .gesture(
                 DragGesture().updating(self.$translation) { value, state, _ in
                     state = value.translation.height

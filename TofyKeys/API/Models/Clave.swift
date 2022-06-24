@@ -13,7 +13,8 @@ struct ClavesResponse: Codable {
     var claves: [Clave]
 }
 
-struct Clave: Codable {
+struct Clave: Codable, Identifiable {
+    var id: UUID = UUID()
     var token: String
     var tokenUsuario: String
     var titulo: String
