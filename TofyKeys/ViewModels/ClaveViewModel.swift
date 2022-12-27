@@ -146,19 +146,41 @@ extension ClaveViewModel {
                         "fecha": fecha
                      ]).eraseToAnyPublisher()
     }
-    
+}
+// MARK: DELETE
+extension ClaveViewModel {
+    public func deleteClave(clave: Clave) {
+        deleteClaveLocally(clave: clave)
+    }
+}
+// MARK: EDIT
+extension ClaveViewModel {
+    public func editClave(clave: Clave) {
+        editClaveLocally(clave: clave)
+    }
 }
 
 // MARK: LOCALLY
 extension ClaveViewModel: NSFetchedResultsControllerDelegate {
-    func saveClaveLocally(claveToSave: Clave) {
+    private func saveClaveLocally(claveToSave: Clave) {
         PersistenceController.shared.saveClave(clave: claveToSave, allLocalClaves: self.dbClaves)
+    }
+    
+    private func deleteClaveLocally(clave: Clave) {
+        guard let claveDBItemToDelete = dbClaves.filter({$0.token == clave.token}).first else { return }
+        PersistenceController.shared.deleteClave(clave: claveDBItemToDelete)
+    }
+    
+    private func editClaveLocally(clave: Clave) {
+        if let claveToChange = dbClaves.filter({$0.token == clave.token}).first {
+            PersistenceController.shared.editClave(oldClave: claveToChange, newClave: clave)
+        }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let claveItems = controller.fetchedObjects as? [ClaveDB] else { return }
         print("Clave DB Changed", controller.fetchedObjects)
-        self.dbClaves = claveItems
-        self.claves = self.dbClaves.map({Clave.parseClaveDB($0)})
+        dbClaves = claveItems
+        claves = dbClaves.map({Clave.parseClaveDB($0)})
     }
 }

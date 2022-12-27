@@ -27,7 +27,7 @@ struct LandingView: View {
     @State var emptyClaveValues: Bool = false
     
     // SHOW CLAVE VARS
-    @State var selectedClave: Clave = Clave(token: "", tokenUsuario: "", titulo: "AAAA", valor: "", usuario: "", contrasena: "", fecha: "")
+    @State var selectedClave: Clave = Clave()
     
     var body: some View {
         ZStack {
@@ -38,9 +38,9 @@ struct LandingView: View {
                     ClaveCell(clave: clave)
                         .padding([.top, .bottom], 4)
                         .onTapGesture {
-                            self.claveType = clave.valor.isEmpty ? .userPass : .value
-                            self.selectedClave = clave
-                            self.showClave = true
+                            claveType = clave.valor.isEmpty ? .userPass : .value
+                            selectedClave = clave
+                            showClave = true
                         }
                 }.padding([.leading, .trailing], 24)
                 Spacer()
@@ -53,16 +53,15 @@ struct LandingView: View {
             if showCreateKey || showClave {
                 DismissView()
                     .onTapGesture {
-                        showCreateKey = false
-                        showClave = false
+                        clearBottomSheets()
                     }
             }
             ZStack {
-                BottomSheetView(isOpen: $showCreateKey, maxHeight: 550, claveType: $claveType) {
+                BottomSheetView(isOpen: $showCreateKey, maxHeight: 550, claveType: $claveType, onClose: clearBottomSheets) {
                     AddClaveView(claveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)
                 }.edgesIgnoringSafeArea(.all)
-                BottomSheetView(isOpen: $showClave, maxHeight: 550, claveType: $claveType) {
-                    ShowClaveView(clave: $selectedClave)
+                BottomSheetView(isOpen: $showClave, maxHeight: 550, claveType: $claveType, onClose: clearBottomSheets) {
+                    ShowClaveView(clave: $selectedClave, onDelete: onDeleteClave, onEdit: onEditClave)
                 }.edgesIgnoringSafeArea(.all)
             }
         }
@@ -96,11 +95,23 @@ struct LandingView: View {
 // MARK: CLAVE FUNCTIONS
 extension LandingView {
     func onAddClave(titulo: String, valor: String, usuario: String, contrasena: String) {
-        self.claveViewModel.addClave(titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena)
+        claveViewModel.addClave(titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena)
+    }
+    
+    func onDeleteClave(clave: Clave) {
+        clearBottomSheets()
+        claveViewModel.deleteClave(clave: clave)
+    }
+    
+    func onEditClave(clave: Clave) {
+        clearBottomSheets()
+        claveViewModel.editClave(clave: clave)
     }
     
     func clearBottomSheets() {
         showCreateKey = false
+        showClave = false
+        selectedClave = Clave()
     }
 }
 

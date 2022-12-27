@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 import Combine
 
-let baseUrl: String = "http://localhost:3000"//"https://tofy-app.herokuapp.com"
+//let baseUrl: String = "http://localhost:3000"
+let baseUrl: String = "https://tofyserver.herokuapp.com"
 // USUARIO
 let getUserUrl: String = "\(baseUrl)/usuario/getUser"
 let loginUrl: String = "\(baseUrl)/usuario/doLogin"

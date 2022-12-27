@@ -38,3 +38,7 @@
 "User" = "Usuario";
 "Password" = "Contraseña";
 "EmptyValuesAddingKey" = "Completa todos los campos";
+
+// MARK: CLAVES
+"delete" = "Borrar";
+"edit" = "Editar";

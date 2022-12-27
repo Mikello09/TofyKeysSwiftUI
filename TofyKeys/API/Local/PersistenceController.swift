@@ -57,7 +57,6 @@ struct PersistenceController {
 
 // MARK: USER
 extension PersistenceController {
-    
     func saveUser(user: User) {
         let newUser = UserDB(context: container.viewContext)
         
@@ -90,5 +89,25 @@ extension PersistenceController {
             newClave.actualizado = clave.actualizado
         }
         save()
+    }
+    
+    func editClave(oldClave: ClaveDB, newClave: Clave) {
+        var claveToChange = oldClave
+        claveToChange.titulo = newClave.titulo
+        claveToChange.valor = newClave.valor
+        claveToChange.usuario = newClave.usuario
+        claveToChange.contrasena = newClave.contrasena
+        
+        save()
+    }
+    
+    func deleteClave(clave: ClaveDB) {
+        let context = container.viewContext
+        context.delete(clave)
+        do {
+            try context.save()
+        } catch {
+            print("Error deleting clave")
+        }
     }
 }
