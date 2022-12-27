@@ -35,7 +35,7 @@ struct LandingView: View {
                 LandingTopView(showUserSettings: $showUserSettings, user: $user)
                     .frame(height: 60)
                 ScrollView {
-                    ForEach(claves) { clave in
+                    ForEach(claves, id: \.titulo) { clave in
                         ClaveCell(clave: clave)
                             .padding([.top, .bottom], 4)
                             .simultaneousGesture(
@@ -83,7 +83,9 @@ struct LandingView: View {
             emptyClaveValues = isEmptyClavesValue
         }
         .onReceive(claveViewModel.$claves) { claves in
-            self.claves = claves
+            withAnimation(.linear(duration: 0.2)) {
+                self.claves = claves
+            }
         }
         .onReceive(claveViewModel.$claveSavingState) { claveState in
             switch claveState {

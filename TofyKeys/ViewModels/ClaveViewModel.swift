@@ -18,6 +18,13 @@ enum ClaveSavingState {
     case errorSavingToServer
 }
 
+enum ClaveOrderType {
+    case AZ
+    case ZA
+    case newFirst
+    case oldFirst
+}
+
 class ClaveViewModel: NSObject, ObservableObject {
     
     @Published var claves: [Clave] = []
@@ -41,9 +48,9 @@ class ClaveViewModel: NSObject, ObservableObject {
         super.init()
         claveController.delegate = self
         do {
-          try claveController.performFetch()
+            try claveController.performFetch()
             self.dbClaves = claveController.fetchedObjects ?? []
-            claves = self.dbClaves.compactMap({Clave.parseClaveDB($0)})
+            claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.compactMap({Clave.parseClaveDB($0)}))
             print("Local Claves: \(claves)")
         } catch {
           print("failed to fetch items!")
@@ -93,7 +100,7 @@ extension ClaveViewModel {
     func addClave(titulo: String, valor: String, usuario: String, contrasena: String) {
         if checkAddClaveParams(titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena) {
             self.claveSavingState = .saving
-            let claveToken = GlobalManager.generateToken()
+            let claveToken = GlobalManager.shared.generateToken()
             let claveFecha = Date().toString()
             self.saveClaveLocally(claveToSave: Clave(token: claveToken,
                                                      tokenUsuario: USER_TOKEN,
@@ -179,8 +186,7 @@ extension ClaveViewModel: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let claveItems = controller.fetchedObjects as? [ClaveDB] else { return }
-        print("Clave DB Changed", controller.fetchedObjects)
         dbClaves = claveItems
-        claves = dbClaves.map({Clave.parseClaveDB($0)})
+        claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.map({Clave.parseClaveDB($0)}))
     }
 }

@@ -117,9 +117,9 @@
 			children = (
 				977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */,
 				977F493E280DA85800DE9BEC /* Resources */,
+				970F980327F1BEEF00FAE05B /* API */,
 				970F980827F1C02D00FAE05B /* Views */,
 				970F980727F1C02300FAE05B /* ViewModels */,
-				970F980327F1BEEF00FAE05B /* API */,
 				970F980027F1B96000FAE05B /* Helper */,
 				970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */,
 				970F97F027F1B1B900FAE05B /* Preview Content */,
@@ -167,7 +167,6 @@
 			children = (
 				974E3D332849596E00C5CA1F /* Lottie */,
 				974E3D322849595200C5CA1F /* UI */,
-				974E3D28281B1B9700C5CA1F /* Items */,
 				977F4932280D92E100DE9BEC /* Localizables */,
 				970F981627F1C7B700FAE05B /* Colors.swift */,
 				974E3D2628198BA000C5CA1F /* Extensions.swift */,
@@ -262,6 +261,7 @@
 		974E3D322849595200C5CA1F /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				974E3D28281B1B9700C5CA1F /* Items */,
 				970F980127F1B97800FAE05B /* TofyText.swift */,
 				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
