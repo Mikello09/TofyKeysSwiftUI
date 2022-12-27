@@ -16,8 +16,8 @@ extension Text {
             .font(.largeTitle)
     }
     
-    func title() -> some View {
-        self.foregroundColor(.blackTofy)
+    func title(_ color: Color = Color.blackTofy) -> some View {
+        self.foregroundColor(color)
             .font(.system(size: 22, weight: .bold))
     }
     

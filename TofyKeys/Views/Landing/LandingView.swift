@@ -34,15 +34,19 @@ struct LandingView: View {
             VStack {
                 LandingTopView(showUserSettings: $showUserSettings, user: $user)
                     .frame(height: 60)
-                ForEach(claves) { clave in
-                    ClaveCell(clave: clave)
-                        .padding([.top, .bottom], 4)
-                        .onTapGesture {
-                            claveType = clave.valor.isEmpty ? .userPass : .value
-                            selectedClave = clave
-                            showClave = true
-                        }
-                }.padding([.leading, .trailing], 24)
+                ScrollView {
+                    ForEach(claves) { clave in
+                        ClaveCell(clave: clave)
+                            .padding([.top, .bottom], 4)
+                            .simultaneousGesture(
+                                TapGesture().onEnded({ _ in
+                                    claveType = clave.valor.isEmpty ? .userPass : .value
+                                    selectedClave = clave
+                                    showClave = true
+                                })
+                            )
+                    }.padding([.leading, .trailing], 24)
+                }
                 Spacer()
                 Button (action: {
                     showCreateKey = true
@@ -65,8 +69,9 @@ struct LandingView: View {
                 }.edgesIgnoringSafeArea(.all)
             }
         }
-        .background(.blue)
-        .fullScreenCover(isPresented: $showUserSettings){
+        .background(
+            Image("tofy_background"))
+        .fullScreenCover(isPresented: $showUserSettings) {
             UserSettingsView().environmentObject(userViewModel)
         }
         // MARK: USER
