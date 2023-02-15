@@ -73,7 +73,7 @@ extension PersistenceController {
 
 // MARK: CLAVE
 extension PersistenceController {
-    func saveClave(clave: Clave, allLocalClaves: [ClaveDB]) {
+    func saveClave(clave: Clave, allLocalClaves: [ClaveDB], valores: [Valores]) {
         if let claveToUpdate = allLocalClaves.filter({$0.token == clave.token}).first {
             claveToUpdate.actualizado = true
         } else {
@@ -82,21 +82,15 @@ extension PersistenceController {
             newClave.tokenUsuario = clave.tokenUsuario
             newClave.token = clave.token
             newClave.titulo = clave.titulo
-            newClave.usuario = clave.usuario
-            newClave.contrasena = clave.contrasena
-            newClave.valor = clave.valor
             newClave.fecha = clave.fecha
             newClave.actualizado = clave.actualizado
         }
         save()
     }
     
-    func editClave(oldClave: ClaveDB, newClave: Clave) {
+    func updateClave(oldClave: ClaveDB, newClave: Clave) {
         var claveToChange = oldClave
         claveToChange.titulo = newClave.titulo
-        claveToChange.valor = newClave.valor
-        claveToChange.usuario = newClave.usuario
-        claveToChange.contrasena = newClave.contrasena
         
         save()
     }

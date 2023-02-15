@@ -18,7 +18,7 @@ struct ShowClaveView: View {
     @State var contrasena: String = ""
     
     var onDelete: (_: Clave) -> Void
-    var onEdit: (_: Clave) -> Void
+    var onUpdate: (_: Clave) -> Void
     
     var body: some View {
         ZStack {
@@ -36,7 +36,7 @@ struct ShowClaveView: View {
                             .textFieldStyle(LoginTextFieldStyle())
                     }
                     Button {
-                        onEdit(Clave(token: clave.token,
+                        onUpdate(Clave(token: clave.token,
                                      tokenUsuario: clave.tokenUsuario,
                                      titulo: title,
                                      valor: valor,
@@ -139,6 +139,6 @@ struct ShowClaveView_Previews: PreviewProvider {
     static var previews: some View {
         ShowClaveView(clave: .constant(Clave()),
                       onDelete: {_ in },
-                      onEdit: {_ in})
+                      onUpdate: {_ in})
     }
 }

@@ -28,6 +28,8 @@ enum ClaveOrderType {
 class ClaveViewModel: NSObject, ObservableObject {
     
     @Published var claves: [Clave] = []
+    @Published var updatedClave: Clave = Clave()
+    
     var dbClaves: [ClaveDB] = []
     @Published var claveSavingState: ClaveSavingState = .none
     
@@ -99,17 +101,18 @@ extension ClaveViewModel {
 extension ClaveViewModel {
     func addClave(titulo: String, valor: String, usuario: String, contrasena: String) {
         if checkAddClaveParams(titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena) {
-            self.claveSavingState = .saving
+            claveSavingState = .saving
             let claveToken = GlobalManager.shared.generateToken()
             let claveFecha = Date().toString()
-            self.saveClaveLocally(claveToSave: Clave(token: claveToken,
-                                                     tokenUsuario: USER_TOKEN,
-                                                     titulo: titulo,
-                                                     valor: valor,
-                                                     usuario: usuario,
-                                                     contrasena: contrasena,
-                                                     fecha: claveFecha,
-                                                     actualizado: false))
+            let claveToSave = Clave(token: claveToken,
+                                    tokenUsuario: USER_TOKEN,
+                                    titulo: titulo,
+                                    valor: valor,
+                                    usuario: usuario,
+                                    contrasena: contrasena,
+                                    fecha: claveFecha,
+                                    actualizado: false)
+            self.saveClaveLocally(claveToSave: claveToSave)
             self.claveSavingState = .locallySaved
             addClaveCancellable = addClaveCall(token: claveToken, userToken: USER_TOKEN, titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena, fecha: claveFecha).sink(receiveCompletion: {
                 switch $0 {
@@ -160,10 +163,11 @@ extension ClaveViewModel {
         deleteClaveLocally(clave: clave)
     }
 }
-// MARK: EDIT
+// MARK: UPDATE
 extension ClaveViewModel {
-    public func editClave(clave: Clave) {
-        editClaveLocally(clave: clave)
+    public func updateClave(clave: Clave) {
+        updatedClave = clave
+        updateClaveLocally(clave: clave)
     }
 }
 
@@ -178,9 +182,9 @@ extension ClaveViewModel: NSFetchedResultsControllerDelegate {
         PersistenceController.shared.deleteClave(clave: claveDBItemToDelete)
     }
     
-    private func editClaveLocally(clave: Clave) {
+    private func updateClaveLocally(clave: Clave) {
         if let claveToChange = dbClaves.filter({$0.token == clave.token}).first {
-            PersistenceController.shared.editClave(oldClave: claveToChange, newClave: clave)
+            PersistenceController.shared.updateClave(oldClave: claveToChange, newClave: clave)
         }
     }
     

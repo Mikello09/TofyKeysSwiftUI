@@ -28,6 +28,7 @@ struct LandingView: View {
     
     // SHOW CLAVE VARS
     @State var selectedClave: Clave = Clave()
+    @State var updatedClave: Clave = Clave()
     
     var body: some View {
         ZStack {
@@ -35,8 +36,10 @@ struct LandingView: View {
                 LandingTopView(showUserSettings: $showUserSettings, user: $user)
                     .frame(height: 60)
                 ScrollView {
-                    ForEach(claves, id: \.titulo) { clave in
-                        ClaveCell(clave: clave)
+                    ForEach(claves, id: \.self) { clave in
+                        ClaveCell(clave: clave,
+                                  isUpdated: clave.token == updatedClave.token,
+                                  animationFinished: removeUpdatedClave)
                             .padding([.top, .bottom], 4)
                             .simultaneousGesture(
                                 TapGesture().onEnded({ _ in
@@ -65,7 +68,7 @@ struct LandingView: View {
                     AddClaveView(claveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)
                 }.edgesIgnoringSafeArea(.all)
                 BottomSheetView(isOpen: $showClave, maxHeight: 550, claveType: $claveType, onClose: clearBottomSheets) {
-                    ShowClaveView(clave: $selectedClave, onDelete: onDeleteClave, onEdit: onEditClave)
+                    ShowClaveView(clave: $selectedClave, onDelete: onDeleteClave, onUpdate: onUpdateClave)
                 }.edgesIgnoringSafeArea(.all)
             }
         }
@@ -82,11 +85,48 @@ struct LandingView: View {
         .onReceive(claveViewModel.$emptyClaveValues) { isEmptyClavesValue in
             emptyClaveValues = isEmptyClavesValue
         }
-        .onReceive(claveViewModel.$claves) { claves in
-            withAnimation(.linear(duration: 0.2)) {
-                self.claves = claves
+        .onReceive(claveViewModel.$claves) { newClaves in
+            let clavesToDelete = self.claves.filter { oldClave in
+                return !newClaves.contains(where: {$0.token == oldClave.token})
+            }
+            let clavesToAdd = newClaves.filter { newClave in
+                return !self.claves.contains(where: {$0.token == newClave.token})
+            }
+            let clavesToUpdate = newClaves.filter { oldClave in
+                return oldClave.token == self.updatedClave.token
+            }
+            // DELETE
+            for clave in clavesToDelete {
+                if let indexToRemove = self.claves.firstIndex(where: {$0.id == clave.id}) {
+                    withAnimation(.linear(duration: 0.2)) {
+                        self.claves.remove(at: indexToRemove)
+                    }
+                }
+            }
+            // ADD
+            for clave in clavesToAdd {
+                if let indexToAdd = newClaves.firstIndex(where: {$0.id == clave.id}) {
+                    withAnimation(.linear(duration: 0.2)) {
+                        self.claves.insert(clave, at: indexToAdd)
+                    }
+                }
+            }
+            // UPDATE
+            for clave in clavesToUpdate {
+                withAnimation(.linear(duration: 0.2)) {
+                    self.claves = self.claves.map({ c in
+                        var newClave = c
+                        if newClave.token == clave.token {
+                            newClave = clave
+                        }
+                        return newClave
+                    })
+                }
             }
         }
+        .onReceive(claveViewModel.$updatedClave, perform: { clave in
+            updatedClave = clave
+        })
         .onReceive(claveViewModel.$claveSavingState) { claveState in
             switch claveState {
             case .none: ()
@@ -110,15 +150,19 @@ extension LandingView {
         claveViewModel.deleteClave(clave: clave)
     }
     
-    func onEditClave(clave: Clave) {
+    func onUpdateClave(clave: Clave) {
         clearBottomSheets()
-        claveViewModel.editClave(clave: clave)
+        claveViewModel.updateClave(clave: clave)
     }
     
     func clearBottomSheets() {
         showCreateKey = false
         showClave = false
         selectedClave = Clave()
+    }
+    
+    func removeUpdatedClave() {
+        updatedClave = Clave()
     }
 }
 

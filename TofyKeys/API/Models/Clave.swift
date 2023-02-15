@@ -13,14 +13,27 @@ struct ClavesResponse: Codable {
     var claves: [Clave]
 }
 
+enum TipoRecordatorio {
+    case clave
+    case userPass
+    case lista
+    case aparcamiento
+    case fecha
+    case foto
+    case texto
+}
+
+struct Valores: Codable, Equatable, Hashable {
+    var tipo: String
+    var valor: String
+}
+
 struct Clave: Codable, Identifiable, Equatable, Hashable {
     var id: UUID = UUID()
     var token: String
     var tokenUsuario: String
     var titulo: String
-    var valor: String
-    var usuario: String
-    var contrasena: String
+    var valores: [Valores]
     var fecha: String
     var actualizado: Bool = false
     
@@ -28,20 +41,16 @@ struct Clave: Codable, Identifiable, Equatable, Hashable {
         token = ""
         tokenUsuario = ""
         titulo = ""
-        valor = ""
-        usuario = ""
-        contrasena = ""
+        valores = []
         fecha = ""
         actualizado = false
     }
     
-    public init(token: String, tokenUsuario: String, titulo: String, valor: String, usuario: String, contrasena: String, fecha: String, actualizado: Bool) {
+    public init(token: String, tokenUsuario: String, titulo: String, valores: [Valores], fecha: String, actualizado: Bool) {
         self.token = token
         self.tokenUsuario = tokenUsuario
         self.titulo = titulo
-        self.valor = valor
-        self.usuario = usuario
-        self.contrasena = contrasena
+        self.valores = valores
         self.fecha = fecha
         self.actualizado = actualizado
     }
@@ -50,9 +59,7 @@ struct Clave: Codable, Identifiable, Equatable, Hashable {
         return Clave(token: claveDB.token ?? "",
                      tokenUsuario: claveDB.tokenUsuario ?? "",
                      titulo: claveDB.titulo ?? "",
-                     valor: claveDB.valor ?? "",
-                     usuario: claveDB.usuario ?? "",
-                     contrasena: claveDB.contrasena ?? "",
+                     valores: claveDB
                      fecha: claveDB.fecha ?? "",
                      actualizado: claveDB.actualizado ?? false)
     }
@@ -73,8 +80,11 @@ enum ClaveType {
 
 extension ClaveDB {
   static var claveDBFetchRequest: NSFetchRequest<ClaveDB> {
-    let request: NSFetchRequest<ClaveDB> = ClaveDB.fetchRequest()
-    request.sortDescriptors = [NSSortDescriptor(key: "fecha", ascending: true)]
-    return request
+      let request: NSFetchRequest<ClaveDB> = ClaveDB.fetchRequest()
+      request.sortDescriptors = [NSSortDescriptor(key: "fecha", ascending: true)]
+      
+      let request2: NSFetchRequest<ValoresDB> = ValoresDB.fetchRequest()
+      
+      return request
   }
 }
