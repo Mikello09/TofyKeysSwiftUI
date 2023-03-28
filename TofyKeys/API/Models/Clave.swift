@@ -113,14 +113,14 @@ enum ClaveType: String {
         }
     }
     
-    func getHeight() -> CGFloat {
+    func getFraction() -> CGFloat {
         switch self {
-        case .clave: return 550
-        case .userPass: return 650
-        case .lista: return 550
-        case .aparcamiento: return 550
-        case .foto: return 550
-        case .texto: return 550
+        case .clave: return 0.6
+        case .userPass: return 0.75
+        case .lista: return 0.6
+        case .aparcamiento: return 0.6
+        case .foto: return 0.6
+        case .texto: return 0.6
         }
     }
     

@@ -29,7 +29,6 @@
 		974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2228197DAE00C5CA1F /* LottieView.swift */; };
 		974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D24281988D800C5CA1F /* ApiManager.swift */; };
 		974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2628198BA000C5CA1F /* Extensions.swift */; };
-		974E3D2A281B1BA700C5CA1F /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D29281B1BA700C5CA1F /* BottomSheet.swift */; };
 		974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2B281BF7A800C5CA1F /* RegisterView.swift */; };
 		974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */; };
 		974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */; };
@@ -41,7 +40,6 @@
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
 		9798C76F2850E3530044D11B /* AddClaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C76E2850E3530044D11B /* AddClaveView.swift */; };
-		9798C7712850F5F80044D11B /* DismissView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C7702850F5F80044D11B /* DismissView.swift */; };
 		9798C7732853C8570044D11B /* ClaveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C7722853C8570044D11B /* ClaveCell.swift */; };
 		9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9798C7742857766A0044D11B /* ShowClaveView.swift */; };
 		979B9399295AF7740034827D /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979B9398295AF7740034827D /* Animations.swift */; };
@@ -70,7 +68,6 @@
 		974E3D2228197DAE00C5CA1F /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		974E3D24281988D800C5CA1F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
 		974E3D2628198BA000C5CA1F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		974E3D29281B1BA700C5CA1F /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		974E3D2B281BF7A800C5CA1F /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCharacter.swift; sourceTree = "<group>"; };
 		974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveViewModel.swift; sourceTree = "<group>"; };
@@ -84,7 +81,6 @@
 		977F493C280D9F2500DE9BEC /* TofyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyTextField.swift; sourceTree = "<group>"; };
 		977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TofyKeys.entitlements; sourceTree = "<group>"; };
 		9798C76E2850E3530044D11B /* AddClaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClaveView.swift; sourceTree = "<group>"; };
-		9798C7702850F5F80044D11B /* DismissView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissView.swift; sourceTree = "<group>"; };
 		9798C7722853C8570044D11B /* ClaveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveCell.swift; sourceTree = "<group>"; };
 		9798C7742857766A0044D11B /* ShowClaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowClaveView.swift; sourceTree = "<group>"; };
 		979B9398295AF7740034827D /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
@@ -247,15 +243,6 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		974E3D28281B1B9700C5CA1F /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				974E3D29281B1BA700C5CA1F /* BottomSheet.swift */,
-				9798C7702850F5F80044D11B /* DismissView.swift */,
-			);
-			path = Items;
-			sourceTree = "<group>";
-		};
 		974E3D2D281C742700C5CA1F /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -268,7 +255,6 @@
 		974E3D322849595200C5CA1F /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				974E3D28281B1B9700C5CA1F /* Items */,
 				970F980127F1B97800FAE05B /* TofyText.swift */,
 				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
@@ -446,10 +432,8 @@
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
 				974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
-				974E3D2A281B1BA700C5CA1F /* BottomSheet.swift in Sources */,
 				9798C76F2850E3530044D11B /* AddClaveView.swift in Sources */,
 				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
-				9798C7712850F5F80044D11B /* DismissView.swift in Sources */,
 				974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */,
 				974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */,
 				9798C7732853C8570044D11B /* ClaveCell.swift in Sources */,

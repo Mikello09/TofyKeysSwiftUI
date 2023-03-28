@@ -34,6 +34,7 @@ struct AddClaveView: View {
     var body: some View {
         VStack(spacing: 24) {
             Text(LocalizedStringKey("Add_new_key")).title()
+                .padding([.top], 24)
             TextField("Titulo", text: $tituloValue)
                 .textFieldStyle(LoginTextFieldStyle())
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {

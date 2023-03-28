@@ -57,29 +57,35 @@ struct ClavesLandingView: View {
                                         showClave = true
                                     })
                                 )
+                                .contextMenu {
+                                    Button {
+                                        print("FAVOURITE")
+                                    } label: {
+                                        HStack {
+                                            Text("Favourite")
+                                            Spacer()
+                                            Image(systemName: "heart.fill")
+                                        }
+                                    }
+                                    Button {
+                                        print("DELETE")
+                                    } label: {
+                                        HStack {
+                                            Text("Delete")
+                                            Spacer()
+                                            Image(systemName: "trash.fill")
+                                        }
+                                    }
+                                }
                         }.padding([.leading, .trailing], 24)
                     }
                     Spacer()
-                }
-                if showCreateKey || showClave {
-                    DismissView()
-                        .onTapGesture {
-                            clearBottomSheets()
-                        }
-                }
-                ZStack {
-                    BottomSheetView(isOpen: $showCreateKey, maxHeight: 650, claveType: $claveType, onClose: clearBottomSheets) {
-                        AddClaveView(selectedClaveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)
-                    }.edgesIgnoringSafeArea(.all)
-                    BottomSheetView(isOpen: $showClave, maxHeight: 550, claveType: $claveType, onClose: clearBottomSheets) {
-                        ShowClaveView(clave: $selectedClave, onDelete: onDeleteClave, onUpdate: onUpdateClave)
-                    }.edgesIgnoringSafeArea(.all)
                 }
             }
             .navigationTitle("Claves")
             .toolbar(content: {
                 Button (action: {
-                    showCreateKey = true
+                    self.showCreateKey = true
                 }, label: {
                     imageButton(systemName: "plus.circle", color: .primaryColor, size: 24)
                 })
@@ -91,6 +97,8 @@ struct ClavesLandingView: View {
                     Button(ClaveOrderType.newFirst.rawValue, action: newFirstSelection)
                     Button(ClaveOrderType.oldFirst.rawValue, action: oldFirstselection)
                 }
+                .foregroundColor(.primaryColor)
+                .font(Font.system(size: 18, weight: .semibold))
 
             })
             .background(
@@ -99,6 +107,14 @@ struct ClavesLandingView: View {
                 UserSettingsView().environmentObject(userViewModel)
             }
         }
+        .sheet(isPresented: $showCreateKey) {
+            AddClaveView(selectedClaveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)
+                .presentationDetents([.fraction(claveType.getFraction())])
+        }
+        .sheet(isPresented: $showClave, content: {
+            ShowClaveView(clave: $selectedClave, onDelete: onDeleteClave, onUpdate: onUpdateClave)
+                .presentationDetents([.fraction(claveType.getFraction())])
+        })
         .searchable(text: $searchText, prompt: "Search for clave")
         // MARK: USER
         .onReceive(userViewModel.$user) { user in
