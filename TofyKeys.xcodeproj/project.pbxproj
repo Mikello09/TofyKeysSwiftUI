@@ -10,8 +10,8 @@
 		970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */; };
 		970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97EE27F1B1B900FAE05B /* Assets.xcassets */; };
 		970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */; };
-		970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97FA27F1B69900FAE05B /* LandingView.swift */; };
-		970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97FE27F1B71E00FAE05B /* LandingTopView.swift */; };
+		970F97FB27F1B69900FAE05B /* ClavesLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97FA27F1B69900FAE05B /* ClavesLandingView.swift */; };
+		970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97FE27F1B71E00FAE05B /* TopView.swift */; };
 		970F980227F1B97800FAE05B /* TofyText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980127F1B97800FAE05B /* TofyText.swift */; };
 		970F980627F1BF1E00FAE05B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980527F1BF1E00FAE05B /* User.swift */; };
 		970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F980927F1C05100FAE05B /* UserViewModel.swift */; };
@@ -34,6 +34,9 @@
 		974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */; };
 		974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */; };
 		974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D3528495A3E00C5CA1F /* GlobalManager.swift */; };
+		9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774067E29D1AF2100802B25 /* MainTabBarView.swift */; };
+		9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068129D1AFD900802B25 /* EconomyLandingView.swift */; };
+		9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068429D1B9E200802B25 /* TofyNavigation.swift */; };
 		977F4933280D92F300DE9BEC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 977F4935280D92F300DE9BEC /* Localizable.strings */; };
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
@@ -49,8 +52,8 @@
 		970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyKeysApp.swift; sourceTree = "<group>"; };
 		970F97EE27F1B1B900FAE05B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		970F97FA27F1B69900FAE05B /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
-		970F97FE27F1B71E00FAE05B /* LandingTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingTopView.swift; sourceTree = "<group>"; };
+		970F97FA27F1B69900FAE05B /* ClavesLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClavesLandingView.swift; sourceTree = "<group>"; };
+		970F97FE27F1B71E00FAE05B /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		970F980127F1B97800FAE05B /* TofyText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyText.swift; sourceTree = "<group>"; };
 		970F980527F1BF1E00FAE05B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		970F980927F1C05100FAE05B /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -72,6 +75,9 @@
 		974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCharacter.swift; sourceTree = "<group>"; };
 		974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveViewModel.swift; sourceTree = "<group>"; };
 		974E3D3528495A3E00C5CA1F /* GlobalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalManager.swift; sourceTree = "<group>"; };
+		9774067E29D1AF2100802B25 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
+		9774068129D1AFD900802B25 /* EconomyLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyLandingView.swift; sourceTree = "<group>"; };
+		9774068429D1B9E200802B25 /* TofyNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyNavigation.swift; sourceTree = "<group>"; };
 		977F4934280D92F300DE9BEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F4936280D930400DE9BEC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		977F493A280D95AC00DE9BEC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -135,14 +141,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		970F97F827F1B66C00FAE05B /* Landing */ = {
+		970F97F827F1B66C00FAE05B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9774068029D1AFC100802B25 /* Economy */,
 				9798C76D2850E33B0044D11B /* Claves */,
-				970F97FD27F1B70400FAE05B /* TopView */,
-				970F97FA27F1B69900FAE05B /* LandingView.swift */,
 			);
-			path = Landing;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		970F97F927F1B68400FAE05B /* UserSettings */ = {
@@ -157,7 +162,7 @@
 		970F97FD27F1B70400FAE05B /* TopView */ = {
 			isa = PBXGroup;
 			children = (
-				970F97FE27F1B71E00FAE05B /* LandingTopView.swift */,
+				970F97FE27F1B71E00FAE05B /* TopView.swift */,
 			);
 			path = TopView;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 		970F980027F1B96000FAE05B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				9774068329D1B9D400802B25 /* Navigation */,
 				974E3D332849596E00C5CA1F /* Lottie */,
 				974E3D322849595200C5CA1F /* UI */,
 				977F4932280D92E100DE9BEC /* Localizables */,
@@ -207,9 +213,10 @@
 		970F980827F1C02D00FAE05B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9774067D29D1AF1300802B25 /* TabBar */,
 				977F4937280D957900DE9BEC /* Login */,
 				970F97F927F1B68400FAE05B /* UserSettings */,
-				970F97F827F1B66C00FAE05B /* Landing */,
+				970F97F827F1B66C00FAE05B /* Main */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -265,6 +272,7 @@
 				970F980127F1B97800FAE05B /* TofyText.swift */,
 				970F981227F1C67600FAE05B /* TofyButton.swift */,
 				977F493C280D9F2500DE9BEC /* TofyTextField.swift */,
+				970F97FD27F1B70400FAE05B /* TopView */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -284,6 +292,30 @@
 				974E3D1D28197C9F00C5CA1F /* loading.json */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		9774067D29D1AF1300802B25 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9774067E29D1AF2100802B25 /* MainTabBarView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		9774068029D1AFC100802B25 /* Economy */ = {
+			isa = PBXGroup;
+			children = (
+				9774068129D1AFD900802B25 /* EconomyLandingView.swift */,
+			);
+			path = Economy;
+			sourceTree = "<group>";
+		};
+		9774068329D1B9D400802B25 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				9774068429D1B9E200802B25 /* TofyNavigation.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		977F4932280D92E100DE9BEC /* Localizables */ = {
@@ -315,6 +347,7 @@
 		9798C76D2850E33B0044D11B /* Claves */ = {
 			isa = PBXGroup;
 			children = (
+				970F97FA27F1B69900FAE05B /* ClavesLandingView.swift */,
 				9798C76E2850E3530044D11B /* AddClaveView.swift */,
 				9798C7722853C8570044D11B /* ClaveCell.swift */,
 				9798C7742857766A0044D11B /* ShowClaveView.swift */,
@@ -402,6 +435,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */,
+				9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */,
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
 				974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */,
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
@@ -421,12 +456,13 @@
 				979B9399295AF7740034827D /* Animations.swift in Sources */,
 				970F981327F1C67600FAE05B /* TofyButton.swift in Sources */,
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
-				970F97FB27F1B69900FAE05B /* LandingView.swift in Sources */,
+				970F97FB27F1B69900FAE05B /* ClavesLandingView.swift in Sources */,
 				974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */,
 				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
-				970F97FF27F1B71E00FAE05B /* LandingTopView.swift in Sources */,
+				970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
+				9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */,
 				970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */,
 				974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */,
 				970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */,
@@ -579,11 +615,13 @@
 				DEVELOPMENT_TEAM = M63K3782TK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Tofy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -609,11 +647,13 @@
 				DEVELOPMENT_TEAM = FR47VZSJ37;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Tofy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

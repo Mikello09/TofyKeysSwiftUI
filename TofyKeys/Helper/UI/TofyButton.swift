@@ -51,12 +51,12 @@ func textButton(text: LocalizedStringKey, foregroundColor: Color = .primaryColor
 }
 
 
-func imageButton(systemName: String, color: Color) -> some View {
+func imageButton(systemName: String, color: Color, size: CGFloat = 20) -> some View {
         Image(systemName: systemName)
             .resizable()
             .tint(color)
-            .frame(width: 20, height: 20)
-            .font(.system(size: 20, weight: .semibold))
+            .frame(width: size, height: size)
+            .font(.system(size: size, weight: .semibold))
             .padding()
 }
 

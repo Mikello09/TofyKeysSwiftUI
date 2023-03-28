@@ -33,7 +33,7 @@ struct TofyKeysApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LandingView(userViewModel: userViewModel, claveViewModel: claveViewModel)
+            MainTabBarView(userViewModel: userViewModel, claveViewModel: claveViewModel)
         }
         .onChange(of: scenePhase) { _ in // App to background
             persistenceController.save()

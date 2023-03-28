@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BottomSheetView<Content: View>: View {
     
@@ -16,6 +17,7 @@ struct BottomSheetView<Content: View>: View {
     let maxHeight: CGFloat
     let minHeight: CGFloat
     let content: Content
+    @State var keyboardHeight: CGFloat = 0
     
     init(isOpen: Binding<Bool>, maxHeight: CGFloat, claveType: Binding<ClaveType>, onClose: @escaping(()->Void), @ViewBuilder content: () -> Content) {
         self.minHeight = 0
@@ -44,7 +46,7 @@ struct BottomSheetView<Content: View>: View {
                 indicator.padding()
                 content
             }
-            .frame(width: geometry.size.width, height: claveType == .value ? 450 : maxHeight, alignment: .top)
+            .frame(width: geometry.size.width, height: keyboardHeight/2 + (isOpen ? claveType.getHeight() : 0), alignment: .top)
             .background(Color.white)
             .cornerRadius(8)
             .frame(height: geometry.size.height, alignment: .bottom)
@@ -53,6 +55,9 @@ struct BottomSheetView<Content: View>: View {
             .animation(.interactiveSpring(), value: isOpen)
             .animation(.interactiveSpring(), value: translation)
             .animation(.interactiveSpring(), value: claveType)
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
             .gesture(
                 DragGesture().updating($translation) { value, state, _ in
                     state = value.translation.height
@@ -63,10 +68,34 @@ struct BottomSheetView<Content: View>: View {
                             return
                         }
                         isOpen = value.translation.height < 0
-                        if !isOpen { onClose() }
+                        if !isOpen {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            onClose()
+                        }
                     }
                 }
             )
+            .onReceive(keyboardPublisher) { keyboardHeight in
+                self.keyboardHeight = keyboardHeight
+                print("Keyboard height: \(keyboardHeight)")
+            }
         }
     }
+}
+
+
+extension View {
+  var keyboardPublisher: AnyPublisher<CGFloat, Never> {
+      Publishers.Merge(
+                  NotificationCenter.default
+                      .publisher(for: UIResponder.keyboardWillShowNotification)
+                      .compactMap { $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue }
+                      .map {
+                          $0.cgRectValue.height
+                      },
+                  NotificationCenter.default
+                      .publisher(for: UIResponder.keyboardWillHideNotification)
+                      .map { _ in CGFloat(0) }
+             ).eraseToAnyPublisher()
+  }
 }

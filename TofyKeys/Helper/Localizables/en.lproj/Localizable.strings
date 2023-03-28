@@ -33,8 +33,13 @@
 // MARK: KEYS
 "Add_new_key" = "Add new key";
 "Add_key" = "Add key";
+"ClaveTitle" = "Key";
 "ValueTitle" = "Value";
 "UserPassTitle" = "User/Password";
+"ListTitle" = "List";
+"ParkingTitle" = "Parking";
+"PhotoTitle" = "Photo";
+"TextTitle" = "Text";
 "Title" = "Title";
 "Value" = "Value";
 "User" = "User";

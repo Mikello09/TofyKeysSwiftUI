@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct LandingTopView: View {
+struct TopView: View {
     
     @Binding var showUserSettings: Bool
     @Binding var user: User?

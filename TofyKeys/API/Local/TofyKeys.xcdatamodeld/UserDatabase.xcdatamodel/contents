@@ -3,9 +3,10 @@
     <entity name="ClaveDB" representedClassName="ClaveDB" syncable="YES" codeGenerationType="class">
         <attribute name="actualizado" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="fecha" optional="YES" attributeType="String"/>
+        <attribute name="idClave" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
-        <attribute name="token" optional="YES" attributeType="String"/>
         <attribute name="tokenUsuario" optional="YES" attributeType="String"/>
+        <attribute name="valores" optional="YES" attributeType="Transformable" valueTransformerName="NSAttributedStringTransformer" customClassName="Valores"/>
     </entity>
     <entity name="UserDB" representedClassName="UserDB" syncable="YES" codeGenerationType="class">
         <attribute name="character" optional="YES" attributeType="String"/>

@@ -31,6 +31,7 @@
 // MARK: KEYS
 "Add_new_key" = "Añade una nueva clave";
 "Add_key" = "Añade clave";
+"ClaveTitle" = "Clave";
 "ValueTitle" = "Valor";
 "UserPassTitle" = "Usuario/Contraseña";
 "Title" = "Título";

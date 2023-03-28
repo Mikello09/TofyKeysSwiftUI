@@ -73,15 +73,18 @@ extension PersistenceController {
 
 // MARK: CLAVE
 extension PersistenceController {
-    func saveClave(clave: Clave, allLocalClaves: [ClaveDB], valores: [Valores]) {
-        if let claveToUpdate = allLocalClaves.filter({$0.token == clave.token}).first {
+    func saveClave(clave: Clave, allLocalClaves: [ClaveDB]) {
+        if let claveToUpdate = allLocalClaves.filter({$0.idClave == clave.id.uuidString}).first {
             claveToUpdate.actualizado = true
         } else {
             let newClave = ClaveDB(context: container.viewContext)
             
             newClave.tokenUsuario = clave.tokenUsuario
-            newClave.token = clave.token
+            newClave.idClave = "\(clave.id)"
             newClave.titulo = clave.titulo
+            if let valores = clave.valores {
+                newClave.valores = valores//ValoresArray(valores: clave.valores)
+            }
             newClave.fecha = clave.fecha
             newClave.actualizado = clave.actualizado
         }
@@ -105,3 +108,10 @@ extension PersistenceController {
         }
     }
 }
+
+@objc(NSAttributedStringTransformer)
+class NSAttributedStringTransformer: NSSecureUnarchiveFromDataTransformer {
+    override class var allowedTopLevelClasses: [AnyClass] {
+        return super.allowedTopLevelClasses + [Valores.self]
+    }
+}   

@@ -18,11 +18,11 @@ enum ClaveSavingState {
     case errorSavingToServer
 }
 
-enum ClaveOrderType {
-    case AZ
-    case ZA
-    case newFirst
-    case oldFirst
+enum ClaveOrderType: String {
+    case AZ = "A-Z"
+    case ZA = "Z-A"
+    case newFirst = "New first"
+    case oldFirst = "Old first"
 }
 
 class ClaveViewModel: NSObject, ObservableObject {
@@ -58,6 +58,10 @@ class ClaveViewModel: NSObject, ObservableObject {
           print("failed to fetch items!")
         }
     }
+    
+    func sortClaves() {
+        claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.compactMap({Clave.parseClaveDB($0)}))
+    }
 }
 
 // MARK: GET CLAVES
@@ -75,16 +79,7 @@ extension ClaveViewModel {
                 }
             }, receiveValue: { claves in
                 print(claves)
-                for clave in claves.claves {
-                    self.saveClaveLocally(claveToSave: Clave(token: clave.token,
-                                                             tokenUsuario: clave.tokenUsuario,
-                                                             titulo: clave.titulo,
-                                                             valor: clave.valor,
-                                                             usuario: clave.usuario,
-                                                             contrasena: clave.contrasena,
-                                                             fecha: clave.fecha,
-                                                             actualizado: true))
-                }
+                ()
             })
         }
     }
@@ -99,44 +94,34 @@ extension ClaveViewModel {
 
 // MARK: ADD CLAVE
 extension ClaveViewModel {
-    func addClave(titulo: String, valor: String, usuario: String, contrasena: String) {
-        if checkAddClaveParams(titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena) {
+    func addClave(titulo: String, valores: Valores) {
+        if checkAddClaveParams(titulo: titulo, valores: valores) {
             claveSavingState = .saving
             let claveToken = GlobalManager.shared.generateToken()
             let claveFecha = Date().toString()
-            let claveToSave = Clave(token: claveToken,
+            let claveToSave = Clave(id: UUID().uuidString,
                                     tokenUsuario: USER_TOKEN,
                                     titulo: titulo,
-                                    valor: valor,
-                                    usuario: usuario,
-                                    contrasena: contrasena,
+                                    valores: valores,
                                     fecha: claveFecha,
                                     actualizado: false)
             self.saveClaveLocally(claveToSave: claveToSave)
             self.claveSavingState = .locallySaved
-            addClaveCancellable = addClaveCall(token: claveToken, userToken: USER_TOKEN, titulo: titulo, valor: valor, usuario: usuario, contrasena: contrasena, fecha: claveFecha).sink(receiveCompletion: {
+            addClaveCancellable = addClaveCall(token: claveToken, userToken: USER_TOKEN, titulo: titulo, valores: valores, fecha: claveFecha).sink(receiveCompletion: {
                 switch $0 {
                 case .failure(let err):
                     self.claveSavingState = .errorSavingToServer
                 case .finished: ()
                 }
             }, receiveValue: { clave in
-                self.saveClaveLocally(claveToSave: Clave(token: clave.token,
-                                                         tokenUsuario: clave.tokenUsuario,
-                                                         titulo: clave.titulo,
-                                                         valor: clave.valor,
-                                                         usuario: clave.usuario,
-                                                         contrasena: clave.contrasena,
-                                                         fecha: clave.fecha,
-                                                         actualizado: true))
                 self.claveSavingState = .serverSaved
             })
         }
     }
     
-    func checkAddClaveParams(titulo: String, valor: String, usuario: String, contrasena: String) -> Bool {
+    func checkAddClaveParams(titulo: String, valores: Valores) -> Bool {
         emptyClaveValues = false
-        if titulo.isEmpty || (valor.isEmpty && (usuario.isEmpty || contrasena.isEmpty)) {
+        if titulo.isEmpty || valores.valor.isEmpty {
             emptyClaveValues = true
             return false
         } else {
@@ -144,15 +129,12 @@ extension ClaveViewModel {
         }
     }
     
-    func addClaveCall(token: String, userToken: String, titulo: String, valor: String, usuario: String, contrasena: String, fecha: String) -> AnyPublisher<Clave, Error> {
+    func addClaveCall(token: String, userToken: String, titulo: String, valores: Valores, fecha: String) -> AnyPublisher<Clave, Error> {
         return crearLlamada(url: addClaveUrl,
                      parametros: [
                         "usuarioToken": userToken,
                         "token": token,
                         "titulo": titulo,
-                        "valor": valor,
-                        "usuario": usuario,
-                        "contrasena": contrasena,
                         "fecha": fecha
                      ]).eraseToAnyPublisher()
     }
@@ -178,12 +160,12 @@ extension ClaveViewModel: NSFetchedResultsControllerDelegate {
     }
     
     private func deleteClaveLocally(clave: Clave) {
-        guard let claveDBItemToDelete = dbClaves.filter({$0.token == clave.token}).first else { return }
+        guard let claveDBItemToDelete = dbClaves.filter({$0.idClave == clave.id.uuidString}).first else { return }
         PersistenceController.shared.deleteClave(clave: claveDBItemToDelete)
     }
     
     private func updateClaveLocally(clave: Clave) {
-        if let claveToChange = dbClaves.filter({$0.token == clave.token}).first {
+        if let claveToChange = dbClaves.filter({$0.idClave == clave.id.uuidString}).first {
             PersistenceController.shared.updateClave(oldClave: claveToChange, newClave: clave)
         }
     }
