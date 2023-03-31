@@ -10,7 +10,6 @@ import SwiftUI
 struct ClavesLandingView: View {
     
     // ViewModels
-    @ObservedObject var userViewModel: UserViewModel
     @ObservedObject var claveViewModel: ClaveViewModel
     
     // ACTION VARS
@@ -19,7 +18,6 @@ struct ClavesLandingView: View {
     @State var showClave: Bool = false
     
     // MAIN VARS
-    @State var user: User?
     @State var claves: [Clave] = []
     
     // ADD CLAVE VARS
@@ -59,7 +57,7 @@ struct ClavesLandingView: View {
                                 )
                                 .contextMenu {
                                     Button {
-                                        print("FAVOURITE")
+                                        claveViewModel.setFavourite(clave: clave)
                                     } label: {
                                         HStack {
                                             Text("Favourite")
@@ -68,7 +66,7 @@ struct ClavesLandingView: View {
                                         }
                                     }
                                     Button {
-                                        print("DELETE")
+                                        claveViewModel.deleteClave(clave: clave)
                                     } label: {
                                         HStack {
                                             Text("Delete")
@@ -101,11 +99,7 @@ struct ClavesLandingView: View {
                 .font(Font.system(size: 18, weight: .semibold))
 
             })
-            .background(
-                Image("tofy_background"))
-            .fullScreenCover(isPresented: $showUserSettings) {
-                UserSettingsView().environmentObject(userViewModel)
-            }
+            .background(Image("tofy_background"))
         }
         .sheet(isPresented: $showCreateKey) {
             AddClaveView(selectedClaveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)
@@ -116,11 +110,6 @@ struct ClavesLandingView: View {
                 .presentationDetents([.fraction(claveType.getFraction())])
         })
         .searchable(text: $searchText, prompt: "Search for clave")
-        // MARK: USER
-        .onReceive(userViewModel.$user) { user in
-            self.user = user
-        }
-        // MARK: CLAVES
         .onReceive(claveViewModel.$emptyClaveValues) { isEmptyClavesValue in
             emptyClaveValues = isEmptyClavesValue
         }

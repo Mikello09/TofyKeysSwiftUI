@@ -104,7 +104,8 @@ extension ClaveViewModel {
                                     titulo: titulo,
                                     valores: valores,
                                     fecha: claveFecha,
-                                    actualizado: false)
+                                    actualizado: false,
+                                    isFavourite: false)
             self.saveClaveLocally(claveToSave: claveToSave)
             self.claveSavingState = .locallySaved
             addClaveCancellable = addClaveCall(token: claveToken, userToken: USER_TOKEN, titulo: titulo, valores: valores, fecha: claveFecha).sink(receiveCompletion: {
@@ -150,6 +151,19 @@ extension ClaveViewModel {
     public func updateClave(clave: Clave) {
         updatedClave = clave
         updateClaveLocally(clave: clave)
+    }
+}
+// MARK: FAVOURITE
+extension ClaveViewModel {
+    public func setFavourite(clave: Clave) {
+        let claveToChange = Clave(id: clave.id.uuidString,
+                                  tokenUsuario: clave.tokenUsuario,
+                                  titulo: clave.titulo,
+                                  valores: clave.valores,
+                                  fecha: clave.fecha,
+                                  actualizado: false,
+                                  isFavourite: clave.isFavourite ? false : true)
+        updateClaveLocally(clave: claveToChange)
     }
 }
 

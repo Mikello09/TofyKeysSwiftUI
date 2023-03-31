@@ -94,6 +94,7 @@ extension PersistenceController {
     func updateClave(oldClave: ClaveDB, newClave: Clave) {
         var claveToChange = oldClave
         claveToChange.titulo = newClave.titulo
+        claveToChange.isFavourite = newClave.isFavourite
         
         save()
     }

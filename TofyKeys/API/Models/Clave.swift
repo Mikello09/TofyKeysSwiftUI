@@ -12,7 +12,7 @@ import SwiftUI
 struct ClavesResponse: Codable {
     var claves: [Clave]
 }
-
+// MARK: VALORES
 public class Valores: NSObject, Codable, NSSecureCoding {
     public static var supportsSecureCoding: Bool{ get{ return true } }
     
@@ -57,7 +57,7 @@ public class Valores: NSObject, Codable, NSSecureCoding {
         }
     }
 }
-
+// MARK: CLAVE
 struct Clave: Codable, Identifiable, Equatable, Hashable {
     var id: UUID = UUID()
     var tokenUsuario: String
@@ -65,21 +65,24 @@ struct Clave: Codable, Identifiable, Equatable, Hashable {
     var valores: Valores?
     var fecha: String
     var actualizado: Bool = false
+    var isFavourite: Bool
     
     public init() {
         tokenUsuario = ""
         titulo = ""
         fecha = ""
         actualizado = false
+        isFavourite = false
     }
     
-    public init(id: String, tokenUsuario: String, titulo: String, valores: Valores?, fecha: String, actualizado: Bool) {
+    public init(id: String, tokenUsuario: String, titulo: String, valores: Valores?, fecha: String, actualizado: Bool, isFavourite: Bool) {
         self.id = UUID(uuidString: id) ?? UUID()
         self.tokenUsuario = tokenUsuario
         self.titulo = titulo
         self.valores = valores
         self.fecha = fecha
         self.actualizado = actualizado
+        self.isFavourite = isFavourite
     }
     
     static func parseClaveDB(_ claveDB: ClaveDB) -> Clave {
@@ -88,12 +91,13 @@ struct Clave: Codable, Identifiable, Equatable, Hashable {
                      titulo: claveDB.titulo ?? "",
                      valores: claveDB.valores,
                      fecha: claveDB.fecha ?? "",
-                     actualizado: claveDB.actualizado)
+                     actualizado: claveDB.actualizado,
+                     isFavourite: claveDB.isFavourite)
     }
 }
 
 let VALUE_SEPARATOR: String = "$%&"
-
+// MARK: CLAVE TYPE
 enum ClaveType: String {
     case clave = "clave"
     case userPass = "userPass"
@@ -126,6 +130,7 @@ enum ClaveType: String {
     
 }
 
+// MARK: CLAVE DB
 extension ClaveDB {
   static var claveDBFetchRequest: NSFetchRequest<ClaveDB> {
       let request: NSFetchRequest<ClaveDB> = ClaveDB.fetchRequest()

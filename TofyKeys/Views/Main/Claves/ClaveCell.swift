@@ -23,6 +23,11 @@ struct ClaveCell: View {
             Text(clave.titulo).title(.white)
                 .padding(.leading)
             Spacer()
+            if clave.isFavourite {
+                Image(systemName: "heart.fill")
+                    .padding()
+                    .foregroundColor(.white)
+            }
         }
         .frame(height: 64)
         .background(backgroundColor)
