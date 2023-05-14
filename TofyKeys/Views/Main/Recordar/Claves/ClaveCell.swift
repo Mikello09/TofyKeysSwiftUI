@@ -57,9 +57,3 @@ struct ClaveCell: View {
         }
     }
 }
-
-//struct ClaveCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ClaveCell(clave: Clave())
-//    }
-//}

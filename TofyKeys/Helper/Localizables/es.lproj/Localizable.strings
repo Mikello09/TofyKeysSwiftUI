@@ -33,13 +33,25 @@
 "Add_key" = "Añade clave";
 "ClaveTitle" = "Clave";
 "ValueTitle" = "Valor";
-"UserPassTitle" = "Usuario/Contraseña";
+"UserPassTitle" = "Usuario Contraseña";
+"ListTitle" = "Lista";
+"ParkingTitle" = "Parking";
+"PhotoTitle" = "Foto";
+"TextTitle" = "Texto";
 "Title" = "Título";
 "Value" = "Valor";
 "User" = "Usuario";
 "Password" = "Contraseña";
 "EmptyValuesAddingKey" = "Completa todos los campos";
+"EmptyClaves" = "Empieza a añadir nuevas claves!!";
 
 // MARK: CLAVES
 "delete" = "Borrar";
 "edit" = "Editar";
+
+// MARK: PARKING
+"Parking" = "Parking";
+"AddParking" = "Añadir parking";
+"Reference" = "Referencia";
+"Add_localization" = "Añadir localizacion";
+"EmptyParking" = "Empieza a añadir parkings!";

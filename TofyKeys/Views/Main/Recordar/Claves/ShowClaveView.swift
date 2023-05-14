@@ -22,15 +22,19 @@ struct ShowClaveView: View {
         VStack {
             Text(clave.titulo).title()
                 .padding()
+                .textSelection(.enabled)
             switch clave.valores?.getClaveType() {
             case .clave:
                 Text(clave.valores?.valor ?? "")
+                    .textSelection(.enabled)
             case .userPass:
                 if let usuario = clave.valores?.valor.split(separator: VALUE_SEPARATOR).first {
                     Text(usuario)
+                        .textSelection(.enabled)
                 }
                 if let pass = clave.valores?.valor.split(separator: VALUE_SEPARATOR).last {
                     Text(pass)
+                        .textSelection(.enabled)
                 }
             case .foto: EmptyView()
             case .texto: EmptyView()

@@ -60,3 +60,15 @@ func imageButton(systemName: String, color: Color, size: CGFloat = 20) -> some V
             .padding()
 }
 
+// MARK: HIGHLIGHT BUTTON
+struct HighlightButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(height: 12)
+            .padding()
+            .foregroundColor(configuration.isPressed ? Color.whiteHighlighted : Color.white)
+            .background(configuration.isPressed ? Color.primaryColorHighlighted : Color.primaryColor)
+            .cornerRadius(12)
+    }
+}
+

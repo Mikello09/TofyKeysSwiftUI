@@ -98,7 +98,10 @@ struct Clave: Codable, Identifiable, Equatable, Hashable {
 
 let VALUE_SEPARATOR: String = "$%&"
 // MARK: CLAVE TYPE
-enum ClaveType: String {
+enum ClaveType: String, Identifiable {
+    
+    var id: Self { return self }
+    
     case clave = "clave"
     case userPass = "userPass"
     case lista = "lista"
@@ -117,12 +120,23 @@ enum ClaveType: String {
         }
     }
     
+    func getImage() -> Image {
+        switch self {
+        case .clave: return Image(systemName: "key.fill")
+        case .userPass: return Image(systemName: "person.circle.fill")
+        case .lista: return Image(systemName: "list.clipboard.fill")
+        case .aparcamiento: return Image(systemName: "car.fill")
+        case .foto: return Image(systemName: "photo.fill")
+        case .texto: return Image(systemName: "note.text")
+        }
+    }
+    
     func getFraction() -> CGFloat {
         switch self {
-        case .clave: return 0.6
-        case .userPass: return 0.75
+        case .clave: return 0.5
+        case .userPass: return 0.6
         case .lista: return 0.6
-        case .aparcamiento: return 0.6
+        case .aparcamiento: return 0.75
         case .foto: return 0.6
         case .texto: return 0.6
         }

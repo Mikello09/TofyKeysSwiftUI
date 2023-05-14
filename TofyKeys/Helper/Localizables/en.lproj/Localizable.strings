@@ -35,7 +35,7 @@
 "Add_key" = "Add key";
 "ClaveTitle" = "Key";
 "ValueTitle" = "Value";
-"UserPassTitle" = "User/Password";
+"UserPassTitle" = "User Password";
 "ListTitle" = "List";
 "ParkingTitle" = "Parking";
 "PhotoTitle" = "Photo";
@@ -45,7 +45,16 @@
 "User" = "User";
 "Password" = "Password";
 "EmptyValuesAddingKey" = "Fill all the fields";
+"EmptyClaves" = "Start adding new keys!!";
 
 // MARK: CLAVES
 "delete" = "Delete";
 "edit" = "Edit";
+
+// MARK: PARKING
+"Parking" = "Parking";
+"AddParking" = "Add parking";
+"Reference" = "Reference";
+"Add_localization" = "Add localization";
+"Add_Parking" = "Add parking";
+"EmptyParking" = "Start adding parkings!";

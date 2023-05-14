@@ -42,42 +42,55 @@ struct ClavesLandingView: View {
         TofyNavigation {
             ZStack {
                 VStack {
-                    ScrollView {
-                        ForEach(searchResults, id: \.self) { clave in
-                            ClaveCell(clave: clave,
-                                      isUpdated: clave.id == updatedClave.id,
-                                      animationFinished: removeUpdatedClave)
-                                .padding([.top, .bottom], 4)
-                                .simultaneousGesture(
-                                    TapGesture().onEnded({ _ in
-                                        claveType = .clave
-                                        selectedClave = clave
-                                        showClave = true
-                                    })
-                                )
-                                .contextMenu {
-                                    Button {
-                                        claveViewModel.setFavourite(clave: clave)
-                                    } label: {
-                                        HStack {
-                                            Text("Favourite")
-                                            Spacer()
-                                            Image(systemName: "heart.fill")
+                    if claves.isEmpty {
+                        Spacer()
+                        LottieView(name: "add", loopMode: .loop)
+                            .frame(width: 64, height: 64)
+                            .onTapGesture {
+                                self.showCreateKey = true
+                            }
+                        Text(LocalizedStringKey("EmptyClaves"))
+                            .title()
+                            .multilineTextAlignment(.center)
+                            .padding([.leading, .trailing], 64)
+                        Spacer()
+                    } else {
+                        ScrollView {
+                            ForEach(searchResults, id: \.self) { clave in
+                                ClaveCell(clave: clave,
+                                          isUpdated: clave.id == updatedClave.id,
+                                          animationFinished: removeUpdatedClave)
+                                    .padding([.top, .bottom], 4)
+                                    .simultaneousGesture(
+                                        TapGesture().onEnded({ _ in
+                                            claveType = .clave
+                                            selectedClave = clave
+                                            showClave = true
+                                        })
+                                    )
+                                    .contextMenu {
+                                        Button {
+                                            claveViewModel.setFavourite(clave: clave)
+                                        } label: {
+                                            HStack {
+                                                Text("Favourite")
+                                                Spacer()
+                                                Image(systemName: "heart.fill")
+                                            }
+                                        }
+                                        Button {
+                                            claveViewModel.deleteClave(clave: clave)
+                                        } label: {
+                                            HStack {
+                                                Text("Delete")
+                                                Spacer()
+                                                Image(systemName: "trash.fill")
+                                            }
                                         }
                                     }
-                                    Button {
-                                        claveViewModel.deleteClave(clave: clave)
-                                    } label: {
-                                        HStack {
-                                            Text("Delete")
-                                            Spacer()
-                                            Image(systemName: "trash.fill")
-                                        }
-                                    }
-                                }
-                        }.padding([.leading, .trailing], 24)
+                            }.padding([.leading, .trailing], 24)
+                        }
                     }
-                    Spacer()
                 }
             }
             .navigationTitle("Claves")
@@ -103,11 +116,10 @@ struct ClavesLandingView: View {
         }
         .sheet(isPresented: $showCreateKey) {
             AddClaveView(selectedClaveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)
-                .presentationDetents([.fraction(claveType.getFraction())])
         }
         .sheet(isPresented: $showClave, content: {
             ShowClaveView(clave: $selectedClave, onDelete: onDeleteClave, onUpdate: onUpdateClave)
-                .presentationDetents([.fraction(claveType.getFraction())])
+                .presentationDetents([.fraction(0.3)])
         })
         .searchable(text: $searchText, prompt: "Search for clave")
         .onReceive(claveViewModel.$emptyClaveValues) { isEmptyClavesValue in

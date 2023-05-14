@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ClaveSelection: Hashable {
+struct ClaveSelection: Hashable, Identifiable {
+    var id: UUID = UUID()
     var type: ClaveType
     var isSelected: Bool = false
 }
@@ -15,15 +16,12 @@ struct ClaveSelection: Hashable {
 struct AddClaveView: View {
     
     @State var valores: [Valores] = []
-    @State var claveTypes: [ClaveSelection] = [ClaveSelection(type: .clave),
-                                               ClaveSelection(type: .userPass),
-                                               ClaveSelection(type: .lista),
-                                               ClaveSelection(type: .aparcamiento),
-                                               ClaveSelection(type: .texto),
-                                               ClaveSelection(type: .foto)]
+    
     @Binding var selectedClaveType: ClaveType
     @State var tituloValue: String = ""
+    // CLAVE
     @State var claveValue: String = ""
+    // USER PASS
     @State var userValue: String = ""
     @State var passValue: String = ""
     
@@ -32,27 +30,26 @@ struct AddClaveView: View {
     var onAddClave: (_ title: String, _ valores: Valores) -> Void
     
     var body: some View {
-        VStack(spacing: 24) {
+        VStack {
             Text(LocalizedStringKey("Add_new_key")).title()
                 .padding([.top], 24)
             TextField("Titulo", text: $tituloValue)
                 .textFieldStyle(LoginTextFieldStyle())
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
-                ForEach(claveTypes, id: \.self) { clave in
-                    ClaveSelectionView(clave: clave) { claveSelected in
-                        self.claveSelected(selectedClave: claveSelected)
-                    }
+            HStack(spacing: 8) {
+                OptionSelectorView(clave: .clave, isSelected: selectedClaveType == .clave) {
+                    selectedClaveType = .clave
+                }
+                OptionSelectorView(clave: .userPass, isSelected: selectedClaveType == .userPass) {
+                    selectedClaveType = .userPass
                 }
             }
-            if let selectedClave = claveTypes.first(where: {$0.isSelected}) {
-                switch selectedClave.type {
-                case .clave: AddClaveTypeView(claveValue: $claveValue)
-                case .userPass: AddUserPassTypeView(userValue: $userValue, passValue: $passValue)
-                case .aparcamiento: EmptyView()
-                case .foto: EmptyView()
-                case .lista: EmptyView()
-                case .texto: EmptyView()
-                }
+            .padding()
+            switch selectedClaveType {
+            case .clave:
+                AddClaveTypeView(claveValue: $claveValue)
+            case .userPass:
+                AddUserPassTypeView(userValue: $userValue, passValue: $passValue)
+            default: EmptyView()
             }
             if emptyValues {
                 HStack {
@@ -67,17 +64,7 @@ struct AddClaveView: View {
             }.buttonStyle(PrincipalButton())
             Spacer()
         }
-        .padding([.leading, .trailing], 12)
-    }
-    
-    func claveSelected(selectedClave: ClaveSelection) {
-        let newClaves = claveTypes.map { c in
-            var clave = c
-            clave.isSelected = clave.type == selectedClave.type
-            return clave
-        }
-        selectedClaveType = selectedClave.type
-        claveTypes = newClaves
+        .background(Color.elementColor)
     }
     
     func prepareValuesToAdd() {
@@ -94,26 +81,33 @@ struct AddClaveView: View {
         
     }
 }
-// MARK: CLAVE SELECTION
-struct ClaveSelectionView: View {
+
+struct OptionSelectorView: View {
     
-    @State var clave: ClaveSelection
-    
-    var completion: ((_ : ClaveSelection) -> Void)
+    var clave: ClaveType
+    var isSelected: Bool
+    var onSelect: (() -> Void)
     
     var body: some View {
-        VStack {
-            Text(clave.type.getTitle())
+        VStack(spacing: 8) {
+            clave.getImage().foregroundColor(isSelected ? Color.white : Color.blackTofy)
+            Text(clave.getTitle())
+                .multilineTextAlignment(.center)
+                .foregroundColor(isSelected ? Color.white : Color.blackTofy)
         }
-        .frame(width: 120, height: 50)
-        .border(clave.isSelected ? Color.primaryColor : Color.clear, width: 2)
-        .background(clave.isSelected ? Color.primaryColor.opacity(0.5) : Color.clear)
-        .cornerRadius(4)
+        .frame(height: 120)
+        .frame(maxWidth: .infinity)
+        .background(isSelected ? Color.primaryColor : Color.primaryColorHighlighted)
+        .shadow(color: isSelected ? .clear : .gray, radius: 5)
+        .cornerRadius(8)
+        .padding()
         .onTapGesture {
-            completion(ClaveSelection(type: clave.type, isSelected: !clave.isSelected))
+            onSelect()
         }
     }
+    
 }
+
 // MARK: CLAVE VIEW
 struct AddClaveTypeView: View {
     @Binding var claveValue: String

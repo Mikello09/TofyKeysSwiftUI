@@ -19,6 +19,7 @@ extension Color{
     public static let redTofy: Color = Color(.redTofy)
     public static let screenBackgroundDark: Color = Color(.screenBackgroundDark)
     public static let dismissColor: Color = Color(.dismissColor)
+    public static let elementColor: Color = Color(.elementColor)
     // CELLS
     public static let claveCellColor: Color = Color(.claveCellColor)
     public static let selectedClaveCells: Color = Color(.selectedClaveCells)
@@ -33,6 +34,7 @@ extension UIColor{
     public static let redTofy: UIColor = UIColor.init(named: "RedTofy")!
     public static let screenBackgroundDark: UIColor = UIColor.init(named: "ScreenBackgroundDark")!
     public static let dismissColor: UIColor = UIColor.init(named: "DismissColor")!
+    public static let elementColor: UIColor = UIColor.init(named: "ElementBackground")!
     // CELLS
     public static let claveCellColor: UIColor = UIColor.init(named: "ClaveCells")!
     public static let selectedClaveCells: UIColor = UIColor.init(named: "SelectedClaveCells")!

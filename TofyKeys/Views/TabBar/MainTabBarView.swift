@@ -15,9 +15,9 @@ struct MainTabBarView: View {
     
     var body: some View {
         TabView {
-            ClavesLandingView(claveViewModel: claveViewModel)
+            RecordarView(claveViewModel: claveViewModel)
                 .tabItem {
-                    Label("Claves", systemImage: "key.fill")
+                    Label("Recordar", systemImage: "key.fill")
                 }
             EconomyLandingView()
                 .tabItem {
