@@ -26,7 +26,7 @@ struct NoLoggedUser: View {
             Button (action: {
                 self.goToLogin = true
             }, label: {
-                textButton(text: LocalizedStringKey("loginOrRegister"))
+                TextButton(text: LocalizedStringKey("loginOrRegister"))
             })
 
 

@@ -27,7 +27,11 @@ enum ClaveOrderType: String {
 
 class ClaveViewModel: NSObject, ObservableObject {
     
+    @Published var allClaves: [Clave] = []
     @Published var claves: [Clave] = []
+    @Published var parkings: [Parking] = []
+    @Published var notas: [Nota] = []
+    
     @Published var updatedClave: Clave = Clave()
     
     var dbClaves: [ClaveDB] = []
@@ -52,15 +56,18 @@ class ClaveViewModel: NSObject, ObservableObject {
         do {
             try claveController.performFetch()
             self.dbClaves = claveController.fetchedObjects ?? []
-            claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.compactMap({Clave.parseClaveDB($0)}))
-            print("Local Claves: \(claves)")
+            allClaves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.compactMap({ Clave.parseClaveDB($0) }))
+            claves = allClaves.filter({ $0.valores?.tipo == ClaveType.clave.rawValue })
+            parkings = allClaves.filter({ $0.valores?.tipo == ClaveType.aparcamiento.rawValue }).compactMap( {$0.toParking()} )
+            notas = allClaves.filter({ $0.valores?.tipo == ClaveType.lista.rawValue }).compactMap({$0.toNota()})
+            print("Local Claves: \(allClaves)")
         } catch {
           print("failed to fetch items!")
         }
     }
     
     func sortClaves() {
-        claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.compactMap({Clave.parseClaveDB($0)}))
+        claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.filter({ $0.valores?.tipo == ClaveType.clave.rawValue }).compactMap({Clave.parseClaveDB($0)}))
     }
 }
 
@@ -187,6 +194,9 @@ extension ClaveViewModel: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         guard let claveItems = controller.fetchedObjects as? [ClaveDB] else { return }
         dbClaves = claveItems
-        claves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.map({Clave.parseClaveDB($0)}))
+        allClaves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.map({Clave.parseClaveDB($0)}))
+        claves = allClaves.filter({$0.valores?.tipo == ClaveType.clave.rawValue})
+        parkings = allClaves.filter({$0.valores?.tipo == ClaveType.aparcamiento.rawValue}).compactMap({ $0.toParking() })
+        notas = allClaves.filter({ $0.valores?.tipo == ClaveType.lista.rawValue }).compactMap({ $0.toNota() })
     }
 }

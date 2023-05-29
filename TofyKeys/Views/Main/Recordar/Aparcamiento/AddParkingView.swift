@@ -6,17 +6,23 @@
 //
 
 import SwiftUI
+import UIKit
 import MapKit
 
 struct Parking {
     var reference: String?
+    var color: String?
     var latitude: CGFloat?
     var longitude: CGFloat?
+    var date: Date
 }
 
 struct AddParkingView: View {
     
+    var onAdd: ((String, String, CGFloat, CGFloat) -> Void)
+    
     @State var reference: String = ""
+    @State var color: Color = .clear
     @State var latitude: CGFloat?
     @State var longitude: CGFloat?
     
@@ -29,8 +35,13 @@ struct AddParkingView: View {
             Text(LocalizedStringKey("AddParking"))
                 .title(.black)
                 .padding()
-            TextField(LocalizedStringKey("Reference"), text: $reference)
-                .textFieldStyle(LoginTextFieldStyle())
+            HStack(spacing: 0) {
+                TextField(LocalizedStringKey("Reference"), text: $reference)
+                    .textFieldStyle(LoginTextFieldStyle())
+                ColorPicker("", selection: $color, supportsOpacity: false)
+                    .labelsHidden()
+                    .padding(.trailing)
+            }
             if latitude == nil || longitude == nil {
                 ZStack(alignment: .center) {
                     Image("mapa")
@@ -59,7 +70,7 @@ struct AddParkingView: View {
                     .padding()
             }
             Button {
-                print("add parking")
+                onAdd(reference == "" ? "-" : reference, color == .clear ? "-" : hexStringFromColor(color: UIColor(color)), latitude ?? 0, longitude ?? 0)
             } label: {
                 PrincipalButtonText(LocalizedStringKey("AddParking"))
             }.buttonStyle(PrincipalButton())
@@ -75,6 +86,17 @@ struct AddParkingView: View {
             }
         }
     }
+    
+    func hexStringFromColor(color: UIColor) -> String {
+        let components = color.cgColor.components
+        let r: CGFloat = components?[0] ?? 0.0
+        let g: CGFloat = components?[1] ?? 0.0
+        let b: CGFloat = components?[2] ?? 0.0
+
+        let hexString = String.init(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+        print(hexString)
+        return hexString
+     }
 }
 
 class LocationDelegate: NSObject, ObservableObject, CLLocationManagerDelegate {

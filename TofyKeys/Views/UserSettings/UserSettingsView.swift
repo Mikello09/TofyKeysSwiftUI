@@ -46,7 +46,7 @@ struct UserSettingsView: View {
                 Button {
                     userViewModel.logout()
                 } label: {
-                    textButton(text: LocalizedStringKey("Logout"), foregroundColor: .redTofy)
+                    TextButton(text: LocalizedStringKey("Logout"), foregroundColor: .redTofy)
                 }
             }
         }

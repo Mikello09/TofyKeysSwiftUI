@@ -30,10 +30,12 @@ struct RecordarView: View {
                         }
                     }
                     HStack(spacing: 24) {
-                        NavigationLink(destination: ParkingView()) {
+                        NavigationLink(destination: ParkingView(claveViewModel: claveViewModel)) {
                             RecordarMenuCell(menuItem: .aparcamiento)
                         }
-                        RecordarMenuCell(menuItem: .lista)
+                        NavigationLink(destination: NotasView(claveViewModel: claveViewModel)) {
+                            RecordarMenuCell(menuItem: .lista)
+                        }
                     }
                 }
                 Spacer()

@@ -94,6 +94,33 @@ struct Clave: Codable, Identifiable, Equatable, Hashable {
                      actualizado: claveDB.actualizado,
                      isFavourite: claveDB.isFavourite)
     }
+    
+    func toParking() -> Parking? {
+        if let parkingInfo = valores?.valor.split(separator: VALUE_SEPARATOR) {
+            var reference = ""
+            var color = "-"
+            var latitude: CGFloat = 0
+            var longitude: CGFloat = 0
+            for (index, info) in parkingInfo.enumerated() {
+                if index == 0 {
+                    reference = info.description
+                } else if index == 1 {
+                    color = info.description
+                } else if index == 2 {
+                    latitude = CGFloat(Double(info.description) ?? 0)
+                } else {
+                    longitude = CGFloat(Double(info.description) ?? 0)
+                }
+            }
+            return Parking(reference: reference, color: color, latitude: latitude, longitude: longitude, date: titulo.toDate())
+        }
+        return nil
+    }
+    
+    func toNota() -> Nota? {
+        guard let notaValue = valores?.valor else { return nil }
+        return Nota(id: self.id, tokenUsuario: self.tokenUsuario, titulo: self.titulo, nota: notaValue, fecha: fecha, actualizado: actualizado, isFavourite: isFavourite)
+    }
 }
 
 let VALUE_SEPARATOR: String = "$%&"

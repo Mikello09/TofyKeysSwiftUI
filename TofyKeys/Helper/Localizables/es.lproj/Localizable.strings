@@ -34,7 +34,7 @@
 "ClaveTitle" = "Clave";
 "ValueTitle" = "Valor";
 "UserPassTitle" = "Usuario Contraseña";
-"ListTitle" = "Lista";
+"ListTitle" = "Notas";
 "ParkingTitle" = "Parking";
 "PhotoTitle" = "Foto";
 "TextTitle" = "Texto";
@@ -55,3 +55,16 @@
 "Reference" = "Referencia";
 "Add_localization" = "Añadir localizacion";
 "EmptyParking" = "Empieza a añadir parkings!";
+"HistoricoParkings" = "Histórico de parkings";
+"ActualParkingTitle" = "Tu coche está en...";
+
+
+// MARK: NOTAS
+"Notas" = "Notas";
+"EmptyNotas" = "Empieza a añadir notas!!";
+"NewNota" = "Nueva nota";
+"NotaTitle" = "Título";
+"NotaMessage" = "Comienza a escribir tu nota";
+"AddNota" = "Añadir nota";
+"Save" = "Guardar";
+"Edit" = "Editar";

@@ -95,6 +95,7 @@ extension PersistenceController {
         var claveToChange = oldClave
         claveToChange.titulo = newClave.titulo
         claveToChange.isFavourite = newClave.isFavourite
+        claveToChange.valores = newClave.valores
         
         save()
     }

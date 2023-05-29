@@ -58,3 +58,5 @@
 "Add_localization" = "Add localization";
 "Add_Parking" = "Add parking";
 "EmptyParking" = "Start adding parkings!";
+"HistoricoParkings" = "Parking historic";
+"ActualParkingTitle" = "Your car is located in...";

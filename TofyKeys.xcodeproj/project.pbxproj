@@ -33,6 +33,9 @@
 		974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */; };
 		974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */; };
 		974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D3528495A3E00C5CA1F /* GlobalManager.swift */; };
+		975C737C2A238A1200CDB280 /* NotasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C737B2A238A1200CDB280 /* NotasView.swift */; };
+		975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C737D2A238A1F00CDB280 /* AddNotasView.swift */; };
+		975C73802A23A16800CDB280 /* ShowNotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C737F2A23A16800CDB280 /* ShowNotaView.swift */; };
 		9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774067E29D1AF2100802B25 /* MainTabBarView.swift */; };
 		9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068129D1AFD900802B25 /* EconomyLandingView.swift */; };
 		9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068429D1B9E200802B25 /* TofyNavigation.swift */; };
@@ -77,6 +80,9 @@
 		974E3D2E281C744F00C5CA1F /* ChooseCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCharacter.swift; sourceTree = "<group>"; };
 		974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveViewModel.swift; sourceTree = "<group>"; };
 		974E3D3528495A3E00C5CA1F /* GlobalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalManager.swift; sourceTree = "<group>"; };
+		975C737B2A238A1200CDB280 /* NotasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotasView.swift; sourceTree = "<group>"; };
+		975C737D2A238A1F00CDB280 /* AddNotasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotasView.swift; sourceTree = "<group>"; };
+		975C737F2A23A16800CDB280 /* ShowNotaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNotaView.swift; sourceTree = "<group>"; };
 		9774067E29D1AF2100802B25 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		9774068129D1AFD900802B25 /* EconomyLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyLandingView.swift; sourceTree = "<group>"; };
 		9774068429D1B9E200802B25 /* TofyNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyNavigation.swift; sourceTree = "<group>"; };
@@ -323,7 +329,7 @@
 			children = (
 				9774068A29FFF41D00802B25 /* Claves */,
 				9774068B29FFF42700802B25 /* Aparcamiento */,
-				9774068C29FFF42E00802B25 /* Listas */,
+				9774068C29FFF42E00802B25 /* Notas */,
 				9774068D29FFF46B00802B25 /* RecordarView.swift */,
 				9774068F29FFF5A400802B25 /* RecordarViewModel.swift */,
 			);
@@ -350,11 +356,14 @@
 			path = Aparcamiento;
 			sourceTree = "<group>";
 		};
-		9774068C29FFF42E00802B25 /* Listas */ = {
+		9774068C29FFF42E00802B25 /* Notas */ = {
 			isa = PBXGroup;
 			children = (
+				975C737B2A238A1200CDB280 /* NotasView.swift */,
+				975C737D2A238A1F00CDB280 /* AddNotasView.swift */,
+				975C737F2A23A16800CDB280 /* ShowNotaView.swift */,
 			);
-			path = Listas;
+			path = Notas;
 			sourceTree = "<group>";
 		};
 		977F4932280D92E100DE9BEC /* Localizables */ = {
@@ -481,7 +490,9 @@
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
 				9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */,
 				9774068E29FFF46B00802B25 /* RecordarView.swift in Sources */,
+				975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
+				975C737C2A238A1200CDB280 /* NotasView.swift in Sources */,
 				974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
 				9798C76F2850E3530044D11B /* AddClaveView.swift in Sources */,
@@ -498,6 +509,7 @@
 				974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */,
 				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
+				975C73802A23A16800CDB280 /* ShowNotaView.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
 				9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */,
