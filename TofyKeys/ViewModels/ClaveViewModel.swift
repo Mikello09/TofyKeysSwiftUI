@@ -57,7 +57,7 @@ class ClaveViewModel: NSObject, ObservableObject {
             try claveController.performFetch()
             self.dbClaves = claveController.fetchedObjects ?? []
             allClaves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.compactMap({ Clave.parseClaveDB($0) }))
-            claves = allClaves.filter({ $0.valores?.tipo == ClaveType.clave.rawValue })
+            claves = allClaves.filter({ $0.valores?.tipo == ClaveType.clave.rawValue || $0.valores?.tipo == ClaveType.userPass.rawValue })
             parkings = allClaves.filter({ $0.valores?.tipo == ClaveType.aparcamiento.rawValue }).compactMap( {$0.toParking()} )
             notas = allClaves.filter({ $0.valores?.tipo == ClaveType.lista.rawValue }).compactMap({$0.toNota()})
             print("Local Claves: \(allClaves)")
@@ -195,7 +195,7 @@ extension ClaveViewModel: NSFetchedResultsControllerDelegate {
         guard let claveItems = controller.fetchedObjects as? [ClaveDB] else { return }
         dbClaves = claveItems
         allClaves = GlobalManager.shared.orderClaves(clavesToOrder: dbClaves.map({Clave.parseClaveDB($0)}))
-        claves = allClaves.filter({$0.valores?.tipo == ClaveType.clave.rawValue})
+        claves = allClaves.filter({$0.valores?.tipo == ClaveType.clave.rawValue || $0.valores?.tipo == ClaveType.userPass.rawValue})
         parkings = allClaves.filter({$0.valores?.tipo == ClaveType.aparcamiento.rawValue}).compactMap({ $0.toParking() })
         notas = allClaves.filter({ $0.valores?.tipo == ClaveType.lista.rawValue }).compactMap({ $0.toNota() })
     }

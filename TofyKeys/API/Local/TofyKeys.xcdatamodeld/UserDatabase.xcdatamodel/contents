@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F66" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ClaveDB" representedClassName="ClaveDB" syncable="YES" codeGenerationType="class">
         <attribute name="actualizado" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="fecha" optional="YES" attributeType="String"/>
@@ -9,6 +9,23 @@
         <attribute name="tokenUsuario" optional="YES" attributeType="String"/>
         <attribute name="valores" optional="YES" attributeType="Transformable" valueTransformerName="NSAttributedStringTransformer" customClassName="Valores"/>
     </entity>
+    <entity name="PeriodoDB" representedClassName="PeriodoDB" syncable="YES" codeGenerationType="class">
+        <attribute name="accion" optional="YES" attributeType="String"/>
+        <attribute name="estado" optional="YES" attributeType="String"/>
+        <attribute name="fechaFinal" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fechaInicio" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="tipo" optional="YES" attributeType="String"/>
+        <attribute name="titulo" optional="YES" attributeType="String"/>
+        <relationship name="gastos" toMany="YES" deletionRule="Cascade" destinationEntity="TransaccionDB"/>
+        <relationship name="ingresos" toMany="YES" deletionRule="Cascade" destinationEntity="TransaccionDB"/>
+    </entity>
+    <entity name="TransaccionDB" representedClassName="TransaccionDB" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="tipo" optional="YES" attributeType="String"/>
+        <attribute name="titulo" optional="YES" attributeType="String"/>
+        <attribute name="valor" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="UserDB" representedClassName="UserDB" syncable="YES" codeGenerationType="class">
         <attribute name="character" optional="YES" attributeType="String"/>
         <attribute name="contrasena" optional="YES" attributeType="String"/>
@@ -16,10 +33,5 @@
         <attribute name="grupo" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="token" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="ValoresDB" representedClassName="ValoresDB" syncable="YES" codeGenerationType="class">
-        <attribute name="idClave" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="tipo" optional="YES" attributeType="String"/>
-        <attribute name="valor" optional="YES" attributeType="String"/>
     </entity>
 </model>

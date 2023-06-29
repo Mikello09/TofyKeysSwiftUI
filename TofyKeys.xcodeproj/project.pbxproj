@@ -36,6 +36,13 @@
 		975C737C2A238A1200CDB280 /* NotasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C737B2A238A1200CDB280 /* NotasView.swift */; };
 		975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C737D2A238A1F00CDB280 /* AddNotasView.swift */; };
 		975C73802A23A16800CDB280 /* ShowNotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C737F2A23A16800CDB280 /* ShowNotaView.swift */; };
+		975C73822A361B4B00CDB280 /* EconomyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73812A361B4B00CDB280 /* EconomyModel.swift */; };
+		975C73842A36230200CDB280 /* ClaveBD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73832A36230200CDB280 /* ClaveBD.swift */; };
+		975C73862A36232400CDB280 /* UserDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73852A36232400CDB280 /* UserDB.swift */; };
+		975C73882A36234400CDB280 /* EconomyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73872A36234400CDB280 /* EconomyDB.swift */; };
+		975C738A2A488AD400CDB280 /* EconomyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73892A488AD400CDB280 /* EconomyViewModel.swift */; };
+		975C738D2A4891FB00CDB280 /* AddPeriodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */; };
+		975C738F2A4DCA3200CDB280 /* AddTransferPeriodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */; };
 		9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774067E29D1AF2100802B25 /* MainTabBarView.swift */; };
 		9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068129D1AFD900802B25 /* EconomyLandingView.swift */; };
 		9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068429D1B9E200802B25 /* TofyNavigation.swift */; };
@@ -83,6 +90,13 @@
 		975C737B2A238A1200CDB280 /* NotasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotasView.swift; sourceTree = "<group>"; };
 		975C737D2A238A1F00CDB280 /* AddNotasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotasView.swift; sourceTree = "<group>"; };
 		975C737F2A23A16800CDB280 /* ShowNotaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNotaView.swift; sourceTree = "<group>"; };
+		975C73812A361B4B00CDB280 /* EconomyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyModel.swift; sourceTree = "<group>"; };
+		975C73832A36230200CDB280 /* ClaveBD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveBD.swift; sourceTree = "<group>"; };
+		975C73852A36232400CDB280 /* UserDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDB.swift; sourceTree = "<group>"; };
+		975C73872A36234400CDB280 /* EconomyDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyDB.swift; sourceTree = "<group>"; };
+		975C73892A488AD400CDB280 /* EconomyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyViewModel.swift; sourceTree = "<group>"; };
+		975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPeriodoView.swift; sourceTree = "<group>"; };
+		975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferPeriodoView.swift; sourceTree = "<group>"; };
 		9774067E29D1AF2100802B25 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		9774068129D1AFD900802B25 /* EconomyLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyLandingView.swift; sourceTree = "<group>"; };
 		9774068429D1B9E200802B25 /* TofyNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyNavigation.swift; sourceTree = "<group>"; };
@@ -160,7 +174,6 @@
 			children = (
 				9774068929FFF40900802B25 /* Recordar */,
 				9774068029D1AFC100802B25 /* Economy */,
-				9798C76D2850E33B0044D11B /* Claves */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -221,6 +234,7 @@
 			children = (
 				970F980927F1C05100FAE05B /* UserViewModel.swift */,
 				974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */,
+				975C73892A488AD400CDB280 /* EconomyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -250,6 +264,9 @@
 			children = (
 				970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */,
 				970F983727F6456300FAE05B /* PersistenceController.swift */,
+				975C73832A36230200CDB280 /* ClaveBD.swift */,
+				975C73852A36232400CDB280 /* UserDB.swift */,
+				975C73872A36234400CDB280 /* EconomyDB.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -300,6 +317,15 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		975C738B2A4891EE00CDB280 /* Periodo */ = {
+			isa = PBXGroup;
+			children = (
+				975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */,
+				975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */,
+			);
+			path = Periodo;
+			sourceTree = "<group>";
+		};
 		9774067D29D1AF1300802B25 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,7 +337,9 @@
 		9774068029D1AFC100802B25 /* Economy */ = {
 			isa = PBXGroup;
 			children = (
+				975C738B2A4891EE00CDB280 /* Periodo */,
 				9774068129D1AFD900802B25 /* EconomyLandingView.swift */,
+				975C73812A361B4B00CDB280 /* EconomyModel.swift */,
 			);
 			path = Economy;
 			sourceTree = "<group>";
@@ -390,13 +418,6 @@
 				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		9798C76D2850E33B0044D11B /* Claves */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Claves;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -480,7 +501,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				975C73882A36234400CDB280 /* EconomyDB.swift in Sources */,
 				9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */,
+				975C738D2A4891FB00CDB280 /* AddPeriodoView.swift in Sources */,
 				9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */,
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
 				97999AF62A111D8000482E6D /* AddParkingView.swift in Sources */,
@@ -488,10 +511,13 @@
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */,
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,
+				975C738F2A4DCA3200CDB280 /* AddTransferPeriodoView.swift in Sources */,
+				975C738A2A488AD400CDB280 /* EconomyViewModel.swift in Sources */,
 				9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */,
 				9774068E29FFF46B00802B25 /* RecordarView.swift in Sources */,
 				975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
+				975C73822A361B4B00CDB280 /* EconomyModel.swift in Sources */,
 				975C737C2A238A1200CDB280 /* NotasView.swift in Sources */,
 				974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */,
 				970F980C27F1C40F00FAE05B /* UserSettingsView.swift in Sources */,
@@ -512,8 +538,10 @@
 				975C73802A23A16800CDB280 /* ShowNotaView.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
+				975C73842A36230200CDB280 /* ClaveBD.swift in Sources */,
 				9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */,
 				970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */,
+				975C73862A36232400CDB280 /* UserDB.swift in Sources */,
 				974E3D312847AC0700C5CA1F /* ClaveViewModel.swift in Sources */,
 				970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */,
 				970F983827F6456300FAE05B /* PersistenceController.swift in Sources */,

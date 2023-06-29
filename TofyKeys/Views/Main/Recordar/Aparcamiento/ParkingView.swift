@@ -54,15 +54,16 @@ struct ParkingView: View {
                                 .padding()
                             Spacer()
                         }
-                        ForEach(Array(parkings.enumerated()), id: \.offset) { index, parking in
-                            if index != 0 {
-                                HistoricParkingCell(parking: parking)
-                                    .frame(height: 64)
+                        ScrollView {
+                            ForEach(Array(parkings.enumerated()), id: \.offset) { index, parking in
+                                if index != 0 {
+                                    HistoricParkingCell(parking: parking)
+                                        .frame(height: 64)
+                                }
                             }
                         }
                         Spacer()
                     }
-                    
                 }
             }
             .navigationTitle(LocalizedStringKey("Parking"))
@@ -84,7 +85,8 @@ struct ParkingView: View {
             }
         }
         .onReceive(claveViewModel.$parkings) { parkings in
-            self.parkings = parkings.reversed()
+            let orderedParkings = parkings.sorted(by: {$0.date < $1.date})
+            self.parkings = orderedParkings.reversed()
         }
     }
         

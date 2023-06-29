@@ -28,6 +28,19 @@ extension Date {
         dateFormatter.dateFormat = "YY, MMM d, HH:mm:ss"
         return dateFormatter.string(from: self)
     }
+    
+    func daysFrom() -> String {
+        let calendar = Calendar.current
+
+        // Replace the hour (time) of both dates with 00:00
+        let date1 = calendar.startOfDay(for: self)
+        let date2 = calendar.startOfDay(for: Date())
+
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
+        var days = (components.day ?? 0)
+        days += 1
+        return "Día \(days)"
+}
 }
 
 extension Color {
