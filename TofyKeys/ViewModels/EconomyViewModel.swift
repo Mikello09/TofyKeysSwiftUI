@@ -52,14 +52,16 @@ class EconomyViewModel: NSObject, ObservableObject {
                                                                        accion: ""))
     }
     
-    func addGasto(titulo: String, tipo: String, valor: Double) {
+    func addGasto(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
         if let periodoActivo {
             PersistenceController.shared.addTransactionToPeriodoActual(allPeriodos: periodos,
                                                                        periodo: periodoActivo,
                                                                        transaction: Transaccion(id: UUID(),
                                                                                                 titulo: titulo,
                                                                                                 tipo: tipo,
-                                                                                                valor: valor))
+                                                                                                valor: valor,
+                                                                                                category: category,
+                                                                                                observacion: observacion))
         }
     }
 }

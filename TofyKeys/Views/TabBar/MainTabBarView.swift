@@ -13,6 +13,7 @@ struct MainTabBarView: View {
     @ObservedObject var userViewModel: UserViewModel
     @ObservedObject var claveViewModel: ClaveViewModel
     @ObservedObject var economyViewModel: EconomyViewModel
+    @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
     var body: some View {
         TabView {
@@ -20,7 +21,7 @@ struct MainTabBarView: View {
                 .tabItem {
                     Label("Recordar", systemImage: "key.fill")
                 }
-            EconomyLandingView(economyViewModel: economyViewModel)
+            EconomyLandingView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel)
                 .tabItem {
                     Label("Economy", systemImage: "dollarsign.circle.fill")
                 }

@@ -58,6 +58,10 @@
 		97999AF42A111CF600482E6D /* ParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97999AF32A111CF600482E6D /* ParkingView.swift */; };
 		97999AF62A111D8000482E6D /* AddParkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97999AF52A111D8000482E6D /* AddParkingView.swift */; };
 		979B9399295AF7740034827D /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979B9398295AF7740034827D /* Animations.swift */; };
+		97BFA28E2A7A913F00022312 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA28D2A7A913F00022312 /* UserSettings.swift */; };
+		97BFA2922A7BDD9D00022312 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */; };
+		97BFA2942A7BE44100022312 /* CategoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA2932A7BE44100022312 /* CategoryDB.swift */; };
+		97BFA2962A7BE9BD00022312 /* TransactionCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA2952A7BE9BD00022312 /* TransactionCategoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +119,10 @@
 		97999AF52A111D8000482E6D /* AddParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkingView.swift; sourceTree = "<group>"; };
 		97999AF92A112BDD00482E6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		979B9398295AF7740034827D /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		97BFA28D2A7A913F00022312 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		97BFA2932A7BE44100022312 /* CategoryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDB.swift; sourceTree = "<group>"; };
+		97BFA2952A7BE9BD00022312 /* TransactionCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCategoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +157,7 @@
 		970F97E927F1B1B700FAE05B /* TofyKeys */ = {
 			isa = PBXGroup;
 			children = (
+				97BFA28C2A7A913300022312 /* User */,
 				977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */,
 				977F493E280DA85800DE9BEC /* Resources */,
 				970F980327F1BEEF00FAE05B /* API */,
@@ -235,6 +244,7 @@
 				970F980927F1C05100FAE05B /* UserViewModel.swift */,
 				974E3D302847AC0700C5CA1F /* ClaveViewModel.swift */,
 				975C73892A488AD400CDB280 /* EconomyViewModel.swift */,
+				97BFA2952A7BE9BD00022312 /* TransactionCategoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -267,6 +277,7 @@
 				975C73832A36230200CDB280 /* ClaveBD.swift */,
 				975C73852A36232400CDB280 /* UserDB.swift */,
 				975C73872A36234400CDB280 /* EconomyDB.swift */,
+				97BFA2932A7BE44100022312 /* CategoryDB.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -322,6 +333,7 @@
 			children = (
 				975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */,
 				975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */,
+				97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */,
 			);
 			path = Periodo;
 			sourceTree = "<group>";
@@ -420,6 +432,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		97BFA28C2A7A913300022312 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				97BFA28D2A7A913F00022312 /* UserSettings.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -514,9 +534,11 @@
 				975C738F2A4DCA3200CDB280 /* AddTransferPeriodoView.swift in Sources */,
 				975C738A2A488AD400CDB280 /* EconomyViewModel.swift in Sources */,
 				9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */,
+				97BFA28E2A7A913F00022312 /* UserSettings.swift in Sources */,
 				9774068E29FFF46B00802B25 /* RecordarView.swift in Sources */,
 				975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
+				97BFA2962A7BE9BD00022312 /* TransactionCategoryViewModel.swift in Sources */,
 				975C73822A361B4B00CDB280 /* EconomyModel.swift in Sources */,
 				975C737C2A238A1200CDB280 /* NotasView.swift in Sources */,
 				974E3D2F281C744F00C5CA1F /* ChooseCharacter.swift in Sources */,
@@ -532,10 +554,12 @@
 				970F980A27F1C05100FAE05B /* UserViewModel.swift in Sources */,
 				97999AF42A111CF600482E6D /* ParkingView.swift in Sources */,
 				970F97FB27F1B69900FAE05B /* ClavesLandingView.swift in Sources */,
+				97BFA2942A7BE44100022312 /* CategoryDB.swift in Sources */,
 				974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */,
 				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
 				975C73802A23A16800CDB280 /* ShowNotaView.swift in Sources */,
+				97BFA2922A7BDD9D00022312 /* AddCategoryView.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,
 				975C73842A36230200CDB280 /* ClaveBD.swift in Sources */,

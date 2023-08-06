@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 // MARK: PERIODO
 struct Periodo: Codable {
@@ -31,19 +32,58 @@ struct Periodo: Codable {
                        estado: periodoDB.estado ?? "",
                        accion: periodoDB.accion ?? "")
     }
-}
+    
+    func getIngresosValue() -> Double {
+        var ingresosValue: Double = 0
+        ingresos.forEach({ ingresosValue += $0.valor })
+        return ingresosValue
+    }
+    
+    func getGastosValue() -> Double {
+        var gastosValue: Double = 0
+        gastos.forEach({ gastosValue += $0.valor })
+        return gastosValue
+    }
 
+    func getIngresosGastosDifference() -> Double {
+        var ingresosValue: Double = 0
+        ingresos.forEach({ ingresosValue += $0.valor })
+        var gastosValue: Double = 0
+        gastos.forEach({ gastosValue += $0.valor })
+        return (ingresosValue - gastosValue)
+    }
+    
+}
+// MARK: TRANSACCION
 struct Transaccion: Codable {
     var id: UUID
     var titulo: String
     var tipo: String// gasto / ingreso
     var valor: Double
+    var category: UUID
+    var observacion: String
     
     static func parseTransaccionDB(_ transaccionDB: TransaccionDB) -> Transaccion {
         return Transaccion(id: transaccionDB.id ?? UUID(),
                            titulo: transaccionDB.titulo ?? "",
                            tipo: transaccionDB.tipo ?? "",
-                           valor: transaccionDB.valor)
+                           valor: transaccionDB.valor,
+                           category: transaccionDB.category ?? UUID(),
+                           observacion: transaccionDB.observacion ?? "")
+    }
+}
+
+struct Category: Hashable {
+    var id: UUID
+    var image: Image
+    var title: String
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    static func == (lhs: Category, rhs: Category) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 
@@ -60,12 +100,3 @@ struct Presupuesto: Codable {
     var gastado: Double
 }
 
-
-// MARK: CLAVE DB
-extension PeriodoDB {
-  static var periodoDBFetchRequest: NSFetchRequest<PeriodoDB> {
-      let request: NSFetchRequest<PeriodoDB> = PeriodoDB.fetchRequest()
-      request.sortDescriptors = [NSSortDescriptor(key: "fechaInicio", ascending: true)]
-      return request
-  }
-}

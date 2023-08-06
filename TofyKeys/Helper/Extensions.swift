@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: STRING
 extension String {
     func isValidEmail() -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -22,6 +23,7 @@ extension String {
     }
 }
 
+// MARK: DATE
 extension Date {
     func toString() -> String {
         let dateFormatter = DateFormatter()
@@ -40,9 +42,9 @@ extension Date {
         var days = (components.day ?? 0)
         days += 1
         return "Día \(days)"
+    }
 }
-}
-
+// MARK: COLOR
 extension Color {
     init(hex string: String) {
         var string: String = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -115,5 +117,15 @@ extension Color {
         } else {
             self.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
         }
+    }
+}
+// MARK: DOUBLE
+extension Double {
+    func toCurrency() -> String {
+        var roundedValue = String(format: "%.2f", self)
+        if roundedValue.split(separator: ".").last == "00" {
+            roundedValue = roundedValue.split(separator: ".").first?.description ?? roundedValue
+        }
+        return "\(roundedValue)\(CURRENCY)"
     }
 }

@@ -18,6 +18,7 @@ struct TofyKeysApp: App {
     @StateObject var userViewModel: UserViewModel
     @StateObject var claveViewModel: ClaveViewModel
     @StateObject var economyViewModel: EconomyViewModel
+    @StateObject var categoryViewModel: TransactionCategoryViewModel
     
     // CoreData
     let persistenceController = PersistenceController.shared
@@ -32,12 +33,17 @@ struct TofyKeysApp: App {
         self._userViewModel = StateObject(wrappedValue: userViewModel)
         // ECONOMY
         let economyViewModel = EconomyViewModel(managedObjectContext: managedObjectContext)
+        let categoryViewModel = TransactionCategoryViewModel(managedObjectContext: managedObjectContext)
         self._economyViewModel = StateObject(wrappedValue: economyViewModel)
+        self._categoryViewModel = StateObject(wrappedValue: categoryViewModel)
       }
     
     var body: some Scene {
         WindowGroup {
-            MainTabBarView(userViewModel: userViewModel, claveViewModel: claveViewModel, economyViewModel: economyViewModel)
+            MainTabBarView(userViewModel: userViewModel,
+                           claveViewModel: claveViewModel,
+                           economyViewModel: economyViewModel,
+                           categoryViewModel: categoryViewModel)
         }
         .onChange(of: scenePhase) { _ in // App to background
             persistenceController.save()

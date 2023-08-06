@@ -7,10 +7,12 @@
 
 import Foundation
 import SwiftUI
+import Charts
 
 struct EconomyLandingView: View {
     
     @ObservedObject var economyViewModel: EconomyViewModel
+    @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
     @State var periodoActivo: Periodo?
     
@@ -36,20 +38,12 @@ struct EconomyLandingView: View {
                                     .padding()
                                     Spacer()
                                 }
-                                if periodoActivo.tipo == "manual" {
-                                    VStack {
-                                        Spacer()
-                                        HStack {
-                                            Spacer()
-                                            Button {
-                                                print("Añadir ingreso/gasto")
-                                            } label: {
-                                                TextButton(text: "Cerrar periodo", foregroundColor: .redTofy, size: 14)
-                                            }
-                                        }
-                                        .padding()
-                                    }
-                                }
+//                                if periodoActivo.tipo == "manual" {
+//                                    VStack {
+//                                        Spacer()
+//
+//                                    }
+//                                }
                                 VStack(spacing: 0) {
                                     HStack {
                                         Text(periodoActivo.titulo)
@@ -61,16 +55,59 @@ struct EconomyLandingView: View {
                                         Spacer()
                                     }
                                     Spacer()
+                                    HStack {
+                                        Chart {
+                                            BarMark(x: .value("Gastos", periodoActivo.getGastosValue()),
+                                                    y: .value("Gastos", "Gastos"))
+                                            .foregroundStyle(Color.redTofy)
+                                            BarMark(x: .value("Ingresos", periodoActivo.getIngresosValue()),
+                                                    y: .value("Gngresos", "Ingresos"))
+                                            .foregroundStyle(Color.green)
+                                        }
+                                        .chartXAxis(.hidden)
+                                        .chartYAxis {
+                                            AxisMarks(position: .leading) { value in
+                                                if let value = value.as(String.self) {
+                                                    if value == "Gastos" {
+                                                        AxisValueLabel {
+                                                            Text("Gastos \(periodoActivo.getGastosValue().toCurrency())")
+                                                        }
+                                                    } else {
+                                                        AxisValueLabel {
+                                                            Text("Ingresos \(periodoActivo.getIngresosValue().toCurrency())")
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    Spacer()
+                                    HStack {
+                                        Text("Restante")
+                                        Text("\(periodoActivo.getIngresosGastosDifference().toCurrency())")
+                                            .fontWeight(.semibold)
+                                        Spacer()
+                                        if periodoActivo.tipo == "manual" {
+                                            Button {
+                                                print("Añadir ingreso/gasto")
+                                            } label: {
+                                                TextButton(text: "Cerrar periodo", foregroundColor: .redTofy, size: 14)
+                                            }
+                                        }
+                                    }
+                                    
                                 }
                                 .padding()
                             }
-                            
-                            
                         } else {
-                            Text("No hay periodos activos. Añade un periodo")
+                            HStack {
+                                Spacer()
+                                Text("No hay periodos activos. Añade un periodo")
+                                Spacer()
+                            }
                         }
                     }
-                    .frame(height: 200)
+                    .frame(height: 250)
                     .background(Color.white)
                     .cornerRadius(12)
                     .shadow(radius: 4)
@@ -82,7 +119,8 @@ struct EconomyLandingView: View {
                 AddPeriodoView(onAdd: onAddPeriodo)
             })
             .sheet(isPresented: $addIngresoGasto, content: {
-                AddTransferPeriodoView(onAdd: onAddGastoIngreso)
+                AddTransferPeriodoView(categoryViewModel: categoryViewModel,
+                                       onAdd: onAddGastoIngreso)
             })
             .toolbar(content: {
                 Menu {
@@ -122,9 +160,9 @@ extension EconomyLandingView {
         economyViewModel.addPeriodo(titulo: titulo, tipo: tipo)
     }
     
-    func onAddGastoIngreso(titulo: String, tipo: String, valor: Double) {
+    func onAddGastoIngreso(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
         addIngresoGasto = false
-        economyViewModel.addGasto(titulo: titulo, tipo: tipo, valor: valor)
+        economyViewModel.addGasto(titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion)
     }
     
     func addCuenta() {

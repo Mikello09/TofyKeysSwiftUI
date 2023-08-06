@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension PersistenceController {
     
@@ -45,4 +46,12 @@ extension PersistenceController {
         }
     }
 
+}
+
+extension PeriodoDB {
+  static var periodoDBFetchRequest: NSFetchRequest<PeriodoDB> {
+      let request: NSFetchRequest<PeriodoDB> = PeriodoDB.fetchRequest()
+      request.sortDescriptors = [NSSortDescriptor(key: "fechaInicio", ascending: true)]
+      return request
+  }
 }
