@@ -49,6 +49,7 @@ struct AddTransferPeriodoView: View {
                 TextField("Valor", text: $valor)
                     .keyboardType(.numberPad)
                 TextField("Observaciones", text: $observacion)
+                    .padding([.top, .bottom])
                 HStack {
                     Text("Category")
                     Spacer()
@@ -75,11 +76,7 @@ struct AddTransferPeriodoView: View {
                                 if category.title == "" {
                                     addCategory = true
                                 } else {
-                                    if self.category == category.id {
-                                        self.category = UUID()
-                                    } else {
-                                        self.category = category.id
-                                    }
+                                    self.category = category.id
                                 }
                             }
                         }

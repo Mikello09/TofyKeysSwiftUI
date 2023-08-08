@@ -55,7 +55,7 @@ struct Periodo: Codable {
     
 }
 // MARK: TRANSACCION
-struct Transaccion: Codable {
+struct Transaccion: Codable, Hashable {
     var id: UUID
     var titulo: String
     var tipo: String// gasto / ingreso

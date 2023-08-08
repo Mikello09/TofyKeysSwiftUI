@@ -18,6 +18,7 @@ struct EconomyLandingView: View {
     
     @State var addPeriodoSheet: Bool = false
     @State var addIngresoGasto: Bool = false
+    @State var showPeriodoDetalle: Bool = false
     
     var body: some View {
         TofyNavigation {
@@ -30,6 +31,11 @@ struct EconomyLandingView: View {
                                     HStack {
                                         Spacer()
                                         Button {
+                                            showPeriodoDetalle = true
+                                        } label: {
+                                            TextButton(text: "Detalle", foregroundColor: .blue)
+                                        }
+                                        Button {
                                             addIngresoGasto = true
                                         } label: {
                                             TextButton(text: "Añadir")
@@ -38,12 +44,6 @@ struct EconomyLandingView: View {
                                     .padding()
                                     Spacer()
                                 }
-//                                if periodoActivo.tipo == "manual" {
-//                                    VStack {
-//                                        Spacer()
-//
-//                                    }
-//                                }
                                 VStack(spacing: 0) {
                                     HStack {
                                         Text(periodoActivo.titulo)
@@ -135,6 +135,11 @@ struct EconomyLandingView: View {
                 
             })
             .navigationTitle("Economy")
+            .navigationDestination(isPresented: $showPeriodoDetalle) {
+                if let periodoActivo {
+                    PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: periodoActivo)
+                }
+            }
         }
         .onAppear {
             economyViewModel.getPeriodoActivo()
@@ -162,7 +167,7 @@ extension EconomyLandingView {
     
     func onAddGastoIngreso(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
         addIngresoGasto = false
-        economyViewModel.addGasto(titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion)
+        economyViewModel.addTransaction(titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion)
     }
     
     func addCuenta() {

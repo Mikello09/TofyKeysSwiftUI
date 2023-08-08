@@ -31,6 +31,7 @@ extension PersistenceController {
         transaccionDB.tipo = transaction.tipo
         transaccionDB.titulo = transaction.titulo
         transaccionDB.valor = transaction.valor
+        transaccionDB.category = transaction.category
         
         if var periodoToUpdate = allPeriodos.filter({$0.id == periodo.id}).first {
             switch transaction.tipo {
@@ -44,6 +45,21 @@ extension PersistenceController {
             }
             save()
         }
+    }
+    
+    func deleteGasto(transaction: TransaccionDB, periodo: PeriodoDB) {
+        periodo.removeFromGastos(transaction)
+        deleteTransaction(transaction)
+    }
+    
+    func deleteIngreso(transaction: TransaccionDB, periodo: PeriodoDB) {
+        periodo.removeFromIngresos(transaction)
+        deleteTransaction(transaction)
+    }
+    
+    func deleteTransaction(_ transaction: TransaccionDB) {
+        container.viewContext.delete(transaction)
+        save()
     }
 
 }

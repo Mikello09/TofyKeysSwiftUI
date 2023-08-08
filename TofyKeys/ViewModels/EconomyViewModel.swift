@@ -52,7 +52,7 @@ class EconomyViewModel: NSObject, ObservableObject {
                                                                        accion: ""))
     }
     
-    func addGasto(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
+    func addTransaction(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
         if let periodoActivo {
             PersistenceController.shared.addTransactionToPeriodoActual(allPeriodos: periodos,
                                                                        periodo: periodoActivo,
@@ -62,6 +62,17 @@ class EconomyViewModel: NSObject, ObservableObject {
                                                                                                 valor: valor,
                                                                                                 category: category,
                                                                                                 observacion: observacion))
+        }
+    }
+    
+    func deletePeriodoTransaction(id: UUID) {
+        guard let periodoActivo = periodos.filter({ $0.id == periodoActivo?.id }).first else { return }
+        if let gasto = (periodoActivo.gastos?.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
+            PersistenceController.shared.deleteGasto(transaction: gasto,
+                                                           periodo: periodoActivo)
+        } else if let ingreso = (periodoActivo.ingresos?.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
+            PersistenceController.shared.deleteIngreso(transaction: ingreso,
+                                                           periodo: periodoActivo)
         }
     }
 }
