@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97087D052A94F45B008A13A3 /* ClosePeriodoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97087D042A94F45B008A13A3 /* ClosePeriodoPopup.swift */; };
 		970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */; };
 		970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97EE27F1B1B900FAE05B /* Assets.xcassets */; };
 		970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */; };
@@ -42,7 +43,7 @@
 		975C73862A36232400CDB280 /* UserDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73852A36232400CDB280 /* UserDB.swift */; };
 		975C73882A36234400CDB280 /* EconomyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73872A36234400CDB280 /* EconomyDB.swift */; };
 		975C738A2A488AD400CDB280 /* EconomyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C73892A488AD400CDB280 /* EconomyViewModel.swift */; };
-		975C738D2A4891FB00CDB280 /* AddPeriodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */; };
+		975C738D2A4891FB00CDB280 /* AddProductoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C738C2A4891FB00CDB280 /* AddProductoView.swift */; };
 		975C738F2A4DCA3200CDB280 /* AddTransferPeriodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */; };
 		9774067F29D1AF2100802B25 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774067E29D1AF2100802B25 /* MainTabBarView.swift */; };
 		9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9774068129D1AFD900802B25 /* EconomyLandingView.swift */; };
@@ -66,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		97087D022A94EA18008A13A3 /* TofyKeysDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TofyKeysDebug.entitlements; sourceTree = "<group>"; };
+		97087D042A94F45B008A13A3 /* ClosePeriodoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePeriodoPopup.swift; sourceTree = "<group>"; };
 		970F97E727F1B1B700FAE05B /* TofyKeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TofyKeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyKeysApp.swift; sourceTree = "<group>"; };
 		970F97EE27F1B1B900FAE05B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -101,7 +104,7 @@
 		975C73852A36232400CDB280 /* UserDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDB.swift; sourceTree = "<group>"; };
 		975C73872A36234400CDB280 /* EconomyDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyDB.swift; sourceTree = "<group>"; };
 		975C73892A488AD400CDB280 /* EconomyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyViewModel.swift; sourceTree = "<group>"; };
-		975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPeriodoView.swift; sourceTree = "<group>"; };
+		975C738C2A4891FB00CDB280 /* AddProductoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductoView.swift; sourceTree = "<group>"; };
 		975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransferPeriodoView.swift; sourceTree = "<group>"; };
 		9774067E29D1AF2100802B25 /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		9774068129D1AFD900802B25 /* EconomyLandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EconomyLandingView.swift; sourceTree = "<group>"; };
@@ -139,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97087D032A94F436008A13A3 /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				97087D042A94F45B008A13A3 /* ClosePeriodoPopup.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
 		970F97DE27F1B1B700FAE05B = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +170,7 @@
 		970F97E927F1B1B700FAE05B /* TofyKeys */ = {
 			isa = PBXGroup;
 			children = (
+				97087D022A94EA18008A13A3 /* TofyKeysDebug.entitlements */,
 				97BFA28C2A7A913300022312 /* User */,
 				977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */,
 				977F493E280DA85800DE9BEC /* Resources */,
@@ -209,6 +221,7 @@
 		970F980027F1B96000FAE05B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				97087D032A94F436008A13A3 /* Popups */,
 				9774068329D1B9D400802B25 /* Navigation */,
 				974E3D332849596E00C5CA1F /* Lottie */,
 				974E3D322849595200C5CA1F /* UI */,
@@ -292,12 +305,12 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		97324F042A813A4D00AE050F /* Detalle */ = {
+		97324F042A813A4D00AE050F /* PeriodoDetalle */ = {
 			isa = PBXGroup;
 			children = (
 				97324F052A813A5600AE050F /* PeriodoDetalleView.swift */,
 			);
-			path = Detalle;
+			path = PeriodoDetalle;
 			sourceTree = "<group>";
 		};
 		974E3D2D281C742700C5CA1F /* Register */ = {
@@ -341,9 +354,7 @@
 		975C738B2A4891EE00CDB280 /* Periodo */ = {
 			isa = PBXGroup;
 			children = (
-				97324F042A813A4D00AE050F /* Detalle */,
-				975C738C2A4891FB00CDB280 /* AddPeriodoView.swift */,
-				975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */,
+				97324F042A813A4D00AE050F /* PeriodoDetalle */,
 				97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */,
 			);
 			path = Periodo;
@@ -361,8 +372,10 @@
 			isa = PBXGroup;
 			children = (
 				975C738B2A4891EE00CDB280 /* Periodo */,
+				975C738C2A4891FB00CDB280 /* AddProductoView.swift */,
 				9774068129D1AFD900802B25 /* EconomyLandingView.swift */,
 				975C73812A361B4B00CDB280 /* EconomyModel.swift */,
+				975C738E2A4DCA3200CDB280 /* AddTransferPeriodoView.swift */,
 			);
 			path = Economy;
 			sourceTree = "<group>";
@@ -534,7 +547,7 @@
 			files = (
 				975C73882A36234400CDB280 /* EconomyDB.swift in Sources */,
 				9774068229D1AFD900802B25 /* EconomyLandingView.swift in Sources */,
-				975C738D2A4891FB00CDB280 /* AddPeriodoView.swift in Sources */,
+				975C738D2A4891FB00CDB280 /* AddProductoView.swift in Sources */,
 				9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */,
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
 				97999AF62A111D8000482E6D /* AddParkingView.swift in Sources */,
@@ -548,6 +561,7 @@
 				9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */,
 				97BFA28E2A7A913F00022312 /* UserSettings.swift in Sources */,
 				9774068E29FFF46B00802B25 /* RecordarView.swift in Sources */,
+				97087D052A94F45B008A13A3 /* ClosePeriodoPopup.swift in Sources */,
 				975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
 				97BFA2962A7BE9BD00022312 /* TransactionCategoryViewModel.swift in Sources */,
@@ -722,40 +736,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeys.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
-				DEVELOPMENT_TEAM = M63K3782TK;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = /Users/mikel/Documents/Proyectos/TofyKeys_iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Tofy;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.codebounds.tofyKeys.TofyKeys;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		970F97F727F1B1B900FAE05B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeys.entitlements;
+				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeysDebug.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
@@ -775,8 +757,46 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codebounds.tofy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		970F97F727F1B1B900FAE05B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeys.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = M63K3782TK;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = /Users/mikel/Documents/Proyectos/TofyKeys_iOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tofy;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.codebounds.tofyKeys.TofyKeys;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TofyKeys Development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

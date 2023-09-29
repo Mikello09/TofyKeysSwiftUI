@@ -113,6 +113,7 @@ struct ClavesLandingView: View {
 
             })
             .background(Image("tofy_background"))
+            .toolbar(.hidden, for: .tabBar)
         }
         .sheet(isPresented: $showCreateKey) {
             AddClaveView(selectedClaveType: $claveType, emptyValues: $emptyClaveValues, onAddClave: onAddClave)

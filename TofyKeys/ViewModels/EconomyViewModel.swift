@@ -14,6 +14,7 @@ class EconomyViewModel: NSObject, ObservableObject {
     
     private let periodoController: NSFetchedResultsController<PeriodoDB>
     var periodos: [PeriodoDB] = []
+    @Published var productos: [Periodo] = []
     @Published var periodoActivo: Periodo?
     
     init(managedObjectContext: NSManagedObjectContext) {
@@ -26,7 +27,8 @@ class EconomyViewModel: NSObject, ObservableObject {
         do {
             try periodoController.performFetch()
             periodos = periodoController.fetchedObjects ?? []
-            if let periodoDBActivo = periodos.filter({ $0.estado == "activo" }).first {
+            productos = periodos.filter({ $0.tipo != TipoProducto.contabilidadManual.rawValue && $0.tipo != TipoProducto.contabilidadMensual.rawValue }).compactMap( {Periodo.parsePeriodoDB($0) })
+            if let periodoDBActivo = periodos.filter({ $0.estado == "activo" && ($0.tipo == TipoProducto.contabilidadManual.rawValue || $0.tipo == TipoProducto.contabilidadMensual.rawValue) }).first {
                 periodoActivo = Periodo.parsePeriodoDB(periodoDBActivo)
             }
             print("Periodos: \(periodos)")
@@ -41,38 +43,52 @@ class EconomyViewModel: NSObject, ObservableObject {
         }
     }
     
-    func addPeriodo(titulo: String, tipo: String) {
+    func getProductos() {
+        productos = periodos.filter({ $0.tipo != TipoProducto.contabilidadManual.rawValue && $0.tipo != TipoProducto.contabilidadMensual.rawValue }).compactMap( {Periodo.parsePeriodoDB($0) })
+    }
+    
+    func closePeriodoActivo() {
+        if let periodoDBActivo = periodos.filter({ $0.estado == "activo" }).first {
+            PersistenceController.shared.closePeriodo(periodo: periodoDBActivo)
+            periodoActivo = nil
+        }
+    }
+    
+    func addPeriodo(titulo: String, tipo: TipoProducto, valorInicial: String) {
+        var transacciones: [Transaccion] = []
+        if !valorInicial.isEmpty, let valor = Double(valorInicial) {
+            transacciones.append(Transaccion(id: UUID(),
+                                             titulo: "Valor inicial",
+                                             tipo: valor >= 0 ? "ingreso" : "gasto",
+                                             valor: valor,
+                                             category: UUID(),
+                                             observacion: ""))
+        }
+        
         PersistenceController.shared.addPeriodoActual(periodo: Periodo(id: UUID(),
                                                                        titulo: titulo,
                                                                        fechaInicio: Date(),
-                                                                       ingresos: [],
-                                                                       gastos: [],
-                                                                       tipo: tipo,
+                                                                       transacciones: transacciones,
+                                                                       tipo: tipo.rawValue,
                                                                        estado: "activo",
                                                                        accion: ""))
     }
     
-    func addTransaction(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
-        if let periodoActivo {
-            PersistenceController.shared.addTransactionToPeriodoActual(allPeriodos: periodos,
-                                                                       periodo: periodoActivo,
-                                                                       transaction: Transaccion(id: UUID(),
-                                                                                                titulo: titulo,
-                                                                                                tipo: tipo,
-                                                                                                valor: valor,
-                                                                                                category: category,
-                                                                                                observacion: observacion))
-        }
+    func addTransaction(periodo: Periodo, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
+        PersistenceController.shared.addTransactionToPeriodoActual(allPeriodos: periodos,
+                                                                   periodo: periodo,
+                                                                   transaction: Transaccion(id: UUID(),
+                                                                                            titulo: titulo,
+                                                                                            tipo: tipo,
+                                                                                            valor: valor,
+                                                                                            category: category,
+                                                                                            observacion: observacion))
     }
     
-    func deletePeriodoTransaction(id: UUID) {
-        guard let periodoActivo = periodos.filter({ $0.id == periodoActivo?.id }).first else { return }
-        if let gasto = (periodoActivo.gastos?.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
-            PersistenceController.shared.deleteGasto(transaction: gasto,
-                                                           periodo: periodoActivo)
-        } else if let ingreso = (periodoActivo.ingresos?.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
-            PersistenceController.shared.deleteIngreso(transaction: ingreso,
-                                                           periodo: periodoActivo)
+    func deletePeriodoTransaction(transactionID: UUID, periodo: Periodo) {
+        guard let periodoDB = periodos.filter({ $0.id == periodo.id }).first else { return }
+        if let transaction = (periodoDB.transacciones?.allObjects as? [TransaccionDB])?.filter({ $0.id == transactionID }).first {
+            PersistenceController.shared.deleteTransaction(transaction, periodo: periodoDB)
         }
     }
 }
@@ -83,6 +99,7 @@ extension EconomyViewModel: NSFetchedResultsControllerDelegate {
         print("Controller did changed")
         guard let periodoItems = controller.fetchedObjects as? [PeriodoDB] else { return }
         periodos = periodoItems
+        productos = periodos.filter({ $0.tipo != TipoProducto.contabilidadManual.rawValue && $0.tipo != TipoProducto.contabilidadMensual.rawValue }).compactMap( {Periodo.parsePeriodoDB($0) })
         if let periodoDBActivo = periodos.filter({ $0.estado == "activo" }).first {
             periodoActivo = Periodo.parsePeriodoDB(periodoDBActivo)
         }

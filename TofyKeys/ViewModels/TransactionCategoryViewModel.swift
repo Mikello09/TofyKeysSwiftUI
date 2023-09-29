@@ -37,6 +37,10 @@ class TransactionCategoryViewModel: NSObject, ObservableObject {
         PersistenceController.shared.saveCategory(title: titulo, image: image)
     }
     
+    func getCategory(id: UUID) -> Category {
+        return categories.filter({ $0.id == id }).first ?? Category(id: UUID(), image: Image(systemName: "questionmark.circle.fill"), title: "")
+    }
+    
 }
 
 extension TransactionCategoryViewModel: NSFetchedResultsControllerDelegate {

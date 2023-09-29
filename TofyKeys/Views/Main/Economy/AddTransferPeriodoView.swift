@@ -47,7 +47,7 @@ struct AddTransferPeriodoView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 TextField("Valor", text: $valor)
-                    .keyboardType(.numberPad)
+                    .keyboardType(.decimalPad)
                 TextField("Observaciones", text: $observacion)
                     .padding([.top, .bottom])
                 HStack {

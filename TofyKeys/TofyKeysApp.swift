@@ -36,6 +36,9 @@ struct TofyKeysApp: App {
         let categoryViewModel = TransactionCategoryViewModel(managedObjectContext: managedObjectContext)
         self._economyViewModel = StateObject(wrappedValue: economyViewModel)
         self._categoryViewModel = StateObject(wrappedValue: categoryViewModel)
+        
+        // UI
+        UITabBar.appearance().backgroundColor = .white
       }
     
     var body: some Scene {

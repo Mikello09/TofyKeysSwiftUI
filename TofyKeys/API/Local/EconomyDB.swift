@@ -21,6 +21,19 @@ extension PersistenceController {
         newPeriodo.accion = periodo.accion
         newPeriodo.estado = periodo.estado
         
+        if let valorInicial = periodo.transacciones.first {
+            
+            let transaccionDB = TransaccionDB(context: container.viewContext)
+            transaccionDB.id = valorInicial.id
+            transaccionDB.tipo = valorInicial.tipo
+            transaccionDB.titulo = valorInicial.titulo
+            transaccionDB.valor = valorInicial.valor
+            transaccionDB.category = valorInicial.category
+            
+            let transacciones = newPeriodo.mutableSetValue(forKey: "transacciones")
+            transacciones.add(transaccionDB)
+        }
+        
         save()
     }
     
@@ -33,32 +46,21 @@ extension PersistenceController {
         transaccionDB.valor = transaction.valor
         transaccionDB.category = transaction.category
         
-        if var periodoToUpdate = allPeriodos.filter({$0.id == periodo.id}).first {
-            switch transaction.tipo {
-            case "gasto":
-                var gastos = periodoToUpdate.mutableSetValue(forKey: "gastos")
-                gastos.add(transaccionDB)
-            case "ingreso":
-                var ingresos = periodoToUpdate.mutableSetValue(forKey: "ingresos")
-                ingresos.add(transaccionDB)
-            default: ()
-            }
+        if let periodoToUpdate = allPeriodos.filter({$0.id == periodo.id}).first {
+            let transacciones = periodoToUpdate.mutableSetValue(forKey: "transacciones")
+            transacciones.add(transaccionDB)
             save()
         }
     }
     
-    func deleteGasto(transaction: TransaccionDB, periodo: PeriodoDB) {
-        periodo.removeFromGastos(transaction)
-        deleteTransaction(transaction)
-    }
-    
-    func deleteIngreso(transaction: TransaccionDB, periodo: PeriodoDB) {
-        periodo.removeFromIngresos(transaction)
-        deleteTransaction(transaction)
-    }
-    
-    func deleteTransaction(_ transaction: TransaccionDB) {
+    func deleteTransaction(_ transaction: TransaccionDB, periodo: PeriodoDB) {
+        periodo.removeFromTransacciones(transaction)
         container.viewContext.delete(transaction)
+        save()
+    }
+    
+    func closePeriodo(periodo: PeriodoDB) {
+        periodo.estado = "cerrado"
         save()
     }
 
