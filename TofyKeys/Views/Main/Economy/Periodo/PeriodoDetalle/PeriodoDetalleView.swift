@@ -8,79 +8,6 @@
 import SwiftUI
 import CoreData
 
-struct PeriodoDetalleView: View {
-    
-    @ObservedObject var economyViewModel: EconomyViewModel
-    @ObservedObject var categoryViewModel: TransactionCategoryViewModel
-    
-    var periodo: Periodo
-    @State var showingTipo: String = "gasto"
-    
-    var body: some View {
-        VStack {
-            Text(periodo.getIngresosGastosDifference().toCurrency())
-                .font(Font.system(size: 32, weight: .bold))
-            HStack {
-                ForEach(PeriodoDetalleMenuOption.allCases) { option in
-                
-                    PeriodoDetalleMenuOptionView(option: option) {
-                        switch option {
-                        case .estadistica: ()
-                        case .categorias: ()
-                        case .gasto: ()
-                        case.ingreso: ()
-                        }
-                    }
-                    
-                }
-            }
-            .padding()
-            
-            if periodo.transacciones.isEmpty {
-                VStack {
-                    Spacer()
-                    Text("No hay movimientos")
-                    Spacer()
-                }
-            } else {
-                List(periodo.transacciones, id: \.self) { gasto in
-                    TransactionCell(transaction: gasto, category: categoryViewModel.getCategory(id: gasto.category))
-                        .contextMenu {
-                            Button {
-                                economyViewModel.deletePeriodoTransaction(transactionID: gasto.id, periodo: periodo)
-                            } label: {
-                                HStack {
-                                    Text("Eliminar")
-                                    Spacer()
-                                    Image(systemName: "trash.fill")
-                                }
-                            }
-                        }
-                }
-            }
-        }
-        .navigationTitle(periodo.titulo)
-        .toolbar(.hidden, for: .tabBar)
-    }
-}
-
-struct TransactionCell: View {
-    
-    var transaction: Transaccion
-    var category: Category
-    
-    var body: some View {
-        HStack {
-            category.image
-            VStack(alignment: .leading) {
-                Text(transaction.titulo)
-                Text(transaction.valor.toCurrency())
-            }
-            Spacer()
-        }
-    }
-}
-
 enum PeriodoDetalleMenuOption: String, CaseIterable, Identifiable {
     
     var id: String { self.rawValue }
@@ -102,13 +29,154 @@ enum PeriodoDetalleMenuOption: String, CaseIterable, Identifiable {
     func getImage() -> Image {
         switch self {
         case .estadistica: return Image(systemName: "chart.bar.xaxis")
-        case .categorias: return Image(systemName: "")
-        case .ingreso: return Image(systemName: "")
-        case .gasto: return Image(systemName: "")
+        case .categorias: return Image(systemName: "line.3.horizontal.decrease.circle.fill")
+        case .ingreso: return Image(systemName: "plus")
+        case .gasto: return Image(systemName: "minus")
         }
     }
 }
 
+struct PeriodoDetalleView: View {
+    
+    @ObservedObject var economyViewModel: EconomyViewModel
+    @ObservedObject var categoryViewModel: TransactionCategoryViewModel
+    
+    @State var periodo: Periodo
+    @State var showingTipo: String = "gasto"
+    
+    @State var addGasto: Bool = false
+    @State var addIngreso: Bool = false
+    
+    var body: some View {
+        GeometryReader { proxy in
+            VStack {
+                Text(periodo.getIngresosGastosDifference().toCurrency())
+                    .font(Font.system(size: 32, weight: .bold))
+                HStack(spacing: 0) {
+                    ForEach(PeriodoDetalleMenuOption.allCases) { option in
+                    
+                        PeriodoDetalleMenuOptionView(option: option) {
+                            switch option {
+                            case .estadistica: ()
+                            case .categorias: ()
+                            case .gasto: addGasto = true
+                            case.ingreso: addIngreso = true
+                            }
+                        }
+                        .frame(width: proxy.size.width/4)
+                        
+                    }
+                }
+                .padding([.top, .bottom])
+                
+                if periodo.transacciones.isEmpty {
+                    VStack {
+                        Spacer()
+                        Text("No hay movimientos")
+                        Spacer()
+                    }
+                } else {
+                    List {
+                        ForEach(periodo.transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
+                            TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
+                                .contextMenu {
+                                    Button {
+                                        economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: periodo)
+                                    } label: {
+                                        HStack {
+                                            Text("Eliminar")
+                                            Spacer()
+                                            Image(systemName: "trash.fill")
+                                        }
+                                    }
+                                }
+                                .overlay (
+                                    NavigationLink (destination: {
+                                        TransferDetailView(categoryViewModel: categoryViewModel,
+                                                           transfer: transaccion,
+                                                           onEdit: onEdit,
+                                                           onDelete: onDelete) }
+                                        , label: {EmptyView() } ).opacity(0)
+                                )
+                        }
+                        
+                    }
+                }
+            }
+            .navigationTitle(periodo.titulo)
+            .toolbar(.hidden, for: .tabBar)
+            .sheet(isPresented: $addGasto, content: {
+                AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "gasto", onAdd: onAdd)
+            })
+            .sheet(isPresented: $addIngreso) {
+                AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "ingreso", onAdd: onAdd)
+            }
+            .onReceive(economyViewModel.$periodos, perform: { periodos in
+                if let detalle = periodos.filter({ $0.id == periodo.id }).first {
+                    periodo = Periodo.parsePeriodoDB(detalle)
+                }
+            })
+        }
+    }
+    
+    func onAdd(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+        economyViewModel.addTransaction(periodo: periodo,
+                                        titulo: titulo,
+                                        tipo: tipo,
+                                        valor: valor,
+                                        category: category,
+                                        observacion: observacion,
+                                        fecha: fecha)
+        addGasto = false
+        addIngreso = false
+    }
+    
+    func onEdit(id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+        economyViewModel.editTransaction(periodo: periodo, id: id, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion, fecha: fecha)
+    }
+    
+    func onDelete(transaccion: Transaccion) {
+        economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: periodo)
+    }
+}
+// MARK: TRANSACTION CELL
+struct TransactionCell: View {
+    
+    var transaction: Transaccion
+    var category: Category
+    
+    var body: some View {
+        
+            HStack {
+                category.image
+                    .frame(width: 32, height: 32)
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.trailing, 8)
+                HStack {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(transaction.titulo)
+                            .font(Font.system(size: 14, weight: .semibold))
+                            .foregroundStyle(Color.primaryColor)
+                        Text(transaction.fecha.toDayString())
+                            .font(Font.system(size: 12, weight: .regular))
+                            .foregroundStyle(Color.secondaryColor)
+                    }
+                    Spacer()
+                    VStack(alignment: .trailing, spacing: 8) {
+                        Text(transaction.valor.toCurrency())
+                            .font(Font.system(size: 14, weight: .semibold))
+                            .foregroundStyle(transaction.tipo == "ingreso" ? .green : .red)
+                        Text(category.title)
+                            .font(Font.system(size: 12, weight: .regular))
+                            .foregroundStyle(Color.secondaryColor)
+                    }
+                }
+                Spacer()
+            }
+        
+    }
+}
+// MARK: MENU OPTION
 struct PeriodoDetalleMenuOptionView: View {
     
     var option: PeriodoDetalleMenuOption
@@ -120,14 +188,15 @@ struct PeriodoDetalleMenuOptionView: View {
                 completion()
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerSize: CGSize(width: 16, height: 16))
+                    RoundedRectangle(cornerSize: CGSize(width: 24, height: 24))
                         .fill(.gray)
                     option.getImage()
                 }
             }
-            .frame(width: 32, height: 32)
+            .frame(width: 48, height: 48)
             Text(option.getTitle())
                 .font(Font.system(size: 14))
         }
+        
     }
 }

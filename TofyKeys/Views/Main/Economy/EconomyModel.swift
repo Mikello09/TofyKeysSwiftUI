@@ -57,14 +57,19 @@ struct Periodo: Codable, Hashable {
         return resultado
     }
     
+    func isContabilidad() -> Bool {
+        return self.tipo == TipoProducto.contabilidadManual.rawValue || self.tipo == TipoProducto.contabilidadMensual.rawValue
+    }
+    
 }
 // MARK: TRANSACCION
-struct Transaccion: Codable, Hashable {
+struct Transaccion: Codable, Hashable, Identifiable {
     var id: UUID
     var titulo: String
     var tipo: String// gasto / ingreso
     var valor: Double
     var category: UUID
+    var fecha: Date
     var observacion: String
     
     static func parseTransaccionDB(_ transaccionDB: TransaccionDB) -> Transaccion {
@@ -73,11 +78,12 @@ struct Transaccion: Codable, Hashable {
                            tipo: transaccionDB.tipo ?? "",
                            valor: transaccionDB.valor,
                            category: transaccionDB.category ?? UUID(),
+                           fecha: transaccionDB.fecha ?? Date(),
                            observacion: transaccionDB.observacion ?? "")
     }
 }
 
-struct Category: Hashable {
+struct Category: Hashable, Identifiable {
     var id: UUID
     var image: Image
     var title: String

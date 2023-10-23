@@ -15,6 +15,8 @@ struct AddCategoryView: View {
     @State var categoryImage: String = ""
     @Binding var isShowing: Bool
     
+    var categoryAdded: ((Category) -> Void)
+    
     var body: some View {
         VStack(spacing: 24) {
             ZStack {
@@ -28,7 +30,9 @@ struct AddCategoryView: View {
                     Spacer()
                     Button (action: {
                         if titulo != "" && categoryImage != "" {
-                            categoryViewModel.addCategory(titulo: titulo, image: categoryImage)
+                            let id = UUID()
+                            categoryViewModel.addCategory(id: id, titulo: titulo, image: categoryImage)
+                            categoryAdded(Category(id: id, image: Image(systemName: categoryImage), title: titulo))
                             isShowing = false
                         }
                     }, label: {

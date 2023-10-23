@@ -28,13 +28,16 @@ class TransactionCategoryViewModel: NSObject, ObservableObject {
             try categoryController.performFetch()
             categoriesDB = categoryController.fetchedObjects ?? []
             categories = categoriesDB.map({ $0.toCategory() })
+            if categories.isEmpty {
+                addCategory(id: UUID(), titulo: "General", image: "banknote.fill")
+            }
         } catch {
           print("failed to fetch items!")
         }
     }
     
-    func addCategory(titulo: String, image: String) {
-        PersistenceController.shared.saveCategory(title: titulo, image: image)
+    func addCategory(id: UUID, titulo: String, image: String) {
+        PersistenceController.shared.saveCategory(id: id, title: titulo, image: image)
     }
     
     func getCategory(id: UUID) -> Category {

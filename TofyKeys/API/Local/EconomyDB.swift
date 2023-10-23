@@ -28,6 +28,7 @@ extension PersistenceController {
             transaccionDB.tipo = valorInicial.tipo
             transaccionDB.titulo = valorInicial.titulo
             transaccionDB.valor = valorInicial.valor
+            transaccionDB.fecha = valorInicial.fecha
             transaccionDB.category = valorInicial.category
             
             let transacciones = newPeriodo.mutableSetValue(forKey: "transacciones")
@@ -44,6 +45,7 @@ extension PersistenceController {
         transaccionDB.tipo = transaction.tipo
         transaccionDB.titulo = transaction.titulo
         transaccionDB.valor = transaction.valor
+        transaccionDB.fecha = transaction.fecha
         transaccionDB.category = transaction.category
         
         if let periodoToUpdate = allPeriodos.filter({$0.id == periodo.id}).first {
@@ -56,6 +58,20 @@ extension PersistenceController {
     func deleteTransaction(_ transaction: TransaccionDB, periodo: PeriodoDB) {
         periodo.removeFromTransacciones(transaction)
         container.viewContext.delete(transaction)
+        save()
+    }
+    
+    func editTransaction(_ periodo: PeriodoDB, id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+        
+        var transacciones = periodo.mutableSetValue(forKey: "transacciones")
+        if let transactionToEdit = (transacciones.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
+            transactionToEdit.titulo = titulo
+            transactionToEdit.tipo = tipo
+            transactionToEdit.valor = valor
+            transactionToEdit.category = category
+            transactionToEdit.observacion = observacion
+            transactionToEdit.fecha = fecha
+        }
         save()
     }
     

@@ -68,3 +68,6 @@
 "AddNota" = "Añadir nota";
 "Save" = "Guardar";
 "Edit" = "Editar";
+
+// MARK: ECONOMY
+"añadirTransferencia" = "Añadir %@";

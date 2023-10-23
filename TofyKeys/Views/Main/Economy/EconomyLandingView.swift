@@ -14,7 +14,6 @@ struct EconomyLandingView: View {
     @ObservedObject var economyViewModel: EconomyViewModel
     @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
-    @State var periodoActivo: Periodo?
     @State var productos: [Periodo] = []
     @State var productosVacios: [TipoProducto] = []
     
@@ -26,9 +25,6 @@ struct EconomyLandingView: View {
     @State var addIngresoGasto: Bool = false
     @State var showPeriodoDetalle: Bool = false
     @State var closePeriodo: Bool = false
-
-    @State var selectedCuenta: Periodo?
-    @State var showCuentaDetail: Bool = false
     
     var body: some View {
         GeometryReader { proxy in
@@ -37,10 +33,16 @@ struct EconomyLandingView: View {
                 ZStack {
                     ScrollView {
                         VStack {
-                            Contabilidad(periodoActivo: $periodoActivo,
-                                         addIngresoGasto: $addIngresoGasto,
-                                         showPeriodoDetalle: $showPeriodoDetalle,
-                                         closePeriodo: $closePeriodo)
+                            ForEach(productos.filter({ $0.isContabilidad() }), id: \.self) { periodo in
+                                NavigationLink {
+                                    PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: periodo)
+                                } label: {
+                                    Contabilidad(periodo: periodo,
+                                                 addIngresoGasto: $addIngresoGasto,
+                                                 showPeriodoDetalle: $showPeriodoDetalle,
+                                                 closePeriodo: $closePeriodo)
+                                }
+                            }
                             .padding()
                             VStack {
                                 if self.productos.isEmpty {
@@ -97,15 +99,17 @@ struct EconomyLandingView: View {
                                     .padding()
                                 } else {
                                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible())], spacing: 8) {
-                                        ForEach(self.productos, id: \.self) { producto in
+                                        ForEach(self.productos.filter( {!$0.isContabilidad()} ), id: \.self) { producto in
                                             if producto.tipo == TipoProducto.cuenta.rawValue {
-                                                CuentaView(cuenta: producto)
-                                                    .frame(width: proxy.size.width/2 - 32,
-                                                           height: proxy.size.width/2 - 32)
-                                                    .onTapGesture {
-                                                        selectedCuenta = producto
-                                                        showCuentaDetail = true
-                                                    }
+                                                NavigationLink {
+                                                    PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: producto)
+                                                } label: {
+                                                    CuentaView(cuenta: producto)
+                                                        .frame(width: proxy.size.width/2 - 32,
+                                                               height: proxy.size.width/2 - 32)
+                                                }
+
+                                                
                                                 
                                             } else {
                                                 Text(producto.tipo)
@@ -129,17 +133,6 @@ struct EconomyLandingView: View {
                     .sheet(isPresented: $addGastosSheet, content: {
                         AddProductoView(producto: .gastos ,onAdd: onAddPeriodo)
                     })
-                    .sheet(isPresented: $addIngresoGasto, content: {
-                        AddTransferPeriodoView(categoryViewModel: categoryViewModel,
-                                               onAdd: onAddGastoIngreso)
-                    })
-                    if closePeriodo {
-                        ClosePeriodoPopup() {
-                            economyViewModel.closePeriodoActivo()
-                            closePeriodo = false
-                        }
-                        .padding()
-                    }
                 }
                 .toolbar(content: {
                     Menu {
@@ -155,24 +148,11 @@ struct EconomyLandingView: View {
                     
                 })
                 .navigationTitle("Economy")
-                .navigationDestination(isPresented: $showPeriodoDetalle) {
-                    if let periodoActivo {
-                        PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: periodoActivo)
-                    }
-                }
-                .navigationDestination(isPresented: $showCuentaDetail) {
-                    if let selectedCuenta {
-                        PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: selectedCuenta)
-                    }
-                }
             }
         }
         .onAppear {
-            economyViewModel.getPeriodoActivo()
+            //economyViewModel.getPeriodoActivo()
             economyViewModel.getProductos()
-        }
-        .onReceive(economyViewModel.$periodoActivo) { periodoActivo in
-            self.periodoActivo = periodoActivo
         }
         .onReceive(economyViewModel.$productos) { productos in
             self.productos = productos
@@ -184,9 +164,9 @@ struct EconomyLandingView: View {
 // MARK: ADD ACTIONS
 extension EconomyLandingView {
     func addPeriodo() {
-        if periodoActivo == nil {
-            addContabilidadSheet = true
-        }
+//        if periodoActivo == nil {
+//            addContabilidadSheet = true
+//        }
     }
     
     func onAddPeriodo(titulo: String, tipo: TipoProducto, valorInicial: String) {
@@ -198,11 +178,11 @@ extension EconomyLandingView {
         economyViewModel.addPeriodo(titulo: titulo, tipo: tipo, valorInicial: valorInicial)
     }
     
-    func onAddGastoIngreso(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String) {
-        if let periodoActivo {
-            addIngresoGasto = false
-            economyViewModel.addTransaction(periodo: periodoActivo, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion)
-        }
+    func onAddGastoIngreso(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+//        if let periodoActivo {
+//            addIngresoGasto = false
+//            economyViewModel.addTransaction(periodo: periodoActivo, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion, fecha: fecha)
+//        }
     }
     
     func addCuenta() {
@@ -221,7 +201,7 @@ extension EconomyLandingView {
 // MARK: CONTABILIDAD VIEW
 struct Contabilidad: View {
     
-    @Binding var periodoActivo: Periodo?
+    @State var periodo: Periodo
     @Binding var addIngresoGasto: Bool
     @Binding var showPeriodoDetalle: Bool
     @Binding var closePeriodo: Bool
@@ -229,87 +209,81 @@ struct Contabilidad: View {
     var body: some View {
         VStack {
             VStack {
-                if let periodoActivo {
-                    ZStack {
-                        VStack {
-                            HStack {
-                                Spacer()
-                                Button {
-                                    showPeriodoDetalle = true
-                                } label: {
-                                    TextButton(text: "Detalle", foregroundColor: .blue)
-                                }
-                                Button {
-                                    addIngresoGasto = true
-                                } label: {
-                                    TextButton(text: "Añadir")
-                                }
+                
+                ZStack {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Button {
+                                showPeriodoDetalle = true
+                            } label: {
+                                TextButton(text: "Detalle", foregroundColor: .blue)
                             }
-                            .padding()
+                            Button {
+                                addIngresoGasto = true
+                            } label: {
+                                TextButton(text: "Añadir")
+                            }
+                        }
+                        .padding()
+                        Spacer()
+                    }
+                    VStack(spacing: 0) {
+                        HStack {
+                            Text(periodo.titulo)
+                                .font(Font.system(size: 20, weight: .bold))
                             Spacer()
                         }
-                        VStack(spacing: 0) {
-                            HStack {
-                                Text(periodoActivo.titulo)
-                                    .font(Font.system(size: 20, weight: .bold))
-                                Spacer()
-                            }
-                            HStack {
-                                Text(periodoActivo.fechaInicio.daysFrom())
-                                Spacer()
-                            }
+                        HStack {
+                            Text(periodo.fechaInicio.daysFrom())
                             Spacer()
-                            HStack {
-                                Chart {
-                                    BarMark(x: .value("Gastos", periodoActivo.getGastos()),
-                                            y: .value("Gastos", "Gastos"))
-                                    .foregroundStyle(Color.redTofy)
-                                    BarMark(x: .value("Ingresos", periodoActivo.getIngresos()),
-                                            y: .value("Gngresos", "Ingresos"))
-                                    .foregroundStyle(Color.green)
-                                }
-                                .chartXAxis(.hidden)
-                                .chartYAxis {
-                                    AxisMarks(position: .leading) { value in
-                                        if let value = value.as(String.self) {
-                                            if value == "Gastos" {
-                                                AxisValueLabel {
-                                                    Text("Gastos \(periodoActivo.getGastos().toCurrency())")
-                                                }
-                                            } else {
-                                                AxisValueLabel {
-                                                    Text("Ingresos \(periodoActivo.getIngresos().toCurrency())")
-                                                }
+                        }
+                        Spacer()
+                        HStack {
+                            Chart {
+                                BarMark(x: .value("Gastos", periodo.getGastos()),
+                                        y: .value("Gastos", "Gastos"))
+                                .foregroundStyle(Color.redTofy)
+                                BarMark(x: .value("Ingresos", periodo.getIngresos()),
+                                        y: .value("Gngresos", "Ingresos"))
+                                .foregroundStyle(Color.green)
+                            }
+                            .chartXAxis(.hidden)
+                            .chartYAxis {
+                                AxisMarks(position: .leading) { value in
+                                    if let value = value.as(String.self) {
+                                        if value == "Gastos" {
+                                            AxisValueLabel {
+                                                Text("Gastos \(periodo.getGastos().toCurrency())")
+                                            }
+                                        } else {
+                                            AxisValueLabel {
+                                                Text("Ingresos \(periodo.getIngresos().toCurrency())")
                                             }
                                         }
                                     }
                                 }
                             }
+                        }
+                        Spacer()
+                        HStack {
+                            Text("Restante")
+                            Text("\(periodo.getIngresosGastosDifference().toCurrency())")
+                                .fontWeight(.semibold)
                             Spacer()
-                            HStack {
-                                Text("Restante")
-                                Text("\(periodoActivo.getIngresosGastosDifference().toCurrency())")
-                                    .fontWeight(.semibold)
-                                Spacer()
-                                if periodoActivo.tipo == "contabilidadManual" {
-                                    Button {
-                                        closePeriodo = true
-                                    } label: {
-                                        TextButton(text: "Cerrar periodo", foregroundColor: .redTofy, size: 14)
-                                    }
+                            if periodo.tipo == "contabilidadManual" {
+                                Button {
+                                    closePeriodo = true
+                                } label: {
+                                    TextButton(text: "Cerrar periodo", foregroundColor: .redTofy, size: 14)
                                 }
                             }
-                            
                         }
-                        .padding()
+                        
                     }
-                } else {
-                    HStack {
-                        Spacer()
-                        Text("No hay periodos activos. Añade un periodo")
-                        Spacer()
-                    }
+                    .padding()
                 }
+                
             }
             .frame(height: 250)
             .background(Color.white)
@@ -332,6 +306,7 @@ struct CuentaView: View {
                 HStack {
                     Spacer()
                     Text(cuenta.titulo)
+                        .foregroundStyle(.black)
                         .padding([.leading, .trailing], 24)
                     Spacer()
                 }

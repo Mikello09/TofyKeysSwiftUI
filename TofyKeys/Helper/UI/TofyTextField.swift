@@ -23,3 +23,55 @@ struct LoginTextFieldStyle: TextFieldStyle {
     }
     
 }
+
+struct LabelField: TextFieldStyle {
+    
+    var textSize: CGFloat = 17
+    var textWeight: Font.Weight = .regular
+    
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .padding()
+            .font(Font.system(size: textSize, weight: textWeight))
+            .overlay {
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(lineWidth: 2)
+            }
+    }
+    
+}
+
+struct TofyTextField: View {
+    
+    @Binding var text: String
+    var title: String
+    
+    @State var isEditing: Bool = false
+    
+    var body: some View {
+        VStack {
+            VStack {
+                if isEditing {
+                    HStack {
+                        Text(title)
+                            .font(Font.system(size: 11))
+                            .foregroundStyle(Color.secondaryColor)
+                        Spacer()
+                    }
+                }
+                TextField(title, text: $text) { _ in
+                    withAnimation {
+                        isEditing.toggle()
+                    }
+                }
+                .font(Font.system(size: 14, weight: .semibold))
+                .foregroundStyle(Color.primaryColor)
+            }
+        }
+        .padding()
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .shadow(radius: 4)
+    }
+    
+}

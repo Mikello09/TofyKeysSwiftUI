@@ -43,6 +43,12 @@ extension Date {
         days += 1
         return "Día \(days)"
     }
+    
+    func toDayString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY, MMM d"
+        return dateFormatter.string(from: self)
+    }
 }
 // MARK: COLOR
 extension Color {

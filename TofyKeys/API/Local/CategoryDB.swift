@@ -11,10 +11,10 @@ import SwiftUI
 
 extension PersistenceController {
     
-    func saveCategory(title: String, image: String) {
+    func saveCategory(id: UUID, title: String, image: String) {
         let newCategory = TransactionCategoryDB(context: container.viewContext)
 
-        newCategory.id = UUID()
+        newCategory.id = id
         newCategory.title = title
         newCategory.image = image
         

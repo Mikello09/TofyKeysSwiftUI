@@ -60,3 +60,6 @@
 "EmptyParking" = "Start adding parkings!";
 "HistoricoParkings" = "Parking historic";
 "ActualParkingTitle" = "Your car is located in...";
+
+// MARK: ECONOMY
+"añadirTransferencia" = "Add %@";
