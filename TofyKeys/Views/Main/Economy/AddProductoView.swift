@@ -11,7 +11,7 @@ import SwiftUI
 struct AddProductoView: View {
     
     @State var titulo: String = ""
-    @State var tipo: TipoProducto = TipoProducto.contabilidadManual
+    @State var tipo: TipoProducto = TipoProducto.contabilidad
     @State var valorInicial: String = ""
     
     var producto: TipoProducto
@@ -23,7 +23,7 @@ struct AddProductoView: View {
         VStack(spacing: 24) {
             ZStack {
                 switch producto {
-                case .contabilidadManual, .contabilidadMensual:
+                case .contabilidad:
                     Text("Contabilidad")
                 case .cuenta:
                     Text("Cuenta")
@@ -36,7 +36,7 @@ struct AddProductoView: View {
                     Spacer()
                     Button (action: {
                         if !titulo.isEmpty {
-                            if producto != .contabilidadManual && producto != .contabilidadMensual {
+                            if producto != .contabilidad {
                                 onAdd(titulo, producto, valorInicial)
                             } else {
                                 onAdd(titulo, tipo, valorInicial)
@@ -49,7 +49,7 @@ struct AddProductoView: View {
                 }
             }
             switch producto {
-            case .contabilidadManual, .contabilidadMensual:
+            case .contabilidad:
                 Text("Contabiliza todos los gastos e ingresos durante un periodo de tiempo. Este producto es ideal para llevar los gastos de cadad mes. También se puede utilizar para un periodo anual o de temporada.")
                     .multilineTextAlignment(.center)
                     .lineLimit(nil)
@@ -68,21 +68,17 @@ struct AddProductoView: View {
             }
             TextField("Título", text: $titulo)
             switch producto {
-            case .contabilidadManual, .contabilidadMensual:
+            case .contabilidad:
                 Picker(selection: $tipo, label: Text("Forma de creación")) {
-                    Text("Manual").tag(TipoProducto.contabilidadManual)
-                    Text("Mensual").tag(TipoProducto.contabilidadMensual)
+                    Text("Manual").tag(TipoProducto.contabilidad)
+                    Text("Mensual").tag(TipoProducto.contabilidad)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 HStack {
                     Image(systemName: "info.circle.fill")
                         .resizable()
                         .frame(width: 24, height: 24)
-                    if tipo == .contabilidadManual {
-                        Text("Termina el periodo cuando tú quieras.")
-                    } else {
-                        Text("El periodo finalizará el primer día del siguiente mes")
-                    }
+                    Text("Termina el periodo cuando tú quieras.")
                     Spacer()
                 }
             case .cuenta:

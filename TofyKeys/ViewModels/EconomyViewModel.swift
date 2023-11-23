@@ -12,12 +12,12 @@ import CoreData
 
 class EconomyViewModel: NSObject, ObservableObject {
     
-    private let periodoController: NSFetchedResultsController<PeriodoDB>
-    @Published var periodos: [PeriodoDB] = []
-    @Published var productos: [Periodo] = []
+    private let periodoController: NSFetchedResultsController<ProductoDB>
+    @Published var periodos: [ProductoDB] = []
+    @Published var productos: [Producto] = []
     
     init(managedObjectContext: NSManagedObjectContext) {
-        periodoController = NSFetchedResultsController(fetchRequest: PeriodoDB.periodoDBFetchRequest,
+        periodoController = NSFetchedResultsController(fetchRequest: ProductoDB.productoDBFetchRequest,
                                                     managedObjectContext: managedObjectContext,
                                                     sectionNameKeyPath: nil,
                                                     cacheName: nil)
@@ -26,7 +26,7 @@ class EconomyViewModel: NSObject, ObservableObject {
         do {
             try periodoController.performFetch()
             periodos = periodoController.fetchedObjects ?? []
-            productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Periodo.parsePeriodoDB($0) })
+            productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Producto.parseProductoDB($0) })
             print("Periodos: \(periodos)")
         } catch {
           print("failed to fetch items!")
@@ -34,7 +34,7 @@ class EconomyViewModel: NSObject, ObservableObject {
     }
     
     func getProductos() {
-        productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Periodo.parsePeriodoDB($0) })
+        productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Producto.parseProductoDB($0) })
     }
     
     func addPeriodo(titulo: String, tipo: TipoProducto, valorInicial: String) {
@@ -49,7 +49,7 @@ class EconomyViewModel: NSObject, ObservableObject {
                                              observacion: ""))
         }
         
-        PersistenceController.shared.addPeriodoActual(periodo: Periodo(id: UUID(),
+        PersistenceController.shared.addPeriodoActual(periodo: Producto(id: UUID(),
                                                                        titulo: titulo,
                                                                        fechaInicio: Date(),
                                                                        transacciones: transacciones,
@@ -58,7 +58,7 @@ class EconomyViewModel: NSObject, ObservableObject {
                                                                        accion: ""))
     }
     
-    func addTransaction(periodo: Periodo, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+    func addTransaction(periodo: Producto, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
         PersistenceController.shared.addTransactionToPeriodoActual(allPeriodos: periodos,
                                                                    periodo: periodo,
                                                                    transaction: Transaccion(id: UUID(),
@@ -70,21 +70,21 @@ class EconomyViewModel: NSObject, ObservableObject {
                                                                                             observacion: observacion))
     }
     
-    func deletePeriodoTransaction(transactionID: UUID, periodo: Periodo) {
-        guard let periodoDB = periodos.filter({ $0.id == periodo.id }).first else { return }
-        if let transaction = (periodoDB.transacciones?.allObjects as? [TransaccionDB])?.filter({ $0.id == transactionID }).first {
-            PersistenceController.shared.deleteTransaction(transaction, periodo: periodoDB)
+    func deletePeriodoTransaction(transactionID: UUID, periodo: Producto) {
+        guard let productoDB = periodos.filter({ $0.id == periodo.id }).first else { return }
+        if let transaction = (productoDB.transacciones?.allObjects as? [TransaccionDB])?.filter({ $0.id == transactionID }).first {
+            PersistenceController.shared.deleteTransaction(transaction, periodo: productoDB)
         }
     }
     
-    func editTransaction(periodo: Periodo, id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
-        guard let periodoDB = periodos.filter({ $0.id == periodo.id }).first else { return }
-        if let transaction = (periodoDB.transacciones?.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
-            PersistenceController.shared.editTransaction(periodoDB, id: id, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion, fecha: fecha)
+    func editTransaction(periodo: Producto, id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+        guard let productoDB = periodos.filter({ $0.id == periodo.id }).first else { return }
+        if let transaction = (productoDB.transacciones?.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
+            PersistenceController.shared.editTransaction(productoDB, id: id, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion, fecha: fecha)
             // El controller Did change content no salta y por eso hay que hacerlo "manual"
             try? periodoController.performFetch()
             periodos = periodoController.fetchedObjects ?? []
-            productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Periodo.parsePeriodoDB($0) })
+            productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Producto.parseProductoDB($0) })
         }
     }
 }
@@ -93,8 +93,8 @@ class EconomyViewModel: NSObject, ObservableObject {
 extension EconomyViewModel: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("Controller did changed")
-        guard let periodoItems = controller.fetchedObjects as? [PeriodoDB] else { return }
+        guard let periodoItems = controller.fetchedObjects as? [ProductoDB] else { return }
         periodos = periodoItems
-        productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Periodo.parsePeriodoDB($0) })
+        productos = periodos.filter({ $0.estado == "activo" }).compactMap( {Producto.parseProductoDB($0) })
     }
 }

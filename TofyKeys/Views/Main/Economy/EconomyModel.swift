@@ -9,16 +9,51 @@ import Foundation
 import CoreData
 import SwiftUI
 
-enum TipoProducto: String {
-    case contabilidadManual
-    case contabilidadMensual
+enum TipoProducto: String, CaseIterable {
+    case contabilidad
     case cuenta
     case presupuesto
     case gastos
+    
+    func getImage() -> Image {
+        switch self {
+        case .contabilidad: return Image("contabilidad_white")
+        case .cuenta: return Image("cuenta_white")
+        case .presupuesto: return Image("presupuesto_white")
+        case .gastos: return Image("gastos_white")
+        }
+    }
+    
+    func getTitle() -> String {
+        switch self {
+        case .contabilidad: return "Contabilidad"
+        case .cuenta: return "Cuenta"
+        case .presupuesto: return "Presupuesto"
+        case .gastos: return "Gastos"
+        }
+    }
+    
+    func getShortDescription() -> String {
+        switch self {
+        case .contabilidad: return "¿Operaciones diarias?"
+        case .cuenta: return "¿Tienes un objetivo?"
+        case .presupuesto: return "¿Dinero organizado?"
+        case .gastos: return "¿Gastos durante un tiempo limitado?"
+        }
+    }
+    
+    func getExample() -> String {
+        switch self {
+        case .contabilidad: return "Gastos mensuales de la casa"
+        case .cuenta: return "Cuenta de ahorros"
+        case .presupuesto: return "Gasto de un dinero extra"
+        case .gastos: return "Gastos en viaje"
+        }
+    }
 }
 
 // MARK: PERIODO
-struct Periodo: Codable, Hashable {
+struct Producto: Codable, Hashable {
     var id: UUID
     var titulo: String
     var fechaInicio: Date
@@ -28,15 +63,15 @@ struct Periodo: Codable, Hashable {
     var estado: String
     var accion: String
     
-    static func parsePeriodoDB(_ periodoDB: PeriodoDB) -> Periodo {
-        return Periodo(id: periodoDB.id ?? UUID(),
-                       titulo: periodoDB.titulo ?? "",
-                       fechaInicio: periodoDB.fechaInicio ?? Date(),
-                       fechaFinal: periodoDB.fechaFinal,
-                       transacciones: periodoDB.transacciones?.allObjects.compactMap({$0 as? TransaccionDB}).compactMap({ Transaccion.parseTransaccionDB($0) }) ?? [],
-                       tipo: periodoDB.tipo ?? TipoProducto.contabilidadManual.rawValue,
-                       estado: periodoDB.estado ?? "",
-                       accion: periodoDB.accion ?? "")
+    static func parseProductoDB(_ productoDB: ProductoDB) -> Producto {
+        return Producto(id: productoDB.id ?? UUID(),
+                       titulo: productoDB.titulo ?? "",
+                       fechaInicio: productoDB.fechaInicio ?? Date(),
+                       fechaFinal: productoDB.fechaFinal,
+                       transacciones: productoDB.transacciones?.allObjects.compactMap({$0 as? TransaccionDB}).compactMap({ Transaccion.parseTransaccionDB($0) }) ?? [],
+                       tipo: productoDB.tipo ?? TipoProducto.contabilidad.rawValue,
+                       estado: productoDB.estado ?? "",
+                       accion: productoDB.accion ?? "")
     }
 
     func getGastos() -> Double {
@@ -57,8 +92,21 @@ struct Periodo: Codable, Hashable {
         return resultado
     }
     
-    func isContabilidad() -> Bool {
-        return self.tipo == TipoProducto.contabilidadManual.rawValue || self.tipo == TipoProducto.contabilidadMensual.rawValue
+    func getCategories() -> [CategoriaItem] {
+        var categories: [CategoriaItem] = []
+        var uniqueCategories: [UUID] = []
+        for transaction in transacciones {
+            if !uniqueCategories.contains(where: { $0 == transaction.category}) {
+                uniqueCategories.append(transaction.category)
+            }
+        }
+        for category in uniqueCategories {
+            let categoryTransactions = transacciones.filter({ $0.category == category })
+            var valor: Double = 0
+            categoryTransactions.forEach({ valor += ($0.tipo == "gasto" ? ($0.valor*(-1)) : $0.valor) })
+            categories.append(CategoriaItem(category: category, value: valor))
+        }
+        return categories
     }
     
 }

@@ -307,14 +307,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		97324F042A813A4D00AE050F /* PeriodoDetalle */ = {
+		97324F042A813A4D00AE050F /* Detalle */ = {
 			isa = PBXGroup;
 			children = (
 				97324F052A813A5600AE050F /* PeriodoDetalleView.swift */,
 				975C738E2A4DCA3200CDB280 /* AddTransferenciaView.swift */,
 				97129C452ADDCBD600870E8F /* TransferDetailView.swift */,
 			);
-			path = PeriodoDetalle;
+			path = Detalle;
 			sourceTree = "<group>";
 		};
 		974E3D2D281C742700C5CA1F /* Register */ = {
@@ -355,13 +355,13 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		975C738B2A4891EE00CDB280 /* Periodo */ = {
+		975C738B2A4891EE00CDB280 /* Producto */ = {
 			isa = PBXGroup;
 			children = (
-				97324F042A813A4D00AE050F /* PeriodoDetalle */,
+				97324F042A813A4D00AE050F /* Detalle */,
 				97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */,
 			);
-			path = Periodo;
+			path = Producto;
 			sourceTree = "<group>";
 		};
 		9774067D29D1AF1300802B25 /* TabBar */ = {
@@ -375,7 +375,7 @@
 		9774068029D1AFC100802B25 /* Economy */ = {
 			isa = PBXGroup;
 			children = (
-				975C738B2A4891EE00CDB280 /* Periodo */,
+				975C738B2A4891EE00CDB280 /* Producto */,
 				975C738C2A4891FB00CDB280 /* AddProductoView.swift */,
 				9774068129D1AFD900802B25 /* EconomyLandingView.swift */,
 				975C73812A361B4B00CDB280 /* EconomyModel.swift */,

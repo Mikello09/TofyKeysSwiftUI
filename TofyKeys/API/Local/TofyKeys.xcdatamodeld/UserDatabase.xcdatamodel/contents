@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ClaveDB" representedClassName="ClaveDB" syncable="YES" codeGenerationType="class">
         <attribute name="actualizado" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="fecha" optional="YES" attributeType="String"/>
@@ -9,14 +9,17 @@
         <attribute name="tokenUsuario" optional="YES" attributeType="String"/>
         <attribute name="valores" optional="YES" attributeType="Transformable" valueTransformerName="NSAttributedStringTransformer" customClassName="Valores"/>
     </entity>
-    <entity name="PeriodoDB" representedClassName="PeriodoDB" syncable="YES" codeGenerationType="class">
+    <entity name="Objetivos" representedClassName="Objetivos" syncable="YES" codeGenerationType="class"/>
+    <entity name="ProductoDB" representedClassName="ProductoDB" syncable="YES" codeGenerationType="class">
         <attribute name="accion" optional="YES" attributeType="String"/>
         <attribute name="estado" optional="YES" attributeType="String"/>
         <attribute name="fechaFinal" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fechaInicio" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="padre" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="tipo" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
+        <attribute name="valorInicial" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="transacciones" toMany="YES" deletionRule="Cascade" destinationEntity="TransaccionDB"/>
     </entity>
     <entity name="TransaccionDB" representedClassName="TransaccionDB" syncable="YES" codeGenerationType="class">
@@ -24,6 +27,7 @@
         <attribute name="fecha" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="observacion" optional="YES" attributeType="String"/>
+        <attribute name="padre" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="tipo" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
         <attribute name="valor" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

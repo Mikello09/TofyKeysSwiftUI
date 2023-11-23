@@ -185,8 +185,7 @@ struct TransferDetailView: View {
             selectedCategory = categoryViewModel.getCategory(id: transfer.category)
         }
         .onReceive(categoryViewModel.$categories) { categories in
-            var categoriesToAdd = categories
-            self.categories = categoriesToAdd
+            self.categories = categories
         }
     }
     

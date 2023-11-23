@@ -10,8 +10,8 @@ import CoreData
 
 extension PersistenceController {
     
-    func addPeriodoActual(periodo: Periodo) {
-        let newPeriodo = PeriodoDB(context: container.viewContext)
+    func addPeriodoActual(periodo: Producto) {
+        let newPeriodo = ProductoDB(context: container.viewContext)
 
         newPeriodo.id = periodo.id
         newPeriodo.titulo = periodo.titulo
@@ -38,7 +38,7 @@ extension PersistenceController {
         save()
     }
     
-    func addTransactionToPeriodoActual(allPeriodos: [PeriodoDB], periodo: Periodo, transaction: Transaccion) {
+    func addTransactionToPeriodoActual(allPeriodos: [ProductoDB], periodo: Producto, transaction: Transaccion) {
         
         let transaccionDB = TransaccionDB(context: container.viewContext)
         transaccionDB.id = transaction.id
@@ -55,13 +55,13 @@ extension PersistenceController {
         }
     }
     
-    func deleteTransaction(_ transaction: TransaccionDB, periodo: PeriodoDB) {
+    func deleteTransaction(_ transaction: TransaccionDB, periodo: ProductoDB) {
         periodo.removeFromTransacciones(transaction)
         container.viewContext.delete(transaction)
         save()
     }
     
-    func editTransaction(_ periodo: PeriodoDB, id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
+    func editTransaction(_ periodo: ProductoDB, id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
         
         var transacciones = periodo.mutableSetValue(forKey: "transacciones")
         if let transactionToEdit = (transacciones.allObjects as? [TransaccionDB])?.filter({ $0.id == id }).first {
@@ -75,16 +75,16 @@ extension PersistenceController {
         save()
     }
     
-    func closePeriodo(periodo: PeriodoDB) {
+    func closePeriodo(periodo: ProductoDB) {
         periodo.estado = "cerrado"
         save()
     }
 
 }
 
-extension PeriodoDB {
-  static var periodoDBFetchRequest: NSFetchRequest<PeriodoDB> {
-      let request: NSFetchRequest<PeriodoDB> = PeriodoDB.fetchRequest()
+extension ProductoDB {
+  static var productoDBFetchRequest: NSFetchRequest<ProductoDB> {
+      let request: NSFetchRequest<ProductoDB> = ProductoDB.fetchRequest()
       request.sortDescriptors = [NSSortDescriptor(key: "fechaInicio", ascending: true)]
       return request
   }

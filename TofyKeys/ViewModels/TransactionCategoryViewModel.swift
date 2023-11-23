@@ -41,7 +41,7 @@ class TransactionCategoryViewModel: NSObject, ObservableObject {
     }
     
     func getCategory(id: UUID) -> Category {
-        return categories.filter({ $0.id == id }).first ?? Category(id: UUID(), image: Image(systemName: "questionmark.circle.fill"), title: "")
+        return categories.filter({ $0.id == id }).first ?? Category(id: UUID(), image: Image(systemName: "questionmark.circle.fill"), title: "-")
     }
     
 }

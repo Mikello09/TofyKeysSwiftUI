@@ -9,6 +9,12 @@ import Foundation
 import CoreData
 import SwiftUI
 
+struct CategoriaItem: Identifiable {
+    var id: UUID = UUID()
+    var category: UUID
+    var value: Double
+}
+
 extension PersistenceController {
     
     func saveCategory(id: UUID, title: String, image: String) {
@@ -33,6 +39,6 @@ extension TransactionCategoryDB {
     func toCategory() -> Category {
         return Category(id: self.id ?? UUID(),
                         image: Image(systemName: self.image ?? ""),
-                        title: self.title ?? "")
+                        title: self.title ?? "-")
     }
 }

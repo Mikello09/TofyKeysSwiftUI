@@ -41,9 +41,10 @@ struct PeriodoDetalleView: View {
     @ObservedObject var economyViewModel: EconomyViewModel
     @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
-    @State var periodo: Periodo
+    @State var periodo: Producto
     @State var showingTipo: String = "gasto"
     
+    @State var showCategories: Bool = false
     @State var addGasto: Bool = false
     @State var addIngreso: Bool = false
     
@@ -58,7 +59,7 @@ struct PeriodoDetalleView: View {
                         PeriodoDetalleMenuOptionView(option: option) {
                             switch option {
                             case .estadistica: ()
-                            case .categorias: ()
+                            case .categorias: showCategories.toggle()
                             case .gasto: addGasto = true
                             case.ingreso: addIngreso = true
                             }
@@ -76,30 +77,38 @@ struct PeriodoDetalleView: View {
                         Spacer()
                     }
                 } else {
-                    List {
-                        ForEach(periodo.transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
-                            TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
-                                .contextMenu {
-                                    Button {
-                                        economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: periodo)
-                                    } label: {
-                                        HStack {
-                                            Text("Eliminar")
-                                            Spacer()
-                                            Image(systemName: "trash.fill")
+                    if showCategories {
+                        List {
+                            ForEach(periodo.getCategories()) { categoryItem in
+                                let category = categoryViewModel.getCategory(id: categoryItem.category)
+                                CategoryCell(item: categoryItem, category: category)
+                            }
+                        }
+                    } else {
+                        List {
+                            ForEach(periodo.transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
+                                TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
+                                    .contextMenu {
+                                        Button {
+                                            economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: periodo)
+                                        } label: {
+                                            HStack {
+                                                Text("Eliminar")
+                                                Spacer()
+                                                Image(systemName: "trash.fill")
+                                            }
                                         }
                                     }
-                                }
-                                .overlay (
-                                    NavigationLink (destination: {
-                                        TransferDetailView(categoryViewModel: categoryViewModel,
-                                                           transfer: transaccion,
-                                                           onEdit: onEdit,
-                                                           onDelete: onDelete) }
-                                        , label: {EmptyView() } ).opacity(0)
-                                )
+                                    .overlay (
+                                        NavigationLink (destination: {
+                                            TransferDetailView(categoryViewModel: categoryViewModel,
+                                                               transfer: transaccion,
+                                                               onEdit: onEdit,
+                                                               onDelete: onDelete) }
+                                            , label: {EmptyView() } ).opacity(0)
+                                    )
+                            }
                         }
-                        
                     }
                 }
             }
@@ -113,7 +122,7 @@ struct PeriodoDetalleView: View {
             }
             .onReceive(economyViewModel.$periodos, perform: { periodos in
                 if let detalle = periodos.filter({ $0.id == periodo.id }).first {
-                    periodo = Periodo.parsePeriodoDB(detalle)
+                    periodo = Producto.parseProductoDB(detalle)
                 }
             })
         }
@@ -176,6 +185,28 @@ struct TransactionCell: View {
         
     }
 }
+// MARK: CATEGORY CELL
+struct CategoryCell: View {
+    
+    var item: CategoriaItem
+    var category: Category
+    
+    var body: some View {
+        HStack {
+            category.image
+                .frame(width: 32, height: 32)
+                .aspectRatio(contentMode: .fit)
+                .padding(.trailing, 8)
+            Text(category.title)
+                .font(Font.system(size: 14, weight: .semibold))
+            Spacer()
+            Text(item.value.toCurrency())
+                .font(Font.system(size: 14, weight: .semibold))
+                .foregroundStyle(item.value >= 0 ? .green : .red)
+        }
+    }
+}
+
 // MARK: MENU OPTION
 struct PeriodoDetalleMenuOptionView: View {
     
@@ -189,8 +220,9 @@ struct PeriodoDetalleMenuOptionView: View {
             } label: {
                 ZStack {
                     RoundedRectangle(cornerSize: CGSize(width: 24, height: 24))
-                        .fill(.gray)
+                        .fill(.cyan)
                     option.getImage()
+                        .foregroundStyle(.white)
                 }
             }
             .frame(width: 48, height: 48)
