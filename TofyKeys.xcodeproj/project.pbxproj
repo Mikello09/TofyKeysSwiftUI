@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		97087D052A94F45B008A13A3 /* ClosePeriodoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97087D042A94F45B008A13A3 /* ClosePeriodoPopup.swift */; };
 		970F97EB27F1B1B700FAE05B /* TofyKeysApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */; };
 		970F97EF27F1B1B900FAE05B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97EE27F1B1B900FAE05B /* Assets.xcassets */; };
 		970F97F227F1B1B900FAE05B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970F97F127F1B1B900FAE05B /* Preview Assets.xcassets */; };
@@ -27,6 +26,7 @@
 		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
 		97129C462ADDCBD600870E8F /* TransferDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97129C452ADDCBD600870E8F /* TransferDetailView.swift */; };
 		97324F062A813A5600AE050F /* PeriodoDetalleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97324F052A813A5600AE050F /* PeriodoDetalleView.swift */; };
+		97354B3B2B11503D0024B3FF /* ContabilidadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97354B3A2B11503D0024B3FF /* ContabilidadView.swift */; };
 		974E3D1E28197C9F00C5CA1F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 974E3D1D28197C9F00C5CA1F /* loading.json */; };
 		974E3D2128197CE700C5CA1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 974E3D2028197CE700C5CA1F /* Lottie */; };
 		974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2228197DAE00C5CA1F /* LottieView.swift */; };
@@ -69,7 +69,6 @@
 
 /* Begin PBXFileReference section */
 		97087D022A94EA18008A13A3 /* TofyKeysDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TofyKeysDebug.entitlements; sourceTree = "<group>"; };
-		97087D042A94F45B008A13A3 /* ClosePeriodoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePeriodoPopup.swift; sourceTree = "<group>"; };
 		970F97E727F1B1B700FAE05B /* TofyKeys.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TofyKeys.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		970F97EA27F1B1B700FAE05B /* TofyKeysApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyKeysApp.swift; sourceTree = "<group>"; };
 		970F97EE27F1B1B900FAE05B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -90,6 +89,7 @@
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		97129C452ADDCBD600870E8F /* TransferDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailView.swift; sourceTree = "<group>"; };
 		97324F052A813A5600AE050F /* PeriodoDetalleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodoDetalleView.swift; sourceTree = "<group>"; };
+		97354B3A2B11503D0024B3FF /* ContabilidadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContabilidadView.swift; sourceTree = "<group>"; };
 		974E3D1D28197C9F00C5CA1F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		974E3D2228197DAE00C5CA1F /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		974E3D24281988D800C5CA1F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -144,14 +144,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		97087D032A94F436008A13A3 /* Popups */ = {
-			isa = PBXGroup;
-			children = (
-				97087D042A94F45B008A13A3 /* ClosePeriodoPopup.swift */,
-			);
-			path = Popups;
-			sourceTree = "<group>";
-		};
 		970F97DE27F1B1B700FAE05B = {
 			isa = PBXGroup;
 			children = (
@@ -223,7 +215,6 @@
 		970F980027F1B96000FAE05B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				97087D032A94F436008A13A3 /* Popups */,
 				9774068329D1B9D400802B25 /* Navigation */,
 				974E3D332849596E00C5CA1F /* Lottie */,
 				974E3D322849595200C5CA1F /* UI */,
@@ -317,6 +308,24 @@
 			path = Detalle;
 			sourceTree = "<group>";
 		};
+		97354B382B1150180024B3FF /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				97354B392B1150290024B3FF /* Items */,
+				975C738C2A4891FB00CDB280 /* AddProductoView.swift */,
+				9774068129D1AFD900802B25 /* EconomyLandingView.swift */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		97354B392B1150290024B3FF /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				97354B3A2B11503D0024B3FF /* ContabilidadView.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
 		974E3D2D281C742700C5CA1F /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,9 +384,8 @@
 		9774068029D1AFC100802B25 /* Economy */ = {
 			isa = PBXGroup;
 			children = (
+				97354B382B1150180024B3FF /* Landing */,
 				975C738B2A4891EE00CDB280 /* Producto */,
-				975C738C2A4891FB00CDB280 /* AddProductoView.swift */,
-				9774068129D1AFD900802B25 /* EconomyLandingView.swift */,
 				975C73812A361B4B00CDB280 /* EconomyModel.swift */,
 			);
 			path = Economy;
@@ -564,7 +572,6 @@
 				9798C7752857766A0044D11B /* ShowClaveView.swift in Sources */,
 				97BFA28E2A7A913F00022312 /* UserSettings.swift in Sources */,
 				9774068E29FFF46B00802B25 /* RecordarView.swift in Sources */,
-				97087D052A94F45B008A13A3 /* ClosePeriodoPopup.swift in Sources */,
 				975C737E2A238A1F00CDB280 /* AddNotasView.swift in Sources */,
 				977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */,
 				97BFA2962A7BE9BD00022312 /* TransactionCategoryViewModel.swift in Sources */,
@@ -589,6 +596,7 @@
 				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
 				975C73802A23A16800CDB280 /* ShowNotaView.swift in Sources */,
+				97354B3B2B11503D0024B3FF /* ContabilidadView.swift in Sources */,
 				97BFA2922A7BDD9D00022312 /* AddCategoryView.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */,
 				970F980627F1BF1E00FAE05B /* User.swift in Sources */,

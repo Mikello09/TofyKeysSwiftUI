@@ -10,32 +10,19 @@ import CoreData
 
 extension PersistenceController {
     
-    func addPeriodoActual(periodo: Producto) {
-        let newPeriodo = ProductoDB(context: container.viewContext)
+    func addProducto(producto: Producto) {
+        let newProducto = ProductoDB(context: container.viewContext)
 
-        newPeriodo.id = periodo.id
-        newPeriodo.titulo = periodo.titulo
-        newPeriodo.fechaInicio = periodo.fechaInicio
-        newPeriodo.fechaFinal = periodo.fechaFinal
-        newPeriodo.tipo = periodo.tipo
-        newPeriodo.accion = periodo.accion
-        newPeriodo.estado = periodo.estado
-        
-        if let valorInicial = periodo.transacciones.first {
-            
-            let transaccionDB = TransaccionDB(context: container.viewContext)
-            transaccionDB.id = valorInicial.id
-            transaccionDB.tipo = valorInicial.tipo
-            transaccionDB.titulo = valorInicial.titulo
-            transaccionDB.valor = valorInicial.valor
-            transaccionDB.fecha = valorInicial.fecha
-            transaccionDB.category = valorInicial.category
-            
-            let transacciones = newPeriodo.mutableSetValue(forKey: "transacciones")
-            transacciones.add(transaccionDB)
-        }
+        newProducto.id = producto.id
+        newProducto.titulo = producto.titulo
+        newProducto.fechaInicio = producto.fechaInicio
+        newProducto.fechaFinal = producto.fechaFinal
+        newProducto.tipo = producto.tipo
+        newProducto.accion = producto.accion
+        newProducto.valorInicial = producto.valorInicial
         
         save()
+        
     }
     
     func addTransactionToPeriodoActual(allPeriodos: [ProductoDB], periodo: Producto, transaction: Transaccion) {
@@ -72,11 +59,6 @@ extension PersistenceController {
             transactionToEdit.observacion = observacion
             transactionToEdit.fecha = fecha
         }
-        save()
-    }
-    
-    func closePeriodo(periodo: ProductoDB) {
-        periodo.estado = "cerrado"
         save()
     }
 

@@ -12,11 +12,9 @@
     <entity name="Objetivos" representedClassName="Objetivos" syncable="YES" codeGenerationType="class"/>
     <entity name="ProductoDB" representedClassName="ProductoDB" syncable="YES" codeGenerationType="class">
         <attribute name="accion" optional="YES" attributeType="String"/>
-        <attribute name="estado" optional="YES" attributeType="String"/>
         <attribute name="fechaFinal" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fechaInicio" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="padre" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="tipo" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
         <attribute name="valorInicial" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>

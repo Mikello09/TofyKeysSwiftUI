@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Charts
 
 struct EconomyLandingView: View {
     
@@ -24,7 +23,6 @@ struct EconomyLandingView: View {
     
     @State var addIngresoGasto: Bool = false
     @State var showPeriodoDetalle: Bool = false
-    @State var closePeriodo: Bool = false
     
     var body: some View {
         GeometryReader { proxy in
@@ -43,14 +41,13 @@ struct EconomyLandingView: View {
                         ZStack {
                             ScrollView {
                                 VStack {
-                                    ForEach(productos.filter({ $0.tipo == TipoProducto.contabilidad.rawValue }), id: \.self) { periodo in
+                                    ForEach(productos.filter({ $0.tipo == TipoProducto.contabilidad.rawValue }), id: \.self) { producto in
                                         NavigationLink {
-                                            PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: periodo)
+                                            PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: producto)
                                         } label: {
-                                            Contabilidad(periodo: periodo,
+                                            ContabilidadView(producto: producto,
                                                          addIngresoGasto: $addIngresoGasto,
-                                                         showPeriodoDetalle: $showPeriodoDetalle,
-                                                         closePeriodo: $closePeriodo)
+                                                         showPeriodoDetalle: $showPeriodoDetalle)
                                         }
                                     }
                                     .padding()
@@ -180,7 +177,7 @@ extension EconomyLandingView {
         addPresupuestoSheet = false
         addGastosSheet = false
         
-        economyViewModel.addPeriodo(titulo: titulo, tipo: tipo, valorInicial: valorInicial)
+        economyViewModel.addProducto(titulo: titulo, tipo: tipo, valorInicial: valorInicial)
     }
 }
 
@@ -210,20 +207,20 @@ struct EconomyEmptyState: View {
                                 .frame(width: 48, height: 48)
                             Text(producto.getTitle())
                                 .font(Font.system(size: 21, weight: .bold))
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.primaryText)
                             Spacer()
                             VStack(spacing: 0) {
                                 HStack {
                                     Text("Ejemplo")
                                         .font(Font.system(size: 11))
-                                        .foregroundStyle(Color.white)
+                                        .foregroundStyle(Color.primaryText)
                                     Spacer()
                                 }
                                 HStack {
                                     Text(producto.getExample())
                                         .multilineTextAlignment(.leading)
                                         .font(Font.system(size: 14, weight: .bold))
-                                        .foregroundStyle(Color.white)
+                                        .foregroundStyle(Color.primaryText)
                                     Spacer()
                                 }
                             }
@@ -242,103 +239,6 @@ struct EconomyEmptyState: View {
         .padding([.leading, .trailing])
     }
 }
-
-// MARK: CONTABILIDAD VIEW
-struct Contabilidad: View {
-    
-    @State var periodo: Producto
-    @Binding var addIngresoGasto: Bool
-    @Binding var showPeriodoDetalle: Bool
-    @Binding var closePeriodo: Bool
-    
-    var body: some View {
-        VStack {
-            VStack {
-                
-                ZStack {
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Button {
-                                showPeriodoDetalle = true
-                            } label: {
-                                TextButton(text: "Detalle", foregroundColor: .blue)
-                            }
-                            Button {
-                                addIngresoGasto = true
-                            } label: {
-                                TextButton(text: "Añadir")
-                            }
-                        }
-                        .padding()
-                        Spacer()
-                    }
-                    VStack(spacing: 0) {
-                        HStack {
-                            Text(periodo.titulo)
-                                .font(Font.system(size: 20, weight: .bold))
-                            Spacer()
-                        }
-                        HStack {
-                            Text(periodo.fechaInicio.daysFrom())
-                            Spacer()
-                        }
-                        Spacer()
-                        HStack {
-                            Chart {
-                                BarMark(x: .value("Gastos", periodo.getGastos()),
-                                        y: .value("Gastos", "Gastos"))
-                                .foregroundStyle(Color.redTofy)
-                                BarMark(x: .value("Ingresos", periodo.getIngresos()),
-                                        y: .value("Gngresos", "Ingresos"))
-                                .foregroundStyle(Color.green)
-                            }
-                            .chartXAxis(.hidden)
-                            .chartYAxis {
-                                AxisMarks(position: .leading) { value in
-                                    if let value = value.as(String.self) {
-                                        if value == "Gastos" {
-                                            AxisValueLabel {
-                                                Text("Gastos \(periodo.getGastos().toCurrency())")
-                                            }
-                                        } else {
-                                            AxisValueLabel {
-                                                Text("Ingresos \(periodo.getIngresos().toCurrency())")
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        Spacer()
-                        HStack {
-                            Text("Restante")
-                            Text("\(periodo.getIngresosGastosDifference().toCurrency())")
-                                .fontWeight(.semibold)
-                            Spacer()
-                            if periodo.tipo == TipoProducto.contabilidad.rawValue {
-                                Button {
-                                    closePeriodo = true
-                                } label: {
-                                    TextButton(text: "Cerrar periodo", foregroundColor: .redTofy, size: 14)
-                                }
-                            }
-                        }
-                        
-                    }
-                    .padding()
-                }
-                
-            }
-            .frame(height: 250)
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(radius: 4)
-        }
-    }
-}
-
-
 // MARK: CUENTA VIEW
 struct CuentaView: View {
     

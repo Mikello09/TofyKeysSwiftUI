@@ -65,7 +65,7 @@ struct TofyTextField: View {
                     }
                 }
                 .font(Font.system(size: 14, weight: .semibold))
-                .foregroundStyle(Color.primaryColor)
+                .foregroundStyle(Color.primaryText)
             }
         }
         .padding()

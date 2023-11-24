@@ -21,6 +21,7 @@ extension Color{
     public static let screenBackgroundDark: Color = Color(.screenBackgroundDark)
     public static let dismissColor: Color = Color(.dismissColor)
     public static let elementColor: Color = Color(.elementColor)
+    public static let primaryText: Color = Color("PrimaryText", bundle: nil)
     // CELLS
     public static let claveCellColor: Color = Color(.claveCellColor)
     public static let selectedClaveCells: Color = Color(.selectedClaveCells)

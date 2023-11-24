@@ -17,10 +17,10 @@ enum TipoProducto: String, CaseIterable {
     
     func getImage() -> Image {
         switch self {
-        case .contabilidad: return Image("contabilidad_white")
-        case .cuenta: return Image("cuenta_white")
-        case .presupuesto: return Image("presupuesto_white")
-        case .gastos: return Image("gastos_white")
+        case .contabilidad: return Image("contabilidad")
+        case .cuenta: return Image("cuenta")
+        case .presupuesto: return Image("presupuesto")
+        case .gastos: return Image("gastos")
         }
     }
     
@@ -60,35 +60,35 @@ struct Producto: Codable, Hashable {
     var fechaFinal: Date?
     var transacciones: [Transaccion]
     var tipo: String
-    var estado: String
     var accion: String
+    var valorInicial: Double
     
     static func parseProductoDB(_ productoDB: ProductoDB) -> Producto {
         return Producto(id: productoDB.id ?? UUID(),
-                       titulo: productoDB.titulo ?? "",
-                       fechaInicio: productoDB.fechaInicio ?? Date(),
-                       fechaFinal: productoDB.fechaFinal,
-                       transacciones: productoDB.transacciones?.allObjects.compactMap({$0 as? TransaccionDB}).compactMap({ Transaccion.parseTransaccionDB($0) }) ?? [],
-                       tipo: productoDB.tipo ?? TipoProducto.contabilidad.rawValue,
-                       estado: productoDB.estado ?? "",
-                       accion: productoDB.accion ?? "")
+                        titulo: productoDB.titulo ?? "",
+                        fechaInicio: productoDB.fechaInicio ?? Date(),
+                        fechaFinal: productoDB.fechaFinal,
+                        transacciones: productoDB.transacciones?.allObjects.compactMap({$0 as? TransaccionDB}).compactMap({ Transaccion.parseTransaccionDB($0) }) ?? [],
+                        tipo: productoDB.tipo ?? TipoProducto.contabilidad.rawValue,
+                        accion: productoDB.accion ?? "",
+                        valorInicial: productoDB.valorInicial)
     }
 
-    func getGastos() -> Double {
+    func getGastos(forDate: Date = Date()) -> Double {
         var gastos: Double = 0
-        transacciones.filter({ $0.tipo == "gasto" }).forEach({ gastos += $0.valor })
+        transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth }).filter({ $0.tipo == "gasto" }).forEach({ gastos += $0.valor })
         return gastos
     }
     
-    func getIngresos() -> Double {
+    func getIngresos(forDate: Date = Date()) -> Double {
         var ingresos: Double = 0
-        transacciones.filter({ $0.tipo == "ingreso" }).forEach({ ingresos += $0.valor })
+        transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth }).filter({ $0.tipo == "ingreso" }).forEach({ ingresos += $0.valor })
         return ingresos
     }
     
-    func getIngresosGastosDifference() -> Double {
+    func getIngresosGastosDifference(forDate: Date = Date()) -> Double {
         var resultado:Double = 0
-        transacciones.forEach({ resultado += ($0.tipo == "gasto" ? ($0.valor*(-1)) : $0.valor) })
+        transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth }).forEach({ resultado += ($0.tipo == "gasto" ? ($0.valor*(-1)) : $0.valor) })
         return resultado
     }
     

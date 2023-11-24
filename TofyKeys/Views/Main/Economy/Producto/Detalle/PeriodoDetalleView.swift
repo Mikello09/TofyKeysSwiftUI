@@ -120,7 +120,7 @@ struct PeriodoDetalleView: View {
             .sheet(isPresented: $addIngreso) {
                 AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "ingreso", onAdd: onAdd)
             }
-            .onReceive(economyViewModel.$periodos, perform: { periodos in
+            .onReceive(economyViewModel.$dbProductos, perform: { periodos in
                 if let detalle = periodos.filter({ $0.id == periodo.id }).first {
                     periodo = Producto.parseProductoDB(detalle)
                 }
