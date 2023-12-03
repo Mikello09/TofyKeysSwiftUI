@@ -15,6 +15,7 @@ class EconomyViewModel: NSObject, ObservableObject {
     private let periodoController: NSFetchedResultsController<ProductoDB>
     @Published var dbProductos: [ProductoDB] = []
     @Published var productos: [Producto] = []
+    @Published var transaciones: [Transaccion] = []
     
     init(managedObjectContext: NSManagedObjectContext) {
         periodoController = NSFetchedResultsController(fetchRequest: ProductoDB.productoDBFetchRequest,
@@ -37,17 +38,22 @@ class EconomyViewModel: NSObject, ObservableObject {
         productos = dbProductos.compactMap( {Producto.parseProductoDB($0) })
     }
     
+    func getTransacciones(producto: Producto, forDate: Date? = nil) {
+        if let forDate {
+            transaciones = producto.transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth })
+        } else {
+            transaciones = producto.transacciones
+        }
+    }
+    
     func addProducto(titulo: String, tipo: TipoProducto, valorInicial: String) {
-        var transacciones: [Transaccion] = []
-        
         PersistenceController.shared.addProducto(producto: Producto(id: UUID(),
                                                                     titulo: titulo,
                                                                     fechaInicio: Date(),
-                                                                    transacciones: transacciones,
+                                                                    transacciones: [],
                                                                     tipo: tipo.rawValue,
                                                                     accion: "",
                                                                     valorInicial: Double(valorInicial) ?? 0))
-        
     }
     
     func addTransaction(periodo: Producto, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {

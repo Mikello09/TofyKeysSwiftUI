@@ -65,6 +65,12 @@ extension Date {
     func getMonthTitle() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "LLLL"
+        return dateFormatter.string(from: self).capitalized
+    }
+    
+    func getYear() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY"
         return dateFormatter.string(from: self)
     }
 }
@@ -151,5 +157,11 @@ extension Double {
             roundedValue = roundedValue.split(separator: ".").first?.description ?? roundedValue
         }
         return "\(roundedValue)\(CURRENCY)"
+    }
+    
+    func resultColor() -> Color {
+        if self > 0 { return .green }
+        else if self == 0 { return . gray }
+        else { return .red }
     }
 }

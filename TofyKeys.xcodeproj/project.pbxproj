@@ -25,7 +25,7 @@
 		970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */; };
 		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
 		97129C462ADDCBD600870E8F /* TransferDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97129C452ADDCBD600870E8F /* TransferDetailView.swift */; };
-		97324F062A813A5600AE050F /* PeriodoDetalleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97324F052A813A5600AE050F /* PeriodoDetalleView.swift */; };
+		97324F062A813A5600AE050F /* ProductoDetalleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97324F052A813A5600AE050F /* ProductoDetalleView.swift */; };
 		97354B3B2B11503D0024B3FF /* ContabilidadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97354B3A2B11503D0024B3FF /* ContabilidadView.swift */; };
 		974E3D1E28197C9F00C5CA1F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 974E3D1D28197C9F00C5CA1F /* loading.json */; };
 		974E3D2128197CE700C5CA1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 974E3D2028197CE700C5CA1F /* Lottie */; };
@@ -88,7 +88,7 @@
 		970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDatabase.xcdatamodel; sourceTree = "<group>"; };
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		97129C452ADDCBD600870E8F /* TransferDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetailView.swift; sourceTree = "<group>"; };
-		97324F052A813A5600AE050F /* PeriodoDetalleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodoDetalleView.swift; sourceTree = "<group>"; };
+		97324F052A813A5600AE050F /* ProductoDetalleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductoDetalleView.swift; sourceTree = "<group>"; };
 		97354B3A2B11503D0024B3FF /* ContabilidadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContabilidadView.swift; sourceTree = "<group>"; };
 		974E3D1D28197C9F00C5CA1F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		974E3D2228197DAE00C5CA1F /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		97324F042A813A4D00AE050F /* Detalle */ = {
 			isa = PBXGroup;
 			children = (
-				97324F052A813A5600AE050F /* PeriodoDetalleView.swift */,
+				97324F052A813A5600AE050F /* ProductoDetalleView.swift */,
 				975C738E2A4DCA3200CDB280 /* AddTransferenciaView.swift */,
 				97129C452ADDCBD600870E8F /* TransferDetailView.swift */,
 			);
@@ -562,7 +562,7 @@
 				9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */,
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
 				97999AF62A111D8000482E6D /* AddParkingView.swift in Sources */,
-				97324F062A813A5600AE050F /* PeriodoDetalleView.swift in Sources */,
+				97324F062A813A5600AE050F /* ProductoDetalleView.swift in Sources */,
 				974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */,
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */,

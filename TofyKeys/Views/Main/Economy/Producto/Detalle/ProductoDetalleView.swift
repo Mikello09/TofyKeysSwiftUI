@@ -36,23 +36,60 @@ enum PeriodoDetalleMenuOption: String, CaseIterable, Identifiable {
     }
 }
 
-struct PeriodoDetalleView: View {
+struct ProductoDetalleView: View {
     
     @ObservedObject var economyViewModel: EconomyViewModel
     @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
-    @State var periodo: Producto
-    @State var showingTipo: String = "gasto"
+    @State var producto: Producto
+    @State var transacciones: [Transaccion] = []
+    @State var actualMonth: Date = Date()
     
     @State var showCategories: Bool = false
     @State var addGasto: Bool = false
     @State var addIngreso: Bool = false
     
+    @State var optionsHeight: CGFloat = 84
+    
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Text(periodo.getIngresosGastosDifference().toCurrency())
-                    .font(Font.system(size: 32, weight: .bold))
+                
+                switch producto.tipo {
+                case TipoProducto.contabilidad.rawValue:
+                    HStack {
+                        let difference = producto.getIngresosGastosDifference(forDate: actualMonth)
+                        Text(difference.toCurrency())
+                            .font(Font.system(size: 32, weight: .bold))
+                            .foregroundStyle(difference.resultColor())
+                        Spacer()
+                        VStack {
+                            HStack {
+                                Button(action: {
+                                    actualMonth = Calendar.current.date(byAdding: .month, value: -1, to: actualMonth) ?? Date()
+                                    economyViewModel.getTransacciones(producto: producto, forDate: actualMonth)
+                                }, label: {
+                                    Image(systemName: "chevron.left")
+                                })
+                                VStack {
+                                    Text(actualMonth.getMonthTitle())
+                                        .font(Font.system(size: 16, weight: .semibold))
+                                }
+                                Button(action: {
+                                    actualMonth = Calendar.current.date(byAdding: .month, value: 1, to: actualMonth) ?? Date()
+                                    economyViewModel.getTransacciones(producto: producto, forDate: actualMonth)
+                                }, label: {
+                                    Image(systemName: "chevron.right")
+                                })
+                            }
+                            Text(actualMonth.getYear())
+                                .font(Font.system(size: 8, weight: .semibold))
+                        }
+                    }
+                    .padding()
+                default: EmptyView()
+                }
+                
                 HStack(spacing: 0) {
                     ForEach(PeriodoDetalleMenuOption.allCases) { option in
                     
@@ -68,9 +105,10 @@ struct PeriodoDetalleView: View {
                         
                     }
                 }
+                .frame(height: optionsHeight)
                 .padding([.top, .bottom])
                 
-                if periodo.transacciones.isEmpty {
+                if transacciones.isEmpty {
                     VStack {
                         Spacer()
                         Text("No hay movimientos")
@@ -79,40 +117,41 @@ struct PeriodoDetalleView: View {
                 } else {
                     if showCategories {
                         List {
-                            ForEach(periodo.getCategories()) { categoryItem in
+                            ForEach(producto.getCategories()) { categoryItem in
                                 let category = categoryViewModel.getCategory(id: categoryItem.category)
                                 CategoryCell(item: categoryItem, category: category)
                             }
                         }
                     } else {
-                        List {
-                            ForEach(periodo.transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
-                                TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
-                                    .contextMenu {
-                                        Button {
-                                            economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: periodo)
-                                        } label: {
-                                            HStack {
-                                                Text("Eliminar")
-                                                Spacer()
-                                                Image(systemName: "trash.fill")
+                        
+                            List {
+                                ForEach(transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
+                                    TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
+                                        .contextMenu {
+                                            Button {
+                                                economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
+                                            } label: {
+                                                HStack {
+                                                    Text("Eliminar")
+                                                    Spacer()
+                                                    Image(systemName: "trash.fill")
+                                                }
                                             }
                                         }
-                                    }
-                                    .overlay (
-                                        NavigationLink (destination: {
-                                            TransferDetailView(categoryViewModel: categoryViewModel,
-                                                               transfer: transaccion,
-                                                               onEdit: onEdit,
-                                                               onDelete: onDelete) }
-                                            , label: {EmptyView() } ).opacity(0)
-                                    )
+                                        .overlay (
+                                            NavigationLink (destination: {
+                                                TransferDetailView(categoryViewModel: categoryViewModel,
+                                                                   transfer: transaccion,
+                                                                   onEdit: onEdit,
+                                                                   onDelete: onDelete) }
+                                                , label: {EmptyView() } ).opacity(0)
+                                        )
+                                }
                             }
-                        }
                     }
                 }
             }
-            .navigationTitle(periodo.titulo)
+            .navigationTitle(producto.titulo)
             .toolbar(.hidden, for: .tabBar)
             .sheet(isPresented: $addGasto, content: {
                 AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "gasto", onAdd: onAdd)
@@ -120,16 +159,23 @@ struct PeriodoDetalleView: View {
             .sheet(isPresented: $addIngreso) {
                 AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "ingreso", onAdd: onAdd)
             }
+            .onAppear {
+                economyViewModel.getTransacciones(producto: producto, forDate: Date())
+            }
             .onReceive(economyViewModel.$dbProductos, perform: { periodos in
-                if let detalle = periodos.filter({ $0.id == periodo.id }).first {
-                    periodo = Producto.parseProductoDB(detalle)
+                if let detalle = periodos.filter({ $0.id == producto.id }).first {
+                    producto = Producto.parseProductoDB(detalle)
+                    economyViewModel.getTransacciones(producto: producto, forDate: actualMonth)
                 }
+            })
+            .onReceive(economyViewModel.$transaciones, perform: { transacciones in
+                self.transacciones = transacciones
             })
         }
     }
     
     func onAdd(titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
-        economyViewModel.addTransaction(periodo: periodo,
+        economyViewModel.addTransaction(periodo: producto,
                                         titulo: titulo,
                                         tipo: tipo,
                                         valor: valor,
@@ -141,13 +187,22 @@ struct PeriodoDetalleView: View {
     }
     
     func onEdit(id: UUID, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
-        economyViewModel.editTransaction(periodo: periodo, id: id, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion, fecha: fecha)
+        economyViewModel.editTransaction(periodo: producto, id: id, titulo: titulo, tipo: tipo, valor: valor, category: category, observacion: observacion, fecha: fecha)
     }
     
     func onDelete(transaccion: Transaccion) {
-        economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: periodo)
+        economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
     }
 }
+
+struct ToffyPreferencKey: PreferenceKey {
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        print("REDUCE: \(nextValue())")
+        value += nextValue()
+    }
+}
+
 // MARK: TRANSACTION CELL
 struct TransactionCell: View {
     

@@ -43,7 +43,7 @@ struct EconomyLandingView: View {
                                 VStack {
                                     ForEach(productos.filter({ $0.tipo == TipoProducto.contabilidad.rawValue }), id: \.self) { producto in
                                         NavigationLink {
-                                            PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: producto)
+                                            ProductoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, producto: producto)
                                         } label: {
                                             ContabilidadView(producto: producto,
                                                          addIngresoGasto: $addIngresoGasto,
@@ -109,7 +109,7 @@ struct EconomyLandingView: View {
                                                 ForEach(self.productos.filter({ $0.tipo != TipoProducto.contabilidad.rawValue }), id: \.self) { producto in
                                                     if producto.tipo == TipoProducto.cuenta.rawValue {
                                                         NavigationLink {
-                                                            PeriodoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, periodo: producto)
+                                                            ProductoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, producto: producto)
                                                         } label: {
                                                             CuentaView(cuenta: producto)
                                                                 .frame(width: proxy.size.width/2 - 32,

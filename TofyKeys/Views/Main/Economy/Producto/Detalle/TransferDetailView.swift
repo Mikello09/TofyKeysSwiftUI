@@ -143,7 +143,7 @@ struct TransferDetailView: View {
                 }
                 Spacer()
                 Button {
-                    onEdit(transfer.id, titulo, tipo, (valor as NSString).doubleValue, selectedCategory?.id ?? category, observacion, fecha)
+                    onEdit(transfer.id, titulo, tipo, (valor.replacingOccurrences(of: ",", with: ".") as NSString).doubleValue, selectedCategory?.id ?? category, observacion, fecha)
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     ZStack {

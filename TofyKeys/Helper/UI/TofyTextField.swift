@@ -45,6 +45,7 @@ struct TofyTextField: View {
     
     @Binding var text: String
     var title: String
+    var tipo: String = "texto" // texto/gasto/ingreso
     
     @State var isEditing: Bool = false
     
@@ -59,13 +60,20 @@ struct TofyTextField: View {
                         Spacer()
                     }
                 }
-                TextField(title, text: $text) { _ in
-                    withAnimation {
-                        isEditing.toggle()
+                HStack(spacing: 0) {
+                    TextField(title, text: $text) { _ in
+                        withAnimation {
+                            isEditing.toggle()
+                        }
+                    }
+                    .font(Font.system(size: 14, weight: .semibold))
+                    .foregroundStyle(tipo == "texto" ? Color.primaryText : (tipo == "gasto" ? Color.red : Color.green))
+                    if tipo != "texto" && !text.isEmpty {
+                        Text("€")
+                            .font(Font.system(size: 14, weight: .semibold))
+                            .foregroundStyle(tipo == "gasto" ? Color.red : Color.green)
                     }
                 }
-                .font(Font.system(size: 14, weight: .semibold))
-                .foregroundStyle(Color.primaryText)
             }
         }
         .padding()

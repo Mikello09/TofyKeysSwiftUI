@@ -33,12 +33,20 @@ struct AddTransferenciaView: View {
         ScrollView {
             VStack(spacing: 24) {
                 ZStack {
-                    Text(tipo.uppercased())
+                    HStack {
+                        Image(systemName: tipo == "gasto" ? "minus.circle.fill" : "plus.circle.fill")
+                            .foregroundColor(tipo == "gasto" ? .red : .green)
+                        Text(tipo.uppercased())
+                            .font(Font.system(size: 17, weight: .bold))
+                            .foregroundStyle(tipo == "gasto" ? .red : .green)
+                        Spacer()
+                    }
+                    .padding()
                     HStack {
                         Spacer()
                         Button (action: {
                             if !titulo.isEmpty && !valor.isEmpty {
-                                onAdd(titulo, tipo, (valor as NSString).doubleValue, selectedCategory?.id ?? category, observacion, fecha)
+                                onAdd(titulo, tipo, (valor.replacingOccurrences(of: ",", with: ".") as NSString).doubleValue, selectedCategory?.id ?? category, observacion, fecha)
                             }
                         }, label: {
                             TextButton(text: "Guardar")
@@ -51,7 +59,7 @@ struct AddTransferenciaView: View {
                     .focused($descripcionFocused)
                     .onSubmit { valueFocused = true }
                 HStack {
-                    TofyTextField(text: $valor, title: Double(0.0).toCurrency())
+                    TofyTextField(text: $valor, title: "Valor (€)", tipo: tipo)
                         .focused($valueFocused)
                         .keyboardType(.decimalPad)
                         .frame(height: 96)
