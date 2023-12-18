@@ -20,6 +20,7 @@ struct AddTransferenciaView: View {
     @State var fecha: Date = Date()
     
     @State var addCategory: Bool = false
+    @State var editCategory: Bool = false
     
     @FocusState var descripcionFocused: Bool
     @FocusState var valueFocused: Bool
@@ -75,6 +76,15 @@ struct AddTransferenciaView: View {
                                         .font(Font.system(size: 11))
                                 }
                             }
+                            Button {
+                                editCategory = true
+                            } label: {
+                                VStack(spacing: 8){
+                                    Image(systemName: "pencil")
+                                    Text("Edit Category")
+                                        .font(Font.system(size: 11))
+                                }
+                            }
                         }
                         Section {
                             ForEach(categories) { category in
@@ -82,7 +92,7 @@ struct AddTransferenciaView: View {
                                     selectedCategory = category
                                 } label: {
                                     VStack(spacing: 8){
-                                        category.image
+                                        Image(systemName: category.image)
                                         Text(category.title)
                                             .font(Font.system(size: 11))
                                     }
@@ -91,7 +101,7 @@ struct AddTransferenciaView: View {
                         }
                     } label: {
                         VStack(spacing: 8){
-                            selectedCategory?.image ?? Image(systemName: "plus.circle")
+                            selectedCategory?.image == nil ? Image(systemName: "plus.circle") : Image(systemName: selectedCategory?.image ?? "")
                             Text(selectedCategory?.title ?? "Add Category")
                                 .font(Font.system(size: 11))
                         }
@@ -111,13 +121,15 @@ struct AddTransferenciaView: View {
                                 isShowing: $addCategory,
                                 categoryAdded: categoryAdded)
             })
+            .sheet(isPresented: $editCategory) {
+                EditCategoryView(categoryViewModel: categoryViewModel)
+            }
         }
         .onAppear {
             descripcionFocused = true
         }
         .onReceive(categoryViewModel.$categories) { categories in
-            var categoriesToAdd = categories
-            self.categories = categoriesToAdd
+            self.categories = categories
         }
     }
     

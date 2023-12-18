@@ -58,10 +58,14 @@ struct ProductoDetalleView: View {
                 switch producto.tipo {
                 case TipoProducto.contabilidad.rawValue:
                     HStack {
-                        let difference = producto.getIngresosGastosDifference(forDate: actualMonth)
-                        Text(difference.toCurrency())
-                            .font(Font.system(size: 32, weight: .bold))
-                            .foregroundStyle(difference.resultColor())
+                        VStack(alignment: .leading) {
+                            let difference = producto.getIngresosGastosDifference(forDate: actualMonth)
+                            Text("Disponible")
+                                .font(Font.system(size: 10, weight: .semibold))
+                            Text(difference.toCurrency())
+                                .font(Font.system(size: 32, weight: .bold))
+                                .foregroundStyle(difference.resultColor())
+                        }
                         Spacer()
                         VStack {
                             HStack {
@@ -83,7 +87,7 @@ struct ProductoDetalleView: View {
                                 })
                             }
                             Text(actualMonth.getYear())
-                                .font(Font.system(size: 8, weight: .semibold))
+                                .font(Font.system(size: 10, weight: .semibold))
                         }
                     }
                     .padding()
@@ -212,7 +216,7 @@ struct TransactionCell: View {
     var body: some View {
         
             HStack {
-                category.image
+                Image(systemName: category.image)
                     .frame(width: 32, height: 32)
                     .aspectRatio(contentMode: .fit)
                     .padding(.trailing, 8)
@@ -248,7 +252,7 @@ struct CategoryCell: View {
     
     var body: some View {
         HStack {
-            category.image
+            Image(systemName: category.image)
                 .frame(width: 32, height: 32)
                 .aspectRatio(contentMode: .fit)
                 .padding(.trailing, 8)

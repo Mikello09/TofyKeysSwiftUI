@@ -27,6 +27,18 @@ extension PersistenceController {
         save()
     }
     
+    func deleteCategory(_ categoryToDelete: TransactionCategoryDB) {
+        container.viewContext.delete(categoryToDelete)
+        save()
+    }
+    
+    func updateCategory(categoryToUpdate: TransactionCategoryDB, newTitle: String, newImage: String) {
+        var category = categoryToUpdate
+        category.title = newTitle
+        category.image = newImage
+        save()
+    }
+    
 }
 
 extension TransactionCategoryDB {
@@ -38,7 +50,7 @@ extension TransactionCategoryDB {
     
     func toCategory() -> Category {
         return Category(id: self.id ?? UUID(),
-                        image: Image(systemName: self.image ?? ""),
+                        image: self.image ?? "",
                         title: self.title ?? "-")
     }
 }

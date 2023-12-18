@@ -24,42 +24,47 @@ struct ContabilidadView: View {
                             Text(producto.titulo)
                                 .font(Font.system(size: 20, weight: .bold))
                             Spacer()
-                        }
-                        HStack {
-                            Text(Date().getMonthTitle().capitalized)
-                            Text(producto.fechaInicio.daysFrom())
-                            Spacer()
+                            VStack {
+                                Text(Date().getMonthTitle().capitalized)
+                                    .font(Font.system(size: 17, weight: .semibold))
+                                    .foregroundStyle(Color.primaryText)
+                                Text(producto.fechaInicio.daysFrom())
+                                    .font(Font.system(size: 12, weight: .semibold))
+                                    .foregroundStyle(Color.primaryText)
+                            }
                         }
                         Spacer()
                         HStack {
                             Chart {
-                                BarMark(x: .value("Gastos", producto.getGastos()),
-                                        y: .value("Gastos", "Gastos"))
-                                .foregroundStyle(Color.redTofy)
-                                BarMark(x: .value("Ingresos", producto.getIngresos()),
-                                        y: .value("Gngresos", "Ingresos"))
-                                .foregroundStyle(Color.green)
+                                BarMark(x: .value("Gngresos", "Ingresos"),
+                                        y: .value("Ingresos", producto.getIngresos()),
+                                width: 56)
+                                .annotation(position: .top) {
+                                    Text(producto.getIngresos().toCurrency())
+                                        .font(Font.system(size: 10, weight: .semibold))
+                                        .foregroundStyle(Color.primaryText)
+                                }
+                                .cornerRadius(8)
+                                .foregroundStyle(.linearGradient(colors: [Color.green.opacity(0.5), Color.green], startPoint: .bottom, endPoint: .top))
+                                BarMark(x: .value("Gastos", "Gastos"),
+                                        y: .value("Gastos", producto.getGastos()),
+                                width: 56)
+                                .annotation(position: .top) {
+                                    Text(producto.getGastos().toCurrency())
+                                        .font(Font.system(size: 10, weight: .semibold))
+                                        .foregroundStyle(Color.primaryText)
+                                }
+                                .cornerRadius(8)
+                                .foregroundStyle(.linearGradient(colors: [Color.redTofy.opacity(0.5), Color.redTofy], startPoint: .bottom, endPoint: .top))
                             }
                             .chartXAxis(.hidden)
-                            .chartYAxis {
-                                AxisMarks(position: .leading) { value in
-                                    if let value = value.as(String.self) {
-                                        if value == "Gastos" {
-                                            AxisValueLabel {
-                                                Text("Gastos \(producto.getGastos().toCurrency())")
-                                            }
-                                        } else {
-                                            AxisValueLabel {
-                                                Text("Ingresos \(producto.getIngresos().toCurrency())")
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                            .chartYAxis(.hidden)
+                            .frame(width: 128)
+                            Spacer()
                         }
                         Spacer()
                         HStack {
-                            Text("Restante")
+                            Text("Disponible")
                             Text("\(producto.getIngresosGastosDifference().toCurrency())")
                                 .fontWeight(.semibold)
                             Spacer()

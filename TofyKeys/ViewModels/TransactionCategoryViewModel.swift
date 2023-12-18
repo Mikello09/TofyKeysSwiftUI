@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import CoreData
+import UIKit
 
 class TransactionCategoryViewModel: NSObject, ObservableObject {
     
@@ -28,9 +29,6 @@ class TransactionCategoryViewModel: NSObject, ObservableObject {
             try categoryController.performFetch()
             categoriesDB = categoryController.fetchedObjects ?? []
             categories = categoriesDB.map({ $0.toCategory() })
-            if categories.isEmpty {
-                addCategory(id: UUID(), titulo: "General", image: "banknote.fill")
-            }
         } catch {
           print("failed to fetch items!")
         }
@@ -41,7 +39,21 @@ class TransactionCategoryViewModel: NSObject, ObservableObject {
     }
     
     func getCategory(id: UUID) -> Category {
-        return categories.filter({ $0.id == id }).first ?? Category(id: UUID(), image: Image(systemName: "questionmark.circle.fill"), title: "-")
+        return categories.filter({ $0.id == id }).first ?? Category(id: UUID(), image: "questionmark.circle.fill", title: "-")
+    }
+    
+    func deleteCategory(id: UUID) {
+        if let categoryToDelete = categoriesDB.filter({ $0.id == id }).first {
+            PersistenceController.shared.deleteCategory(categoryToDelete)
+        }
+    }
+    
+    func updateCategory(id: UUID, title: String, image: String) {
+        if let categoryToUpdate = categoriesDB.filter({ $0.id == id }).first {
+            PersistenceController.shared.updateCategory(categoryToUpdate: categoryToUpdate,
+                                                        newTitle: title,
+                                                        newImage: image)
+        }
     }
     
 }

@@ -30,6 +30,7 @@ struct TransferDetailView: View {
     @State var fecha: Date = Date()
     
     @State var addCategory: Bool = false
+    @State var editCategory: Bool = false
     
     @State var categories: [Category] = []
     @State var selectedCategory: Category?
@@ -102,6 +103,15 @@ struct TransferDetailView: View {
                                         .font(Font.system(size: 11))
                                 }
                             }
+                            Button {
+                                editCategory = true
+                            } label: {
+                                VStack(spacing: 8){
+                                    Image(systemName: "pencil")
+                                    Text("Edit Category")
+                                        .font(Font.system(size: 11))
+                                }
+                            }
                         }
                         Section {
                             ForEach(categories) { category in
@@ -110,7 +120,7 @@ struct TransferDetailView: View {
                                     self.category = category.id
                                 } label: {
                                     VStack(spacing: 8){
-                                        category.image
+                                        Image(systemName: category.image)
                                         Text(category.title)
                                             .font(Font.system(size: 11))
                                     }
@@ -119,7 +129,7 @@ struct TransferDetailView: View {
                         }
                     } label: {
                         VStack(spacing: 8){
-                            selectedCategory?.image ?? Image(systemName: "plus.circle")
+                            selectedCategory?.image == nil ? Image(systemName: "plus.circle") : Image(systemName: selectedCategory?.image ?? "")
                             Text(selectedCategory?.title ?? "Add Category")
                                 .font(Font.system(size: 11))
                         }
@@ -176,6 +186,9 @@ struct TransferDetailView: View {
                             isShowing: $addCategory,
                             categoryAdded: categoryAdded)
         })
+        .sheet(isPresented: $editCategory) {
+            EditCategoryView(categoryViewModel: categoryViewModel)
+        }
         .onAppear {
             titulo = transfer.titulo
             valor = "\(transfer.valor)"

@@ -156,7 +156,7 @@ extension Double {
         if roundedValue.split(separator: ".").last == "00" {
             roundedValue = roundedValue.split(separator: ".").first?.description ?? roundedValue
         }
-        return "\(roundedValue)\(CURRENCY)"
+        return "\(roundedValue.replacingOccurrences(of: ".", with: ","))\(CURRENCY)"
     }
     
     func resultColor() -> Color {

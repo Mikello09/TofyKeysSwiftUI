@@ -133,7 +133,7 @@ struct Transaccion: Codable, Hashable, Identifiable {
 
 struct Category: Hashable, Identifiable {
     var id: UUID
-    var image: Image
+    var image: String
     var title: String
     
     func hash(into hasher: inout Hasher) {
@@ -141,7 +141,7 @@ struct Category: Hashable, Identifiable {
     }
 
     static func == (lhs: Category, rhs: Category) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.id == rhs.id && lhs.image == rhs.image && lhs.title == rhs.title
     }
 }
 
