@@ -46,7 +46,7 @@ extension Date {
     
     func toDayString() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YY, MMM d"
+        dateFormatter.dateFormat = "d MMM, YY"//"YY, MMM d"
         return dateFormatter.string(from: self)
     }
     
@@ -163,5 +163,13 @@ extension Double {
         if self > 0 { return .green }
         else if self == 0 { return . gray }
         else { return .red }
+    }
+    
+    func roundedTo2Decimals() -> String {
+        var roundedValue = String(format: "%.2f", self)
+        if roundedValue.split(separator: ".").last == "00" {
+            roundedValue = roundedValue.split(separator: ".").first?.description ?? roundedValue
+        }
+        return "\(roundedValue.replacingOccurrences(of: ".", with: ","))"
     }
 }

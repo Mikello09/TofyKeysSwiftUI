@@ -17,19 +17,19 @@ enum PeriodoDetalleMenuOption: String, CaseIterable, Identifiable {
     case ingreso
     case gasto
     
-    func getTitle() -> String {
+    func getTitle(showCategoria: Bool = false) -> String {
         switch self {
         case .estadistica: return "Estadistica"
-        case .categorias: return "Categorias"
+        case .categorias: return showCategoria ? "Transacciones" : "Categorias"
         case .ingreso: return "Ingreso"
         case .gasto: return "Gasto"
         }
     }
     
-    func getImage() -> Image {
+    func getImage(showCategoria: Bool = false) -> Image {
         switch self {
         case .estadistica: return Image(systemName: "chart.bar.xaxis")
-        case .categorias: return Image(systemName: "line.3.horizontal.decrease.circle.fill")
+        case .categorias: return showCategoria ? Image(systemName: "list.bullet") : Image(systemName: "square.3.layers.3d.down.right")
         case .ingreso: return Image(systemName: "plus")
         case .gasto: return Image(systemName: "minus")
         }
@@ -97,7 +97,7 @@ struct ProductoDetalleView: View {
                 HStack(spacing: 0) {
                     ForEach(PeriodoDetalleMenuOption.allCases) { option in
                     
-                        PeriodoDetalleMenuOptionView(option: option) {
+                        PeriodoDetalleMenuOptionView(option: option, showCategories: $showCategories) {
                             switch option {
                             case .estadistica: ()
                             case .categorias: showCategories.toggle()
@@ -121,7 +121,7 @@ struct ProductoDetalleView: View {
                 } else {
                     if showCategories {
                         List {
-                            ForEach(producto.getCategories()) { categoryItem in
+                            ForEach(producto.getCategories(forDate: actualMonth)) { categoryItem in
                                 let category = categoryViewModel.getCategory(id: categoryItem.category)
                                 CategoryCell(item: categoryItem, category: category)
                             }
@@ -250,18 +250,75 @@ struct CategoryCell: View {
     var item: CategoriaItem
     var category: Category
     
+    @State var showDetails: Bool = false
+    
     var body: some View {
-        HStack {
-            Image(systemName: category.image)
-                .frame(width: 32, height: 32)
-                .aspectRatio(contentMode: .fit)
-                .padding(.trailing, 8)
-            Text(category.title)
-                .font(Font.system(size: 14, weight: .semibold))
-            Spacer()
-            Text(item.value.toCurrency())
-                .font(Font.system(size: 14, weight: .semibold))
-                .foregroundStyle(item.value >= 0 ? .green : .red)
+        VStack {
+            Button {
+                showDetails.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: category.image)
+                        .frame(width: 32, height: 32)
+                        .foregroundStyle(Color.blackTofy)
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.trailing, 8)
+                    Text(category.title)
+                        .font(Font.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.primaryColor)
+                    Spacer()
+                    VStack(alignment: .trailing, spacing: 8) {
+                        Text(item.value.toCurrency())
+                            .font(Font.system(size: 14, weight: .semibold))
+                            .foregroundStyle(item.value >= 0 ? .green : .red)
+                        HStack {
+                            if item.numericalComparison > 0 {
+                                Image(systemName: "arrowtriangle.up.fill")
+                                    .foregroundStyle(.green)
+                            } else if item.numericalComparison == 0 {
+                                Image(systemName: "equal")
+                                    .foregroundStyle(.gray)
+                            } else {
+                                Image(systemName: "arrowtriangle.down.fill")
+                                    .foregroundStyle(.red)
+                            }
+                            Text("\(item.numericalComparison.roundedTo2Decimals())")
+                                .font(Font.system(size: 14, weight: .semibold))
+                                .foregroundStyle(item.numericalComparison >= 0 ? .green : .red)
+                        }
+                    }
+                }
+                if showDetails {
+                    VStack(spacing: 16) {
+                        ForEach(item.transactions) { transaction in
+                            HStack {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text(transaction.titulo)
+                                        .font(Font.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(Color.primaryColor)
+                                }
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 8) {
+                                    Text(transaction.valor.toCurrency())
+                                        .font(Font.system(size: 14, weight: .semibold))
+                                        .foregroundStyle(transaction.tipo == "ingreso" ? .green : .red)
+                                    Text(transaction.fecha.toDayString())
+                                        .font(Font.system(size: 12, weight: .regular))
+                                        .foregroundStyle(Color.secondaryColor)
+                                }
+                            }
+                            if transaction != item.transactions.last {
+                                Divider()
+                            }
+                        }
+                    }
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.categoryDetailBackground)
+                    }
+                }
+            }
         }
     }
 }
@@ -270,6 +327,7 @@ struct CategoryCell: View {
 struct PeriodoDetalleMenuOptionView: View {
     
     var option: PeriodoDetalleMenuOption
+    @Binding var showCategories: Bool
     var completion: (() -> Void)
     
     var body: some View {
@@ -280,12 +338,12 @@ struct PeriodoDetalleMenuOptionView: View {
                 ZStack {
                     RoundedRectangle(cornerSize: CGSize(width: 24, height: 24))
                         .fill(.cyan)
-                    option.getImage()
+                    option.getImage(showCategoria: showCategories)
                         .foregroundStyle(.white)
                 }
             }
             .frame(width: 48, height: 48)
-            Text(option.getTitle())
+            Text(option.getTitle(showCategoria: showCategories))
                 .font(Font.system(size: 14))
         }
         

@@ -10,7 +10,7 @@ import SwiftUI
 
 
 
-extension Color{
+extension Color {
     public static let primaryColor: Color = Color(.primaryColor)
     public static let secondaryColor: Color = Color(.secondaryColor)
     public static let primaryColorHighlighted: Color = Color(.primaryColorHighlighted)
@@ -22,12 +22,13 @@ extension Color{
     public static let dismissColor: Color = Color(.dismissColor)
     public static let elementColor: Color = Color(.elementColor)
     public static let primaryText: Color = Color("PrimaryText", bundle: nil)
+    public static let categoryDetailBackground: Color = Color("CategoryDetailsBackground", bundle: nil)
     // CELLS
     public static let claveCellColor: Color = Color(.claveCellColor)
     public static let selectedClaveCells: Color = Color(.selectedClaveCells)
 }
 
-extension UIColor{
+extension UIColor {
     public static let primaryColor: UIColor = UIColor.init(named: "PrimaryColor")!
     public static let secondaryColor: UIColor = UIColor.init(named: "SecondaryColor")!
     public static let primaryColorHighlighted: UIColor = UIColor.init(named: "PrimaryColorHighlighted")!

@@ -13,6 +13,9 @@ struct CategoriaItem: Identifiable {
     var id: UUID = UUID()
     var category: UUID
     var value: Double
+    var numericalComparison: Double
+    var percentageComparison: Double
+    var transactions: [Transaccion]
 }
 
 extension PersistenceController {

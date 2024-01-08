@@ -92,21 +92,48 @@ struct Producto: Codable, Hashable {
         return resultado
     }
     
-    func getCategories() -> [CategoriaItem] {
+    func getCategories(forDate: Date = Date()) -> [CategoriaItem] {
         var categories: [CategoriaItem] = []
         var uniqueCategories: [UUID] = []
-        for transaction in transacciones {
+        let transaccionesInDate = transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth })
+        for transaction in transaccionesInDate {
             if !uniqueCategories.contains(where: { $0 == transaction.category}) {
                 uniqueCategories.append(transaction.category)
             }
         }
         for category in uniqueCategories {
-            let categoryTransactions = transacciones.filter({ $0.category == category })
+            let categoryTransactions = transaccionesInDate.filter({ $0.category == category })
             var valor: Double = 0
             categoryTransactions.forEach({ valor += ($0.tipo == "gasto" ? ($0.valor*(-1)) : $0.valor) })
-            categories.append(CategoriaItem(category: category, value: valor))
+            categories.append(CategoriaItem(category: category, 
+                                            value: valor,
+                                            numericalComparison: valor - mediaValueFor(category),
+                                            percentageComparison: 0,
+                                            transactions: categoryTransactions.sorted(by: { $0.valor > $1.valor })))
         }
-        return categories
+        return categories.sorted(by: { ($0.value < 0 ? ($0.value*(-1)) : $0.value) > ($1.value < 0 ? ($1.value*(-1)) : $1.value) })
+    }
+    
+    func mediaValueFor(_ category: UUID) -> Double {
+        let categoryTransactions = transacciones.filter({ $0.category == category }).sorted(by: {$0.fecha < $1.fecha})
+        if let firstCategoryTransactions = categoryTransactions.first {
+            let firstTransactionDate = firstCategoryTransactions.fecha.startOfMonth
+            let months = Calendar.current.dateComponents([.month], from: firstTransactionDate, to: Date()).month ?? 0
+            var monthValues: [Double] = []
+            for index in 0...months {
+                if let monthDate = Calendar.current.date(byAdding: .month, value: index, to: firstTransactionDate) {
+                    let monthTransactions = categoryTransactions.filter({ $0.fecha >= monthDate.startOfMonth && $0.fecha <= monthDate.endOfMonth })
+                    var valor: Double = 0
+                    monthTransactions.forEach({ valor += ($0.tipo == "gasto" ? ($0.valor*(-1)) : $0.valor) })
+                    monthValues.append(valor)
+                }
+            }
+            var totalValue: Double = 0
+            monthValues.forEach({ totalValue += $0 })
+            return totalValue/Double(monthValues.count)
+        } else {
+            return 0.0
+        }
     }
     
 }

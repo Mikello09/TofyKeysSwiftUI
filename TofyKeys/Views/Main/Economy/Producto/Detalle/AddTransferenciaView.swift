@@ -109,7 +109,7 @@ struct AddTransferenciaView: View {
                     .padding()
                 }
                 HStack {
-                    DatePicker(selection: $fecha, in: ...Date.now, displayedComponents: .date) {
+                    DatePicker(selection: $fecha, in: ...(Calendar.current.date(byAdding: .year, value: 1, to: Date.now)!), displayedComponents: .date) {
                         Text("Fecha")
                     }
                     Spacer()
