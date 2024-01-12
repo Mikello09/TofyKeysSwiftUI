@@ -127,10 +127,24 @@ struct ProductoDetalleView: View {
                             }
                         }
                     } else {
-                        
-                            List {
-                                ForEach(transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
-                                    TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
+                        ZStack {
+                            Color.gray
+                            ScrollView(.vertical) {
+                                VStack(spacing: 4) {
+                                    ForEach(transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
+                                        VStack(spacing: 0) {
+                                            NavigationLink {
+                                                TransferDetailView(categoryViewModel: categoryViewModel,
+                                                                   transfer: transaccion,
+                                                                   onEdit: onEdit,
+                                                                   onDelete: onDelete)
+                                            } label: {
+                                                TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
+                                                    .padding()
+                                            }
+                                            Divider()
+                                                .padding(.leading)
+                                        }
                                         .contextMenu {
                                             Button {
                                                 economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
@@ -142,16 +156,15 @@ struct ProductoDetalleView: View {
                                                 }
                                             }
                                         }
-                                        .overlay (
-                                            NavigationLink (destination: {
-                                                TransferDetailView(categoryViewModel: categoryViewModel,
-                                                                   transfer: transaccion,
-                                                                   onEdit: onEdit,
-                                                                   onDelete: onDelete) }
-                                                , label: {EmptyView() } ).opacity(0)
-                                        )
+                                    }
+                                }
+                                .background {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color.white)
                                 }
                             }
+                            .padding()
+                        }
                     }
                 }
             }
@@ -220,34 +233,34 @@ struct TransactionCell: View {
     var category: Category
     
     var body: some View {
-        
+        HStack {
+            Image(systemName: category.image)
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(Color.black)
+                .frame(width: 32, height: 32)
+                .aspectRatio(contentMode: .fit)
+                .padding(.trailing, 8)
             HStack {
-                Image(systemName: category.image)
-                    .frame(width: 32, height: 32)
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.trailing, 8)
-                HStack {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(transaction.titulo)
-                            .font(Font.system(size: 14, weight: .semibold))
-                            .foregroundStyle(Color.primaryColor)
-                        Text(transaction.fecha.toDayString())
-                            .font(Font.system(size: 12, weight: .regular))
-                            .foregroundStyle(Color.secondaryColor)
-                    }
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 8) {
-                        Text(transaction.valor.toCurrency())
-                            .font(Font.system(size: 14, weight: .semibold))
-                            .foregroundStyle(transaction.tipo == "ingreso" ? .green : .red)
-                        Text(category.title)
-                            .font(Font.system(size: 12, weight: .regular))
-                            .foregroundStyle(Color.secondaryColor)
-                    }
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(transaction.titulo)
+                        .font(Font.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.primaryColor)
+                    Text(transaction.fecha.toDayString())
+                        .font(Font.system(size: 12, weight: .regular))
+                        .foregroundStyle(Color.secondaryColor)
                 }
                 Spacer()
+                VStack(alignment: .trailing, spacing: 8) {
+                    Text(transaction.valor.toCurrency())
+                        .font(Font.system(size: 14, weight: .semibold))
+                        .foregroundStyle(transaction.tipo == "ingreso" ? .green : .red)
+                    Text(category.title)
+                        .font(Font.system(size: 12, weight: .regular))
+                        .foregroundStyle(Color.secondaryColor)
+                }
             }
-        
+            Spacer()
+        }
     }
 }
 // MARK: CATEGORY CELL
