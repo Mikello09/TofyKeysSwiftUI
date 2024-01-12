@@ -158,10 +158,16 @@ struct ProductoDetalleView: View {
             .navigationTitle(producto.titulo)
             .toolbar(.hidden, for: .tabBar)
             .sheet(isPresented: $addGasto, content: {
-                AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "gasto", onAdd: onAdd)
+                AddTransferenciaView(categoryViewModel: categoryViewModel, 
+                                     tipo: "gasto",
+                                     fecha: actualMonth.startOfMonth == Date().startOfMonth ? Date() : actualMonth.startOfMonth,
+                                     onAdd: onAdd)
             })
             .sheet(isPresented: $addIngreso) {
-                AddTransferenciaView(categoryViewModel: categoryViewModel, tipo: "ingreso", onAdd: onAdd)
+                AddTransferenciaView(categoryViewModel: categoryViewModel, 
+                                     tipo: "ingreso",
+                                     fecha: actualMonth.startOfMonth == Date().startOfMonth ? Date() : actualMonth.startOfMonth,
+                                     onAdd: onAdd)
             }
             .onAppear {
                 economyViewModel.getTransacciones(producto: producto, forDate: Date())
