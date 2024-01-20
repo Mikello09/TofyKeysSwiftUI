@@ -49,7 +49,13 @@ struct ProductoDetalleView: View {
     @State var addGasto: Bool = false
     @State var addIngreso: Bool = false
     
+    let OPTIONS_HEIGHT_DEFAULT: CGFloat = 84
     @State var optionsHeight: CGFloat = 84
+    
+    // SCROLL
+    @State var previousViewOffset: CGFloat = 0
+    @State var scrollOffset: CGFloat = 0
+    let minimumOffset: CGFloat = 16
     
     var body: some View {
         GeometryReader { proxy in
@@ -90,7 +96,7 @@ struct ProductoDetalleView: View {
                                 .font(Font.system(size: 10, weight: .semibold))
                         }
                     }
-                    .padding()
+                    .padding([.leading, .trailing, .top])
                 default: EmptyView()
                 }
                 
@@ -105,12 +111,13 @@ struct ProductoDetalleView: View {
                             case.ingreso: addIngreso = true
                             }
                         }
-                        .frame(width: proxy.size.width/4)
+                        .frame(width: proxy.size.width/4*(optionsHeight/OPTIONS_HEIGHT_DEFAULT))
+                        .opacity(optionsHeight/OPTIONS_HEIGHT_DEFAULT)
                         
                     }
                 }
                 .frame(height: optionsHeight)
-                .padding([.top, .bottom])
+                .padding([.top, .bottom], 16*(optionsHeight/OPTIONS_HEIGHT_DEFAULT))
                 
                 if transacciones.isEmpty {
                     VStack {
@@ -119,18 +126,11 @@ struct ProductoDetalleView: View {
                         Spacer()
                     }
                 } else {
-                    if showCategories {
-                        List {
-                            ForEach(producto.getCategories(forDate: actualMonth)) { categoryItem in
-                                let category = categoryViewModel.getCategory(id: categoryItem.category)
-                                CategoryCell(item: categoryItem, category: category)
-                            }
-                        }
-                    } else {
-                        ZStack {
-                            Color.gray
-                            ScrollView(.vertical) {
-                                VStack(spacing: 4) {
+                    ZStack {
+                        Color.gray.opacity(0.5)
+                        ScrollView(.vertical) {
+                            VStack(spacing: 4) {
+                                if !showCategories {
                                     ForEach(transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
                                         VStack(spacing: 0) {
                                             NavigationLink {
@@ -157,14 +157,46 @@ struct ProductoDetalleView: View {
                                             }
                                         }
                                     }
-                                }
-                                .background {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(Color.white)
+                                } else {
+                                    ForEach(producto.getCategories(forDate: actualMonth)) { categoryItem in
+                                        VStack(spacing: 0) {
+                                            let category = categoryViewModel.getCategory(id: categoryItem.category)
+                                            CategoryCell(item: categoryItem, category: category)
+                                                .padding()
+                                            Divider()
+                                                .padding(.leading)
+                                        }
+                                    }
                                 }
                             }
-                            .padding()
+                            .background {
+                                GeometryReader {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(Color.white)
+                                        .preference(key: ViewOffsetKey.self, value: -$0.frame(in: .named("scroll")).origin.y)
+                                }
+                            }
+                            .onPreferenceChange(ViewOffsetKey.self) { scrollValue in
+                                let offsetDifference: CGFloat = abs(self.previousViewOffset - scrollValue)
+
+                                if scrollValue >= 0 {
+                                    if self.previousViewOffset > scrollValue {
+                                        print("Is scrolling up toward top: \(scrollValue)")
+                                        calculateOptionsHeight(true)
+                                    } else {
+                                        print("Is scrolling down toward bottom: \(scrollValue)")
+                                        calculateOptionsHeight(false)
+                                    }
+                                }
+                                
+                                if offsetDifference > minimumOffset { // This condition is optional but the scroll direction is often too sensitive without a minimum offset.
+                                    previousViewOffset = scrollValue
+                                    scrollOffset = scrollValue
+                                }
+                            }
                         }
+                        .padding()
+                        .coordinateSpace(name: "scroll")
                     }
                 }
             }
@@ -215,6 +247,26 @@ struct ProductoDetalleView: View {
     
     func onDelete(transaccion: Transaccion) {
         economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
+    }
+    
+    func calculateOptionsHeight(_ goingUp: Bool) {
+        if goingUp {
+            if optionsHeight != OPTIONS_HEIGHT_DEFAULT {
+                withAnimation {
+                    optionsHeight = OPTIONS_HEIGHT_DEFAULT
+                }
+            }
+        } else {
+            if optionsHeight != 0 {
+                withAnimation {
+                    optionsHeight = 0
+                }
+            }
+        }
+//        var newHeight = OPTIONS_HEIGHT_DEFAULT - (scrollOffset*0.4)
+//        if newHeight <= 0 { newHeight = 0 }
+//        if newHeight >= 84 { newHeight = OPTIONS_HEIGHT_DEFAULT }
+//        optionsHeight = newHeight
     }
 }
 
@@ -366,5 +418,13 @@ struct PeriodoDetalleMenuOptionView: View {
                 .font(Font.system(size: 14))
         }
         
+    }
+}
+
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }
