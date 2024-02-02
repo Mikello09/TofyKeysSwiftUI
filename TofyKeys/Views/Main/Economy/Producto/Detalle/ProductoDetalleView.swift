@@ -48,19 +48,17 @@ struct ProductoDetalleView: View {
     @State var showCategories: Bool = false
     @State var addGasto: Bool = false
     @State var addIngreso: Bool = false
+    @State var detailedCategories: [Category] = []
     
     let OPTIONS_HEIGHT_DEFAULT: CGFloat = 84
     @State var optionsHeight: CGFloat = 84
     
     // SCROLL
-    @State var previousViewOffset: CGFloat = 0
-    @State var scrollOffset: CGFloat = 0
-    let minimumOffset: CGFloat = 16
+    @State var optionsVisible: Bool = true
     
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                
                 switch producto.tipo {
                 case TipoProducto.contabilidad.rawValue:
                     HStack {
@@ -99,26 +97,23 @@ struct ProductoDetalleView: View {
                     .padding([.leading, .trailing, .top])
                 default: EmptyView()
                 }
-                
-                HStack(spacing: 0) {
-                    ForEach(PeriodoDetalleMenuOption.allCases) { option in
-                    
-                        PeriodoDetalleMenuOptionView(option: option, showCategories: $showCategories) {
-                            switch option {
-                            case .estadistica: ()
-                            case .categorias: showCategories.toggle()
-                            case .gasto: addGasto = true
-                            case.ingreso: addIngreso = true
-                            }
+                if !optionsVisible {
+                    HStack {
+                        ZStack {
+                            RoundedRectangle(cornerSize: CGSize(width: 16, height: 16))
+                                .fill(.cyan)
+                            PeriodoDetalleMenuOption.categorias.getImage(showCategoria: showCategories)
+                                .foregroundStyle(.white)
                         }
-                        .frame(width: proxy.size.width/4*(optionsHeight/OPTIONS_HEIGHT_DEFAULT))
-                        .opacity(optionsHeight/OPTIONS_HEIGHT_DEFAULT)
-                        
+                        .frame(width: 32, height: 32)
+                        Text(PeriodoDetalleMenuOption.categorias.getTitle(showCategoria: showCategories))
+                            .font(Font.system(size: 14, weight: .bold))
+                            .foregroundStyle(Color.black)
+                        Spacer()
                     }
+                    .padding([.leading, .trailing])
+                    .padding([.top, .bottom], 8)
                 }
-                .frame(height: optionsHeight)
-                .padding([.top, .bottom], 16*(optionsHeight/OPTIONS_HEIGHT_DEFAULT))
-                
                 if transacciones.isEmpty {
                     VStack {
                         Spacer()
@@ -127,75 +122,88 @@ struct ProductoDetalleView: View {
                     }
                 } else {
                     ZStack {
-                        Color.gray.opacity(0.5)
                         ScrollView(.vertical) {
                             VStack(spacing: 4) {
-                                if !showCategories {
-                                    ForEach(transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
-                                        VStack(spacing: 0) {
-                                            NavigationLink {
-                                                TransferDetailView(categoryViewModel: categoryViewModel,
-                                                                   transfer: transaccion,
-                                                                   onEdit: onEdit,
-                                                                   onDelete: onDelete)
-                                            } label: {
-                                                TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
-                                                    .padding()
+                                HStack(spacing: 0) {
+                                    ForEach(PeriodoDetalleMenuOption.allCases) { option in
+                                    
+                                        PeriodoDetalleMenuOptionView(option: option, showCategories: $showCategories) {
+                                            switch option {
+                                            case .estadistica: ()
+                                            case .categorias: showCategories.toggle()
+                                            case .gasto: addGasto = true
+                                            case.ingreso: addIngreso = true
                                             }
-                                            Divider()
-                                                .padding(.leading)
                                         }
-                                        .contextMenu {
-                                            Button {
-                                                economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
-                                            } label: {
-                                                HStack {
-                                                    Text("Eliminar")
-                                                    Spacer()
-                                                    Image(systemName: "trash.fill")
+                                        .frame(width: proxy.size.width/4)
+                                        
+                                    }
+                                }
+                                .frame(height: optionsHeight)
+                                //.padding(.bottom)
+                                VStack {
+                                    ZStack {
+                                        Color.gray.opacity(0.5)
+                                        VStack {
+                                            if !showCategories {
+                                                ForEach(transacciones.sorted(by: { $0.fecha > $1.fecha })) { transaccion in
+                                                    VStack(spacing: 0) {
+                                                        NavigationLink {
+                                                            TransferDetailView(categoryViewModel: categoryViewModel,
+                                                                               transfer: transaccion,
+                                                                               onEdit: onEdit,
+                                                                               onDelete: onDelete)
+                                                        } label: {
+                                                            TransactionCell(transaction: transaccion, category: categoryViewModel.getCategory(id: transaccion.category))
+                                                                .padding()
+                                                        }
+                                                        Divider()
+                                                            .padding(.leading)
+                                                    }
+                                                    .contextMenu {
+                                                        Button {
+                                                            economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
+                                                        } label: {
+                                                            HStack {
+                                                                Text("Eliminar")
+                                                                Spacer()
+                                                                Image(systemName: "trash.fill")
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                                ForEach(producto.getCategories(forDate: actualMonth)) { categoryItem in
+                                                    VStack(spacing: 0) {
+                                                        let category = categoryViewModel.getCategory(id: categoryItem.category)
+                                                        CategoryCell(item: categoryItem, category: category, detailedCategories: $detailedCategories)
+                                                            .padding()
+                                                        Divider()
+                                                            .padding(.leading)
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
-                                } else {
-                                    ForEach(producto.getCategories(forDate: actualMonth)) { categoryItem in
-                                        VStack(spacing: 0) {
-                                            let category = categoryViewModel.getCategory(id: categoryItem.category)
-                                            CategoryCell(item: categoryItem, category: category)
-                                                .padding()
-                                            Divider()
-                                                .padding(.leading)
-                                        }
+                                        .background { RoundedRectangle(cornerRadius: 8).fill(Color.white) }
+                                        .padding()
                                     }
                                 }
                             }
                             .background {
-                                GeometryReader {
+                                GeometryReader { proxy in
                                     RoundedRectangle(cornerRadius: 8)
                                         .fill(Color.white)
-                                        .preference(key: ViewOffsetKey.self, value: -$0.frame(in: .named("scroll")).origin.y)
+                                        .preference(key: ViewOffsetKey.self, value: -proxy.frame(in: .named("scroll")).origin.y)
                                 }
                             }
                             .onPreferenceChange(ViewOffsetKey.self) { scrollValue in
-                                let offsetDifference: CGFloat = abs(self.previousViewOffset - scrollValue)
-
-                                if scrollValue >= 0 {
-                                    if self.previousViewOffset > scrollValue {
-                                        print("Is scrolling up toward top: \(scrollValue)")
-                                        calculateOptionsHeight(true)
-                                    } else {
-                                        print("Is scrolling down toward bottom: \(scrollValue)")
-                                        calculateOptionsHeight(false)
-                                    }
-                                }
-                                
-                                if offsetDifference > minimumOffset { // This condition is optional but the scroll direction is often too sensitive without a minimum offset.
-                                    previousViewOffset = scrollValue
-                                    scrollOffset = scrollValue
+                                if scrollValue > OPTIONS_HEIGHT_DEFAULT {
+                                    withAnimation { optionsVisible = false }
+                                } else {
+                                    withAnimation { optionsVisible = true }
                                 }
                             }
                         }
-                        .padding()
                         .coordinateSpace(name: "scroll")
                     }
                 }
@@ -247,26 +255,6 @@ struct ProductoDetalleView: View {
     
     func onDelete(transaccion: Transaccion) {
         economyViewModel.deletePeriodoTransaction(transactionID: transaccion.id, periodo: producto)
-    }
-    
-    func calculateOptionsHeight(_ goingUp: Bool) {
-        if goingUp {
-            if optionsHeight != OPTIONS_HEIGHT_DEFAULT {
-                withAnimation {
-                    optionsHeight = OPTIONS_HEIGHT_DEFAULT
-                }
-            }
-        } else {
-            if optionsHeight != 0 {
-                withAnimation {
-                    optionsHeight = 0
-                }
-            }
-        }
-//        var newHeight = OPTIONS_HEIGHT_DEFAULT - (scrollOffset*0.4)
-//        if newHeight <= 0 { newHeight = 0 }
-//        if newHeight >= 84 { newHeight = OPTIONS_HEIGHT_DEFAULT }
-//        optionsHeight = newHeight
     }
 }
 
@@ -320,73 +308,78 @@ struct CategoryCell: View {
     
     var item: CategoriaItem
     var category: Category
-    
-    @State var showDetails: Bool = false
+    @Binding var detailedCategories: [Category]
     
     var body: some View {
         VStack {
             Button {
-                showDetails.toggle()
-            } label: {
-                HStack {
-                    Image(systemName: category.image)
-                        .frame(width: 32, height: 32)
-                        .foregroundStyle(Color.blackTofy)
-                        .aspectRatio(contentMode: .fit)
-                        .padding(.trailing, 8)
-                    Text(category.title)
-                        .font(Font.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.primaryColor)
-                    Spacer()
-                    VStack(alignment: .trailing, spacing: 8) {
-                        Text(item.value.toCurrency())
-                            .font(Font.system(size: 14, weight: .semibold))
-                            .foregroundStyle(item.value >= 0 ? .green : .red)
-                        HStack {
-                            if item.numericalComparison > 0 {
-                                Image(systemName: "arrowtriangle.up.fill")
-                                    .foregroundStyle(.green)
-                            } else if item.numericalComparison == 0 {
-                                Image(systemName: "equal")
-                                    .foregroundStyle(.gray)
-                            } else {
-                                Image(systemName: "arrowtriangle.down.fill")
-                                    .foregroundStyle(.red)
-                            }
-                            Text("\(item.numericalComparison.roundedTo2Decimals())")
-                                .font(Font.system(size: 14, weight: .semibold))
-                                .foregroundStyle(item.numericalComparison >= 0 ? .green : .red)
-                        }
-                    }
+                if detailedCategories.contains(where: {$0.id == category.id}) {
+                    detailedCategories.removeAll(where: {$0.id == category.id})
+                } else {
+                    detailedCategories.append(category)
                 }
-                if showDetails {
-                    VStack(spacing: 16) {
-                        ForEach(item.transactions) { transaction in
+            } label: {
+                VStack {
+                    HStack {
+                        Image(systemName: category.image)
+                            .frame(width: 32, height: 32)
+                            .foregroundStyle(Color.blackTofy)
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.trailing, 8)
+                        Text(category.title)
+                            .font(Font.system(size: 14, weight: .semibold))
+                            .foregroundStyle(Color.primaryColor)
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 8) {
+                            Text(item.value.toCurrency())
+                                .font(Font.system(size: 14, weight: .semibold))
+                                .foregroundStyle(item.value >= 0 ? .green : .red)
                             HStack {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text(transaction.titulo)
-                                        .font(Font.system(size: 14, weight: .semibold))
-                                        .foregroundStyle(Color.primaryColor)
+                                if item.numericalComparison > 0 {
+                                    Image(systemName: "arrowtriangle.up.fill")
+                                        .foregroundStyle(.green)
+                                } else if item.numericalComparison == 0 {
+                                    Image(systemName: "equal")
+                                        .foregroundStyle(.gray)
+                                } else {
+                                    Image(systemName: "arrowtriangle.down.fill")
+                                        .foregroundStyle(.red)
                                 }
-                                Spacer()
-                                VStack(alignment: .trailing, spacing: 8) {
-                                    Text(transaction.valor.toCurrency())
-                                        .font(Font.system(size: 14, weight: .semibold))
-                                        .foregroundStyle(transaction.tipo == "ingreso" ? .green : .red)
-                                    Text(transaction.fecha.toDayString())
-                                        .font(Font.system(size: 12, weight: .regular))
-                                        .foregroundStyle(Color.secondaryColor)
-                                }
-                            }
-                            if transaction != item.transactions.last {
-                                Divider()
+                                Text("\(item.numericalComparison.roundedTo2Decimals())")
+                                    .font(Font.system(size: 14, weight: .semibold))
+                                    .foregroundStyle(item.numericalComparison >= 0 ? .green : .red)
                             }
                         }
                     }
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.categoryDetailBackground)
+                    if detailedCategories.contains(where: {$0.id == category.id}) {
+                        VStack(spacing: 16) {
+                            ForEach(item.transactions) { transaction in
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text(transaction.titulo)
+                                            .font(Font.system(size: 14, weight: .semibold))
+                                            .foregroundStyle(Color.primaryColor)
+                                    }
+                                    Spacer()
+                                    VStack(alignment: .trailing, spacing: 8) {
+                                        Text(transaction.valor.toCurrency())
+                                            .font(Font.system(size: 14, weight: .semibold))
+                                            .foregroundStyle(transaction.tipo == "ingreso" ? .green : .red)
+                                        Text(transaction.fecha.toDayString())
+                                            .font(Font.system(size: 12, weight: .regular))
+                                            .foregroundStyle(Color.secondaryColor)
+                                    }
+                                }
+                                if transaction != item.transactions.last {
+                                    Divider()
+                                }
+                            }
+                        }
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color.categoryDetailBackground)
+                        }
                     }
                 }
             }
