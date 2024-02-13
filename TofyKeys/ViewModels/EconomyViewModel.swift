@@ -45,7 +45,7 @@ class EconomyViewModel: NSObject, ObservableObject {
             transaciones = producto.transacciones
         }
     }
-    
+    // MARK: ADD PRODUCTO
     func addProducto(titulo: String, tipo: TipoProducto, valorInicial: String) {
         PersistenceController.shared.addProducto(producto: Producto(id: UUID(),
                                                                     titulo: titulo,
@@ -53,9 +53,9 @@ class EconomyViewModel: NSObject, ObservableObject {
                                                                     transacciones: [],
                                                                     tipo: tipo.rawValue,
                                                                     accion: "",
-                                                                    valorInicial: Double(valorInicial) ?? 0))
+                                                                    valorInicial: (valorInicial.replacingOccurrences(of: ",", with: ".") as NSString).doubleValue))
     }
-    
+    // MARK: ADD TRANSACTION
     func addTransaction(periodo: Producto, titulo: String, tipo: String, valor: Double, category: UUID, observacion: String, fecha: Date) {
         PersistenceController.shared.addTransactionToPeriodoActual(allPeriodos: dbProductos,
                                                                    periodo: periodo,
@@ -83,6 +83,12 @@ class EconomyViewModel: NSObject, ObservableObject {
             try? periodoController.performFetch()
             dbProductos = periodoController.fetchedObjects ?? []
             productos = dbProductos.compactMap( {Producto.parseProductoDB($0) })
+        }
+    }
+    
+    func deleteProduct(producto: Producto) {
+        if let productoDB = dbProductos.first(where: { $0.id == producto.id }) {
+            PersistenceController.shared.deleteProducto(producto: productoDB)
         }
     }
 }

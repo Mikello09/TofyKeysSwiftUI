@@ -38,7 +38,8 @@ struct TofyKeysApp: App {
         self._categoryViewModel = StateObject(wrappedValue: categoryViewModel)
         
         // UI
-        UITabBar.appearance().backgroundColor = .white
+        //UITabBar.appearance().backgroundColor = .red
+        UINavigationBar.appearance().shadowImage = UIImage()
       }
     
     var body: some Scene {
@@ -48,7 +49,7 @@ struct TofyKeysApp: App {
                            economyViewModel: economyViewModel,
                            categoryViewModel: categoryViewModel)
         }
-        .onChange(of: scenePhase) { _ in // App to background
+        .onChange(of: scenePhase) { // App to background
             persistenceController.save()
         }
     }

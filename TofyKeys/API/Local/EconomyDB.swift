@@ -25,6 +25,10 @@ extension PersistenceController {
         
     }
     
+    func deleteProducto(producto: ProductoDB) {
+        container.viewContext.delete(producto)
+    }
+    
     func addTransactionToPeriodoActual(allPeriodos: [ProductoDB], periodo: Producto, transaction: Transaccion) {
         
         let transaccionDB = TransaccionDB(context: container.viewContext)

@@ -17,14 +17,17 @@ struct MainTabBarView: View {
     
     var body: some View {
         TabView {
-            RecordarView(claveViewModel: claveViewModel)
-                .tabItem {
-                    Label("Recordar", systemImage: "key.fill")
-                }
-            EconomyLandingView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel)
-                .tabItem {
-                    Label("Economy", systemImage: "dollarsign.circle.fill")
-                }
+            Group {
+                RecordarView(claveViewModel: claveViewModel)
+                    .tabItem {
+                        Label("Recordar", systemImage: "key.fill")
+                    }
+                EconomyLanding(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel)
+                    .tabItem {
+                        Label("Economy", systemImage: "dollarsign.circle.fill")
+                    }
+            }
+            .toolbarColorScheme(.dark, for: .tabBar)
         }
     }
 }

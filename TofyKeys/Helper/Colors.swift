@@ -23,6 +23,7 @@ extension Color {
     public static let elementColor: Color = Color(.elementColor)
     public static let primaryText: Color = Color("PrimaryText", bundle: nil)
     public static let categoryDetailBackground: Color = Color("CategoryDetailsBackground", bundle: nil)
+    public static let generalBackground: Color = Color("GeneralBackground", bundle: nil)
     // CELLS
     public static let claveCellColor: Color = Color(.claveCellColor)
     public static let selectedClaveCells: Color = Color(.selectedClaveCells)

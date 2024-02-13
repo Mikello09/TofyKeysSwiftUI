@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct EconomyLandingView: View {
+struct EconomyLanding: View {
     
     @ObservedObject var economyViewModel: EconomyViewModel
     @ObservedObject var categoryViewModel: TransactionCategoryViewModel
@@ -25,8 +25,8 @@ struct EconomyLandingView: View {
     @State var showPeriodoDetalle: Bool = false
     
     var body: some View {
-        GeometryReader { proxy in
-            TofyNavigation {
+        TofyNavigation {
+            GeometryReader { proxy in
                 ZStack {
                     if productos.isEmpty {
                         EconomyEmptyState(geometry: proxy) { producto in
@@ -43,7 +43,7 @@ struct EconomyLandingView: View {
                                 VStack {
                                     ForEach(productos.filter({ $0.tipo == TipoProducto.contabilidad.rawValue }), id: \.self) { producto in
                                         NavigationLink {
-                                            ProductoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, producto: producto)
+                                            ProductoView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, producto: producto)
                                         } label: {
                                             ContabilidadView(producto: producto,
                                                          addIngresoGasto: $addIngresoGasto,
@@ -51,81 +51,34 @@ struct EconomyLandingView: View {
                                         }
                                     }
                                     .padding()
-                                    VStack {
-                                        if self.productos.isEmpty {
-                                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible())], spacing: 8) {
-                                                ForEach(self.productosVacios, id: \.self) { producto in
-                                                    switch producto {
-                                                    case .cuenta:
-                                                        VStack {
-                                                            Spacer()
-                                                            CuentaView(cuenta: nil)
-                                                                .frame(width: proxy.size.width/2 - 32, height: proxy.size.width/2 - 32)
-                                                                .overlay {
-                                                                    RoundedRectangle(cornerRadius: 8)
-                                                                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10]))
-                                                                }
-                                                            Spacer()
-                                                        }
-                                                        .onTapGesture {
-                                                            addCuentaSheet = true
-                                                        }
-                                                    case .gastos:
-                                                        VStack {
-                                                            Spacer()
-                                                            GastoView(gasto: nil)
-                                                                .frame(width: proxy.size.width/2 - 32, height: proxy.size.width/2 - 32)
-                                                                .overlay {
-                                                                    RoundedRectangle(cornerRadius: 8)
-                                                                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10]))
-                                                                }
-                                                            Spacer()
-                                                        }
-                                                        .onTapGesture {
-                                                            addGastosSheet = true
-                                                        }
-                                                    case .presupuesto:
-                                                        VStack {
-                                                            Spacer()
-                                                            PresupuestView(presupuesto: nil)
-                                                                .frame(width: proxy.size.width/2 - 32, height: proxy.size.width/2 - 32)
-                                                                .overlay {
-                                                                    RoundedRectangle(cornerRadius: 8)
-                                                                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [10]))
-                                                                }
-                                                            Spacer()
-                                                        }
-                                                        .onTapGesture {
-                                                            addPresupuestoSheet = true
-                                                        }
-                                                    default:
-                                                        EmptyView()
-                                                    }
+                                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible())], spacing: 8) {
+                                        ForEach(self.productos.filter({ $0.tipo != TipoProducto.contabilidad.rawValue }), id: \.self) { producto in
+                                            if producto.tipo == TipoProducto.cuenta.rawValue {
+                                                NavigationLink {
+                                                    ProductoView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, producto: producto)
+                                                } label: {
+                                                    CuentaView(cuenta: producto)
+                                                        .frame(width: proxy.size.width > 0 ? proxy.size.width/2 - 32 : 0,
+                                                               height: proxy.size.width > 0 ? proxy.size.width/2 - 32 : 0)
                                                 }
-                                            }
-                                            .padding()
-                                        } else {
-                                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible())], spacing: 8) {
-                                                ForEach(self.productos.filter({ $0.tipo != TipoProducto.contabilidad.rawValue }), id: \.self) { producto in
-                                                    if producto.tipo == TipoProducto.cuenta.rawValue {
-                                                        NavigationLink {
-                                                            ProductoDetalleView(economyViewModel: economyViewModel, categoryViewModel: categoryViewModel, producto: producto)
-                                                        } label: {
-                                                            CuentaView(cuenta: producto)
-                                                                .frame(width: proxy.size.width/2 - 32,
-                                                                       height: proxy.size.width/2 - 32)
+                                                .contextMenu {
+                                                    Button {
+                                                        economyViewModel.deleteProduct(producto: producto)
+                                                    } label: {
+                                                        HStack {
+                                                            Image(systemName: "trash")
+                                                            Spacer()
+                                                            Text("Borrar")
                                                         }
+                                                    }
 
-                                                        
-                                                        
-                                                    } else {
-                                                        Text(producto.tipo)
-                                                    }
                                                 }
+                                            } else {
+                                                Text(producto.tipo)
                                             }
-                                            .padding()
                                         }
                                     }
+                                    .padding()
                                 }
                             }
                         }
@@ -170,7 +123,7 @@ struct EconomyLandingView: View {
 }
 
 // MARK: ADD ACTIONS
-extension EconomyLandingView {
+extension EconomyLanding {
     func onAddPeriodo(titulo: String, tipo: TipoProducto, valorInicial: String) {
         addContabilidadSheet = false
         addCuentaSheet = false
@@ -239,51 +192,6 @@ struct EconomyEmptyState: View {
         .padding([.leading, .trailing])
     }
 }
-// MARK: CUENTA VIEW
-struct CuentaView: View {
-    
-    var cuenta: Producto?
-    
-    var body: some View {
-        if let cuenta {
-            VStack(spacing: 16) {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Text(cuenta.titulo)
-                        .foregroundStyle(.black)
-                        .padding([.leading, .trailing], 24)
-                    Spacer()
-                }
-                HStack {
-                    Spacer()
-                    Text(cuenta.getIngresosGastosDifference().toCurrency())
-                        .padding([.leading, .trailing], 24)
-                    Spacer()
-                }
-                Spacer()
-            }
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(radius: 4)
-        } else {
-            VStack(spacing: 16) {
-                Spacer()
-                Image(systemName: "banknote")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 32, height: 32)
-                Text("Añade una cuenta")
-                    .multilineTextAlignment(.center)
-                    .lineLimit(3)
-                    .padding([.leading, .trailing], 24)
-                Spacer()
-            }
-            
-        }
-    }
-}
-
 // MARK: GASTO VIEW
 struct GastoView: View {
     
@@ -315,7 +223,7 @@ struct GastoView: View {
         }
     }
 }
-
+// MARK: PRESUPUESTO VIEW
 struct PresupuestView: View {
     
     var presupuesto: Producto?

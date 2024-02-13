@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TransferDetailView: View {
+struct TransferDetail: View {
     
     enum TextFields: Hashable {
         case titulo

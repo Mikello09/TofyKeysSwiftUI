@@ -89,7 +89,7 @@ struct Producto: Codable, Hashable {
     func getIngresosGastosDifference(forDate: Date = Date()) -> Double {
         var resultado:Double = 0
         transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth }).forEach({ resultado += ($0.tipo == "gasto" ? ($0.valor*(-1)) : $0.valor) })
-        return resultado
+        return valorInicial + resultado
     }
     
     func getCategories(forDate: Date = Date()) -> [CategoriaItem] {

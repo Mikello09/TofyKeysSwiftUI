@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddTransferenciaView: View {
+struct AddTransferencia: View {
     
     @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
