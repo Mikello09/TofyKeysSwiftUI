@@ -82,11 +82,23 @@ struct ProductoView: View {
                                 ScrollView(.vertical) {
                                     VStack(spacing: 4) {
                                         HStack(spacing: 0) {
+                                            NavigationLink {
+                                                Estadisticas()
+                                            } label: {
+                                                ZStack {
+                                                    Color.cyan
+                                                    Text("Estadísticas")
+                                                        .font(Font.system(size: 16, weight: .semibold))
+                                                        .foregroundStyle(Color.white)
+                                                }
+                                                .frame(height: 48)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            }
+                                            .padding()
+                                            Spacer()
                                             ForEach(ProductoMenuOption.allCases) { option in
                                                 ProductoMenu(option: option, showCategories: $showCategories) {
                                                     switch option {
-                                                    case .estadistica: ()
-                                                    case .categorias: showCategories.toggle()
                                                     case .gasto: addGasto = true
                                                     case.ingreso: addIngreso = true
                                                     }
@@ -96,6 +108,12 @@ struct ProductoView: View {
                                         }
                                         .frame(height: optionsHeight)
                                         VStack {
+                                            Picker("", selection: $showCategories) {
+                                                Text("Transacciones").tag(false)
+                                                Text("Categorías").tag(true)
+                                            }
+                                            .pickerStyle(.segmented)
+                                            .padding()
                                             ZStack {
                                                 Color.white
                                                 VStack {
@@ -159,32 +177,6 @@ struct ProductoView: View {
                                     }
                                 }
                                 .coordinateSpace(name: "scroll")
-                            }
-                            
-                            if !optionsVisible {
-                                VStack {
-                                    VStack {
-                                        HStack {
-                                            ZStack {
-                                                RoundedRectangle(cornerSize: CGSize(width: 16, height: 16))
-                                                    .fill(.cyan)
-                                                ProductoMenuOption.categorias.getImage(showCategoria: showCategories)
-                                                    .foregroundStyle(.white)
-                                            }
-                                            .frame(width: 32, height: 32)
-                                            Text(ProductoMenuOption.categorias.getTitle(showCategoria: showCategories))
-                                                .font(Font.system(size: 14, weight: .bold))
-                                                .foregroundStyle(Color.black)
-                                            Spacer()
-                                        }
-                                        .padding(.leading)
-                                    }
-                                    .frame(height: 56)
-                                    .background { Color.generalBackground }
-                                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 16, bottomTrailingRadius: 16, topTrailingRadius: 0, style: .circular))
-                                    .padding([.leading, .trailing])
-                                    Spacer()
-                                }
                             }
                         }
                     }

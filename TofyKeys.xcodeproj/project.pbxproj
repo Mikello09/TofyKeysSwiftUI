@@ -28,6 +28,7 @@
 		97324F062A813A5600AE050F /* ProductoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97324F052A813A5600AE050F /* ProductoView.swift */; };
 		97354B3B2B11503D0024B3FF /* ContabilidadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97354B3A2B11503D0024B3FF /* ContabilidadView.swift */; };
 		973794DB2B1F09120061706C /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973794DA2B1F09120061706C /* EditCategoryView.swift */; };
+		973E993C2BB1C01900D0B802 /* Estadisticas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973E993B2BB1C01900D0B802 /* Estadisticas.swift */; };
 		974E3D1E28197C9F00C5CA1F /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 974E3D1D28197C9F00C5CA1F /* loading.json */; };
 		974E3D2128197CE700C5CA1F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 974E3D2028197CE700C5CA1F /* Lottie */; };
 		974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974E3D2228197DAE00C5CA1F /* LottieView.swift */; };
@@ -97,6 +98,7 @@
 		97324F052A813A5600AE050F /* ProductoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductoView.swift; sourceTree = "<group>"; };
 		97354B3A2B11503D0024B3FF /* ContabilidadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContabilidadView.swift; sourceTree = "<group>"; };
 		973794DA2B1F09120061706C /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
+		973E993B2BB1C01900D0B802 /* Estadisticas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Estadisticas.swift; sourceTree = "<group>"; };
 		974E3D1D28197C9F00C5CA1F /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		974E3D2228197DAE00C5CA1F /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		974E3D24281988D800C5CA1F /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -348,6 +350,14 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		973E993A2BB1BE8900D0B802 /* Estadisticas */ = {
+			isa = PBXGroup;
+			children = (
+				973E993B2BB1C01900D0B802 /* Estadisticas.swift */,
+			);
+			path = Estadisticas;
+			sourceTree = "<group>";
+		};
 		974E3D2D281C742700C5CA1F /* Register */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +436,7 @@
 		9774068029D1AFC100802B25 /* Economy */ = {
 			isa = PBXGroup;
 			children = (
+				973E993A2BB1BE8900D0B802 /* Estadisticas */,
 				97354B382B1150180024B3FF /* Landing */,
 				975C738B2A4891EE00CDB280 /* Producto */,
 				975C73812A361B4B00CDB280 /* EconomyModel.swift */,
@@ -652,6 +663,7 @@
 				970F980227F1B97800FAE05B /* TofyText.swift in Sources */,
 				974E3D3628495A3E00C5CA1F /* GlobalManager.swift in Sources */,
 				97D9E8162B767123007A2B92 /* CuentaView.swift in Sources */,
+				973E993C2BB1C01900D0B802 /* Estadisticas.swift in Sources */,
 				974E3D2728198BA000C5CA1F /* Extensions.swift in Sources */,
 				9774069029FFF5A400802B25 /* RecordarViewModel.swift in Sources */,
 				9798C7732853C8570044D11B /* ClaveCell.swift in Sources */,
