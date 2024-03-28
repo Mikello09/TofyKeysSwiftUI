@@ -16,17 +16,12 @@ struct TofyNavigation<Content: View>: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color.generalBackground.ignoresSafeArea(edges: .all)
-                content()
-                    .navigationBarTitleDisplayMode(.large)
-                    .toolbarBackground(Color.generalBackground, for: .navigationBar)
-                    .toolbarBackground(.visible, for: .navigationBar)
-                    .toolbarBackground(Color.generalBackground, for: .tabBar)
-//                    .toolbarBackground(.visible, for: .tabBar)
-                    .toolbar(tabBarVisibility ? .visible : .hidden, for: .tabBar)
-            }
-            .navigationTitle("Tofy")
+            content()
+                .background {
+                    Color.generalBackground.ignoresSafeArea(edges: .all)
+                }
+                .toolbarBackground(Color.generalBackground, for: .navigationBar)
+                .toolbarBackground(Color.generalBackground, for: .tabBar)
         }
     }
     

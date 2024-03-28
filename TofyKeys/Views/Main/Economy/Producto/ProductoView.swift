@@ -22,12 +22,6 @@ struct ProductoView: View {
     @State var addIngreso: Bool = false
     @State var detailedCategories: [Category] = []
     
-    let OPTIONS_HEIGHT_DEFAULT: CGFloat = 84
-    @State var optionsHeight: CGFloat = 84
-    
-    // SCROLL
-    @State var optionsVisible: Bool = true
-    
     var body: some View {
         TofyNavigation(tabBarVisibility: false) {
             ZStack {
@@ -70,43 +64,44 @@ struct ProductoView: View {
                         .padding([.leading, .trailing, .top])
                     default: EmptyView()
                     }
-                    if transacciones.isEmpty {
+                    GeometryReader { proxy in
                         VStack {
-                            Spacer()
-                            Text("No hay movimientos")
-                            Spacer()
-                        }
-                    } else {
-                        ZStack {
-                            GeometryReader { proxy in
+                            HStack(spacing: 0) {
+                                NavigationLink {
+                                    Estadisticas()
+                                } label: {
+                                    ZStack {
+                                        Color.cyan
+                                        Text("Estadísticas")
+                                            .font(Font.system(size: 16, weight: .semibold))
+                                            .foregroundStyle(Color.white)
+                                    }
+                                    .frame(height: 48)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                }
+                                .padding()
+                                Spacer()
+                                ForEach(ProductoMenuOption.allCases) { option in
+                                    ProductoMenu(option: option, showCategories: $showCategories) {
+                                        switch option {
+                                        case .gasto: addGasto = true
+                                        case.ingreso: addIngreso = true
+                                        }
+                                    }
+                                    .frame(width: proxy.size.width/4)
+                                }
+                            }
+                            .frame(height: 84)
+                            if transacciones.isEmpty {
+                                VStack {
+                                    Spacer()
+                                    Text("No hay movimientos")
+                                        .frame(maxWidth: .infinity, alignment: .center)
+                                    Spacer()
+                                }
+                            } else {
                                 ScrollView(.vertical) {
                                     VStack(spacing: 4) {
-                                        HStack(spacing: 0) {
-                                            NavigationLink {
-                                                Estadisticas()
-                                            } label: {
-                                                ZStack {
-                                                    Color.cyan
-                                                    Text("Estadísticas")
-                                                        .font(Font.system(size: 16, weight: .semibold))
-                                                        .foregroundStyle(Color.white)
-                                                }
-                                                .frame(height: 48)
-                                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                            }
-                                            .padding()
-                                            Spacer()
-                                            ForEach(ProductoMenuOption.allCases) { option in
-                                                ProductoMenu(option: option, showCategories: $showCategories) {
-                                                    switch option {
-                                                    case .gasto: addGasto = true
-                                                    case.ingreso: addIngreso = true
-                                                    }
-                                                }
-                                                .frame(width: proxy.size.width/4)
-                                            }
-                                        }
-                                        .frame(height: optionsHeight)
                                         VStack {
                                             Picker("", selection: $showCategories) {
                                                 Text("Transacciones").tag(false)
@@ -161,20 +156,6 @@ struct ProductoView: View {
                                             .padding([.leading, .trailing])
                                         }
                                     }
-                                    .background {
-                                        GeometryReader { proxy in
-                                            RoundedRectangle(cornerRadius: 8)
-                                                .fill(Color.generalBackground)
-                                                .preference(key: ViewOffsetKey.self, value: -proxy.frame(in: .named("scroll")).origin.y)
-                                        }
-                                    }
-                                    .onPreferenceChange(ViewOffsetKey.self) { scrollValue in
-                                        if scrollValue > OPTIONS_HEIGHT_DEFAULT {
-                                            withAnimation { optionsVisible = false }
-                                        } else {
-                                            optionsVisible = true
-                                        }
-                                    }
                                 }
                                 .coordinateSpace(name: "scroll")
                             }
@@ -184,10 +165,6 @@ struct ProductoView: View {
             }
             .navigationTitle(producto.titulo)
             .toolbar(.hidden, for: .tabBar)
-            .navigationBarTitleDisplayMode(.large)
-            .toolbarBackground(Color.generalBackground, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
-
         }
         .sheet(isPresented: $addGasto, content: {
             AddTransferencia(categoryViewModel: categoryViewModel,

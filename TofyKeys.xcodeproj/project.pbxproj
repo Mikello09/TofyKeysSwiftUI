@@ -135,7 +135,6 @@
 		9798C7742857766A0044D11B /* ShowClaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowClaveView.swift; sourceTree = "<group>"; };
 		97999AF32A111CF600482E6D /* ParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingView.swift; sourceTree = "<group>"; };
 		97999AF52A111D8000482E6D /* AddParkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParkingView.swift; sourceTree = "<group>"; };
-		97999AF92A112BDD00482E6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		979B9398295AF7740034827D /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		97BFA28D2A7A913F00022312 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
@@ -161,7 +160,6 @@
 		970F97DE27F1B1B700FAE05B = {
 			isa = PBXGroup;
 			children = (
-				97999AF92A112BDD00482E6D /* Info.plist */,
 				970F97E927F1B1B700FAE05B /* TofyKeys */,
 				970F97E827F1B1B700FAE05B /* Products */,
 			);
@@ -179,8 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				97087D022A94EA18008A13A3 /* TofyKeysDebug.entitlements */,
-				97BFA28C2A7A913300022312 /* User */,
 				977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */,
+				97BFA28C2A7A913300022312 /* User */,
 				977F493E280DA85800DE9BEC /* Resources */,
 				970F980327F1BEEF00FAE05B /* API */,
 				970F980827F1C02D00FAE05B /* Views */,
@@ -839,8 +837,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"TofyKeys/Preview Content\"";
 				DEVELOPMENT_TEAM = FR47VZSJ37;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = /Users/mikel/Documents/Proyectos/TofyKeys_iOS/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = Tofy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -875,8 +873,8 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = M63K3782TK;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = /Users/mikel/Documents/Proyectos/TofyKeys_iOS/Info.plist;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_CFBundleDisplayName = Tofy;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

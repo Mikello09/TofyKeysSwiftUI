@@ -38,8 +38,7 @@ struct TofyKeysApp: App {
         self._categoryViewModel = StateObject(wrappedValue: categoryViewModel)
         
         // UI
-        //UITabBar.appearance().backgroundColor = .red
-        UINavigationBar.appearance().shadowImage = UIImage()
+        
       }
     
     var body: some Scene {

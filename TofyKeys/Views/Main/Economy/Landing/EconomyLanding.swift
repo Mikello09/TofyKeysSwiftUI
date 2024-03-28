@@ -109,7 +109,7 @@ struct EconomyLanding: View {
                     .font(Font.system(size: 18, weight: .semibold))
                     
                 })
-                .navigationTitle(productos.isEmpty ? "" : "Economy")
+                .navigationTitle("Economy")
             }
         }
         .onAppear {
@@ -141,55 +141,61 @@ struct EconomyEmptyState: View {
     var completion: ((TipoProducto) -> Void)
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Lleva el control de tus finanzas")
-                .font(Font.system(size: 36, weight: .bold))
-                .multilineTextAlignment(.leading)
-            Text("Empieza a añadir tus productos")
-                .font(Font.system(size: 17, weight: .semibold))
-                .padding(.top)
-            Spacer()
-            LazyVGrid(columns: [GridItem(.fixed((geometry.size.width/2) - 32)), GridItem(.fixed((geometry.size.width/2) - 32))], content: {
-                ForEach(TipoProducto.allCases, id: \.self) { producto in
-                    Button(action: {
-                        completion(producto)
-                    }, label: {
-                        VStack(spacing: 8) {
-                            producto.getImage()
-                                .resizable()
-                                .frame(width: 48, height: 48)
-                            Text(producto.getTitle())
-                                .font(Font.system(size: 21, weight: .bold))
-                                .foregroundStyle(Color.primaryText)
-                            Spacer()
-                            VStack(spacing: 0) {
-                                HStack {
-                                    Text("Ejemplo")
-                                        .font(Font.system(size: 11))
-                                        .foregroundStyle(Color.primaryText)
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text(producto.getExample())
-                                        .multilineTextAlignment(.leading)
-                                        .font(Font.system(size: 14, weight: .bold))
-                                        .foregroundStyle(Color.primaryText)
-                                    Spacer()
+        ScrollView(.vertical) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Lleva el control de tus finanzas")
+                    .font(Font.system(size: 24, weight: .bold))
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(Color.primaryColor)
+                    .padding()
+                Text("Empieza a añadir tus productos")
+                    .font(Font.system(size: 17, weight: .semibold))
+                    .foregroundStyle(Color.primaryColor)
+                    .multilineTextAlignment(.leading)
+                    .padding([.leading, .trailing, .bottom])
+                Spacer()
+                LazyVGrid(columns: [GridItem(.fixed((geometry.size.width/2) - 32)), GridItem(.fixed((geometry.size.width/2) - 32))], content: {
+                    ForEach(TipoProducto.allCases, id: \.self) { producto in
+                        Button(action: {
+                            completion(producto)
+                        }, label: {
+                            VStack(spacing: 8) {
+                                producto.getImage()
+                                    .resizable()
+                                    .frame(width: 48, height: 48)
+                                Text(producto.getTitle())
+                                    .font(Font.system(size: 21, weight: .bold))
+                                    .foregroundStyle(Color.primaryText)
+                                Spacer()
+                                VStack(spacing: 0) {
+                                    HStack {
+                                        Text("Ejemplo")
+                                            .font(Font.system(size: 11))
+                                            .foregroundStyle(Color.primaryText)
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text(producto.getExample())
+                                            .multilineTextAlignment(.leading)
+                                            .font(Font.system(size: 14, weight: .bold))
+                                            .foregroundStyle(Color.primaryText)
+                                        Spacer()
+                                    }
                                 }
                             }
-                        }
-                        .padding()
-                        .background {
-                            RoundedRectangle(cornerRadius: 8)
-                                .fill(Color.cyan)
-                        }
-                        .frame(width: (geometry.size.width/2) - 32, height: (geometry.size.width/2) + 48)
-                    })
-                }
-            })
-            Spacer()
+                            .padding()
+                            .background {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color.cyan)
+                            }
+                            .frame(width: geometry.size.width < 32 ? 0 : (geometry.size.width/2) - 32,
+                                   height: (geometry.size.width/2) + 48)
+                        })
+                    }
+                })
+                Spacer()
+            }
         }
-        .padding([.leading, .trailing])
     }
 }
 // MARK: GASTO VIEW
