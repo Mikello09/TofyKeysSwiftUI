@@ -36,7 +36,7 @@ struct ContabilidadView: View {
                         Spacer()
                         HStack {
                             Chart {
-                                BarMark(x: .value("Gngresos", "Ingresos"),
+                                BarMark(x: .value("Ingresos", "Ingresos"),
                                         y: .value("Ingresos", producto.getIngresos()),
                                 width: 56)
                                 .annotation(position: .top) {

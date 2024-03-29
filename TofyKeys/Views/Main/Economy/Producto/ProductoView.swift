@@ -68,7 +68,7 @@ struct ProductoView: View {
                         VStack {
                             HStack(spacing: 0) {
                                 NavigationLink {
-                                    Estadisticas()
+                                    Estadisticas(producto: producto, categoryViewModel: categoryViewModel)
                                 } label: {
                                     ZStack {
                                         Color.cyan

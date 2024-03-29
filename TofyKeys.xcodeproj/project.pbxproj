@@ -72,6 +72,7 @@
 		97D9E8162B767123007A2B92 /* CuentaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E8152B767123007A2B92 /* CuentaView.swift */; };
 		97D9E8192B767381007A2B92 /* ProductoMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E8182B767381007A2B92 /* ProductoMenu.swift */; };
 		97D9E81C2B76753E007A2B92 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D9E81B2B76753E007A2B92 /* CategoryCell.swift */; };
+		F206E6172BB5928700798229 /* EstadisticaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206E6162BB5928700798229 /* EstadisticaViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +144,7 @@
 		97D9E8152B767123007A2B92 /* CuentaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuentaView.swift; sourceTree = "<group>"; };
 		97D9E8182B767381007A2B92 /* ProductoMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductoMenu.swift; sourceTree = "<group>"; };
 		97D9E81B2B76753E007A2B92 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		F206E6162BB5928700798229 /* EstadisticaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadisticaViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				973E993B2BB1C01900D0B802 /* Estadisticas.swift */,
+				F206E6162BB5928700798229 /* EstadisticaViewModel.swift */,
 			);
 			path = Estadisticas;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				97999AF62A111D8000482E6D /* AddParkingView.swift in Sources */,
 				97324F062A813A5600AE050F /* ProductoView.swift in Sources */,
 				974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */,
+				F206E6172BB5928700798229 /* EstadisticaViewModel.swift in Sources */,
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */,
 				970F982D27F63F1900FAE05B /* Clave.swift in Sources */,

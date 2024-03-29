@@ -114,6 +114,16 @@ struct Producto: Codable, Hashable {
         return categories.sorted(by: { ($0.value < 0 ? ($0.value*(-1)) : $0.value) > ($1.value < 0 ? ($1.value*(-1)) : $1.value) })
     }
     
+    func getAllProductCategoryIDS() -> [UUID] {
+        var uniqueCategories: [UUID] = []
+        for transaction in transacciones {
+            if !uniqueCategories.contains(where: { $0 == transaction.category}) {
+                uniqueCategories.append(transaction.category)
+            }
+        }
+        return uniqueCategories
+    }
+    
     func mediaValueFor(_ category: UUID) -> Double {
         let categoryTransactions = transacciones.filter({ $0.category == category }).sorted(by: {$0.fecha < $1.fecha})
         if let firstCategoryTransactions = categoryTransactions.first {
@@ -157,7 +167,7 @@ struct Transaccion: Codable, Hashable, Identifiable {
                            observacion: transaccionDB.observacion ?? "")
     }
 }
-
+// MARK: CATEGORY
 struct Category: Hashable, Identifiable {
     var id: UUID
     var image: String
