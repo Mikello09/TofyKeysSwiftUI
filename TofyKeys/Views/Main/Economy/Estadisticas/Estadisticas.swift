@@ -16,6 +16,8 @@ struct Estadisticas: View {
     
     // CATEGORIES
     @State var categoriesToPlot: [CategoryToPlot] = []
+    // PLOT DATA
+    @State var plotData: [EstadisticaPlotData] = []
     
     init(producto: Producto, categoryViewModel: TransactionCategoryViewModel) {
         self.producto = producto
@@ -51,8 +53,23 @@ struct Estadisticas: View {
                 .frame(height: 96)
                 .padding([.top, .bottom])
             }
-            Chart {
-                
+            if plotData.isEmpty {
+                Text("Selecciona categoría para mostrar")
+            } else {
+                Chart {
+                    ForEach(plotData, id: \.self) { data in
+                        let dataColor = Color.random()
+                        ForEach(data.valores, id: \.self) { valor in
+                            BarMark(
+                                x: .value("Date", data.date.getMonthTitle()),
+                                y: .value(valor.title, valor.valor)
+                                      )
+                            .cornerRadius(8)
+                            .foregroundStyle(valor.color)
+                            //.position(by: .value(valor.title, valor.valor)) Para compararlos uno al lado del otro
+                        }
+                    }
+                }
             }
             Spacer()
         }
@@ -61,8 +78,11 @@ struct Estadisticas: View {
         .onAppear {
             estadisticaViewModel.getCategoriesToPlot()
         }
-        .onReceive(estadisticaViewModel.$categoriesToPlot, perform: { categories in
+        .onReceive(estadisticaViewModel.$categoriesToSelect, perform: { categories in
             categoriesToPlot = categories
         })
+        .onReceive(estadisticaViewModel.$categoriesToPlot) { plotData in
+            self.plotData = plotData
+        }
     }
 }

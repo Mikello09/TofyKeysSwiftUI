@@ -148,6 +148,16 @@ extension Color {
             self.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
         }
     }
+    
+    static func random(randomOpacity: Bool = false) -> Color {
+        Color(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1),
+            opacity: randomOpacity ? .random(in: 0...1) : 1
+        )
+    }
+
 }
 // MARK: DOUBLE
 extension Double {

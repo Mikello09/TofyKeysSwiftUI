@@ -114,6 +114,14 @@ struct Producto: Codable, Hashable {
         return categories.sorted(by: { ($0.value < 0 ? ($0.value*(-1)) : $0.value) > ($1.value < 0 ? ($1.value*(-1)) : $1.value) })
     }
     
+    func getValueForCategory(categoryID: UUID, forDate: Date) -> Double {
+        let transaccionesInDate = transacciones.filter({ $0.fecha >= forDate.startOfMonth && $0.fecha <= forDate.endOfMonth })
+        let categoryTransactions = transaccionesInDate.filter({ $0.category == categoryID })
+        var valor: Double = 0
+        categoryTransactions.forEach({ valor += $0.valor })
+        return valor
+    }
+    
     func getAllProductCategoryIDS() -> [UUID] {
         var uniqueCategories: [UUID] = []
         for transaction in transacciones {
