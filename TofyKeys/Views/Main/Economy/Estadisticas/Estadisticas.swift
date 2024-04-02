@@ -30,26 +30,44 @@ struct Estadisticas: View {
                 .font(Font.system(size: 24, weight: .semibold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             ScrollView(.horizontal) {
-                LazyHGrid(rows: [GridItem(.fixed(48)), GridItem(.fixed(48))], spacing: 24, content: {
-                    ForEach(categoriesToPlot, id: \.self) { category in
-                        HStack {
-                            Button(action: {
-                                withAnimation {
-                                    estadisticaViewModel.categorySelected(selectedCategory: category)
+                LazyHStack {
+                    ForEach(categoriesToPlot.filter({ $0.selected }), id: \.self) { category in
+                        Menu {
+                            ForEach(categoriesToPlot.filter({ !$0.selected }), id: \.self) { category in
+                                Button {
+                                    estadisticaViewModel.categorySelected(selectedCategory: category, overriding: true)
+                                } label: {
+                                    Image(systemName: category.image)
+                                    Spacer()
+                                    Text(category.title)
                                 }
-                            }, label: {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(category.selected ? Color.primaryColor : .clear)
-                                    .stroke(Color.primaryColor, lineWidth: 1)
-                                    .frame(width: 24, height: 24)
-                                    .clipShape(RoundedRectangle(cornerRadius: 4))
-                            })
-                            Text(category.title)
-                                .font(Font.system(size: 17))
-                            Spacer()
+
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: category.image)
+                                Spacer()
+                                Text(category.title)
+                            }
+                            
                         }
                     }
-                })
+                    Menu {
+                        ForEach(categoriesToPlot.filter({ !$0.selected }), id: \.self) { category in
+                            Button {
+                                estadisticaViewModel.categorySelected(selectedCategory: category)
+                            } label: {
+                                Image(systemName: category.image)
+                                Spacer()
+                                Text(category.title)
+                            }
+
+                        }
+                    } label: {
+                        Text("Categorias")
+                        
+                    }
+                }
                 .frame(height: 96)
                 .padding([.top, .bottom])
             }
