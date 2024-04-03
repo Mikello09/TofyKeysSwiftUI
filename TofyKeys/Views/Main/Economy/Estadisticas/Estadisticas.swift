@@ -33,23 +33,35 @@ struct Estadisticas: View {
                 LazyHStack {
                     ForEach(categoriesToPlot.filter({ $0.selected }), id: \.self) { category in
                         Menu {
-                            ForEach(categoriesToPlot.filter({ !$0.selected }), id: \.self) { category in
+                            ForEach(categoriesToPlot.filter({ !$0.selected }), id: \.self) { categoryToSelect in
                                 Button {
-                                    estadisticaViewModel.categorySelected(selectedCategory: category, overriding: true)
+                                    estadisticaViewModel.categorySelected(selectedCategory: categoryToSelect, categoryToOverride: category)
                                 } label: {
+                                    Image(systemName: categoryToSelect.image)
+                                    Spacer()
+                                    Text(categoryToSelect.title)
+                                }
+                            }
+                            Section {
+                                Button {
+                                    estadisticaViewModel.deleteSelectedCategory(categoryToDelete: category)
+                                } label: {
+                                    Text("Eliminar")
+                                }
+                            }
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 8).stroke(.blue, lineWidth: 2)
+                                HStack {
                                     Image(systemName: category.image)
                                     Spacer()
                                     Text(category.title)
+                                    RoundedRectangle(cornerRadius: 4).fill(category.color)
+                                        .frame(width: 20, height: 20)
                                 }
-
+                                .padding(8)
                             }
-                        } label: {
-                            HStack {
-                                Image(systemName: category.image)
-                                Spacer()
-                                Text(category.title)
-                            }
-                            
+                            .frame(height: 32)
                         }
                     }
                     Menu {
@@ -61,18 +73,31 @@ struct Estadisticas: View {
                                 Spacer()
                                 Text(category.title)
                             }
-
                         }
                     } label: {
-                        Text("Categorias")
-                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8).fill(.blue)
+                            HStack {
+                                Image(systemName: "plus.circle")
+                                    .foregroundStyle(Color.white)
+                                Text("Categorias")
+                                    .foregroundStyle(Color.white)
+                            }
+                            .padding(8)
+                        }
+                        .frame(height: 32)
                     }
                 }
                 .frame(height: 96)
                 .padding([.top, .bottom])
+                .padding(.leading, 2)
             }
             if plotData.isEmpty {
-                Text("Selecciona categoría para mostrar")
+                VStack {
+                    Spacer()
+                    Text("Selecciona categoría para mostrar")
+                    Spacer()
+                }
             } else {
                 Chart {
                     ForEach(plotData, id: \.self) { data in

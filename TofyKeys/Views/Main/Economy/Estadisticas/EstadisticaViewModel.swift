@@ -68,12 +68,23 @@ class EstadisticaViewModel: ObservableObject {
         categoriesToSelect = categories
     }
     
-    func categorySelected(selectedCategory: CategoryToPlot, overriding: Bool = false) {
+    func categorySelected(selectedCategory: CategoryToPlot, categoryToOverride: CategoryToPlot? = nil) {
         categoriesToSelect = categoriesToSelect.map({ cp in
             var categoryToUpdate = cp
-            if overriding { categoryToUpdate.selected = false }
+            if categoryToOverride?.id == categoryToUpdate.id { categoryToUpdate.selected = false }
             if categoryToUpdate.id == selectedCategory.id {
                 categoryToUpdate.selected.toggle()
+            }
+            return categoryToUpdate
+        })
+        getDataToPlot()
+    }
+    
+    func deleteSelectedCategory(categoryToDelete: CategoryToPlot) {
+        categoriesToSelect = categoriesToSelect.map({ cp in
+            var categoryToUpdate = cp
+            if categoryToDelete.id == categoryToUpdate.id {
+                categoryToUpdate.selected = false
             }
             return categoryToUpdate
         })
