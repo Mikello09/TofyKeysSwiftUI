@@ -11,6 +11,7 @@ import Charts
 struct Estadisticas: View {
     
     @ObservedObject var estadisticaViewModel: EstadisticaViewModel
+    @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
     var producto: Producto
     
@@ -18,10 +19,14 @@ struct Estadisticas: View {
     @State var categoriesToPlot: [CategoryToPlot] = []
     // PLOT DATA
     @State var plotData: [EstadisticaPlotData] = []
+    // SELECTION
+    @State var selectedMonth = ""
+    @State var monthTransactions: [Transaccion] = []
     
     init(producto: Producto, categoryViewModel: TransactionCategoryViewModel) {
         self.producto = producto
         estadisticaViewModel = EstadisticaViewModel(producto: producto, categoryViewModel: categoryViewModel)
+        self.categoryViewModel = categoryViewModel
     }
     
     var body: some View {
@@ -99,17 +104,48 @@ struct Estadisticas: View {
                     Spacer()
                 }
             } else {
-                Chart {
-                    ForEach(plotData, id: \.self) { data in
-                        let dataColor = Color.random()
-                        ForEach(data.valores, id: \.self) { valor in
-                            BarMark(
-                                x: .value("Date", data.date.getMonthTitle()),
-                                y: .value(valor.title, valor.valor)
-                                      )
-                            .cornerRadius(8)
-                            .foregroundStyle(valor.color)
-                            //.position(by: .value(valor.title, valor.valor)) Para compararlos uno al lado del otro
+                ScrollView(.vertical) {
+                    Chart {
+                        ForEach(plotData, id: \.self) { data in
+                            ForEach(data.valores, id: \.self) { valor in
+                                BarMark(
+                                    x: .value("Date", data.date.getMonthTitle()),
+                                    y: .value(valor.title, valor.valor)
+                                          )
+                                .cornerRadius(8)
+                                .foregroundStyle(selectedMonth == data.date.getMonthTitle() ? valor.color.opacity(0.5) : valor.color)
+                                .annotation(position: .top) {
+                                    Text(valor.valor.toCurrency())
+                                        .font(Font.system(size: 10, weight: .semibold))
+                                        .foregroundStyle(Color.primaryText)
+                                }
+                                //.position(by: .value(valor.title, valor.valor)) Para compararlos uno al lado del otro
+    //                            RuleMark
+                            }
+                        }
+                    }
+                    .chartOverlay { proxy in
+                        GeometryReader { geometry in
+                            ZStack(alignment: .top) {
+                                Rectangle().fill(.clear).contentShape(Rectangle())
+                                    .onTapGesture { location in
+                                        guard let plotFrame = proxy.plotFrame else { return }
+                                        let xPosition = location.x - geometry[plotFrame].origin.x
+                                        guard let month: String = proxy.value(atX: xPosition) else { return }
+                                        selectedMonth = month
+                                        if let categoryID = categoriesToPlot.first(where: { $0.selected })?.id {
+                                            estadisticaViewModel.getTransactionsForDate(month: selectedMonth, year: 2024, category: categoryID)
+                                        }
+                                        print(month)
+                                    }
+                            }
+                        }
+                    }
+                    .frame(height: 300)
+                    if let categoryID = categoriesToPlot.first(where: { $0.selected })?.id, !selectedMonth.isEmpty {
+                        ForEach(monthTransactions, id: \.self) { transaction in
+                            TransactionCell(transaction: transaction, category: categoryViewModel.getCategory(id: categoryID))
+                                .padding()
                         }
                     }
                 }
@@ -126,6 +162,9 @@ struct Estadisticas: View {
         })
         .onReceive(estadisticaViewModel.$categoriesToPlot) { plotData in
             self.plotData = plotData
+        }
+        .onReceive(estadisticaViewModel.$monthTransactions) { monthTransactions in
+            self.monthTransactions = monthTransactions
         }
     }
 }

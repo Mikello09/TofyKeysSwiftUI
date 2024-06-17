@@ -52,6 +52,7 @@ class EstadisticaViewModel: ObservableObject {
     
     @Published var categoriesToSelect: [CategoryToPlot] = []
     @Published var categoriesToPlot: [EstadisticaPlotData] = []
+    @Published var monthTransactions: [Transaccion] = []
     
     init(producto: Producto, categoryViewModel: TransactionCategoryViewModel) {
         self.producto = producto
@@ -110,6 +111,20 @@ class EstadisticaViewModel: ObservableObject {
         default: ()
         }
         categoriesToPlot = plotData
+    }
+    
+    func getTransactionsForDate(month: String, year: Int, category: UUID) {
+        var monthDateFormatter = DateFormatter()
+        monthDateFormatter.dateFormat = "LLLL"
+        guard let monthDate = monthDateFormatter.date(from: month) else { return }
+        
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = Calendar.current.component(.month, from: monthDate)
+        dateComponents.day = 1
+        guard let createdDate = Calendar.current.date(from: dateComponents) else { return }
+        
+        monthTransactions = producto.transacciones.filter({ $0.fecha.startOfMonth >= createdDate.startOfMonth && $0.fecha.endOfMonth <= createdDate.endOfMonth}).filter({ $0.category == category })
     }
     
 }
