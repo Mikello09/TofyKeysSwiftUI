@@ -37,11 +37,9 @@ class UserViewModel: NSObject, ObservableObject {
     
     private let userController: NSFetchedResultsController<UserDB>
     
-    var claveViewModel: ClaveViewModel?
     
     // Init with local objects and then try to update data with server
-    init(managedObjectContext: NSManagedObjectContext, claveViewModel: ClaveViewModel) {
-        self.claveViewModel = claveViewModel
+    init(managedObjectContext: NSManagedObjectContext) {
         userController = NSFetchedResultsController(fetchRequest: UserDB.userDBFetchRequest,
                                                     managedObjectContext: managedObjectContext,
                                                     sectionNameKeyPath: nil,
@@ -54,7 +52,6 @@ class UserViewModel: NSObject, ObservableObject {
             print("Logged user: \(user)")
             USER_TOKEN = user?.token ?? ""
             getUser()
-            self.claveViewModel?.getClaves(tokenUsuario: user?.token)
         } catch {
           print("failed to fetch items!")
         }
@@ -114,7 +111,6 @@ extension UserViewModel {
             }, receiveValue: { user in
                 self.saveUserLocally(userToSave: user.usuario)
                 USER_TOKEN = user.usuario.token
-                self.claveViewModel?.getClaves(tokenUsuario: user.usuario.token)
             })
         }
     }

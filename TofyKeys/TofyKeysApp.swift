@@ -16,21 +16,21 @@ struct TofyKeysApp: App {
     
     // Global ViewModels
     @StateObject var userViewModel: UserViewModel
-    @StateObject var claveViewModel: ClaveViewModel
+    @StateObject var recordarViewModel: RecordarViewModel
     @StateObject var economyViewModel: EconomyViewModel
     @StateObject var categoryViewModel: TransactionCategoryViewModel
+    
     
     // CoreData
     let persistenceController = PersistenceController.shared
     
     init() {
         let managedObjectContext = persistenceController.container.viewContext
-        // CLAVE
-        let claveViewModel = ClaveViewModel(managedObjectContext: managedObjectContext)
-        self._claveViewModel = StateObject(wrappedValue: claveViewModel)
         // USER
-        let userViewModel = UserViewModel(managedObjectContext: managedObjectContext, claveViewModel: claveViewModel)
+        let userViewModel = UserViewModel(managedObjectContext: managedObjectContext)
         self._userViewModel = StateObject(wrappedValue: userViewModel)
+        // RECORDAR
+        self._recordarViewModel = StateObject(wrappedValue: RecordarViewModel())
         // ECONOMY
         let economyViewModel = EconomyViewModel(managedObjectContext: managedObjectContext)
         let categoryViewModel = TransactionCategoryViewModel(managedObjectContext: managedObjectContext)
@@ -44,7 +44,7 @@ struct TofyKeysApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabBarView(userViewModel: userViewModel,
-                           claveViewModel: claveViewModel,
+                           recordarViewModel: recordarViewModel,
                            economyViewModel: economyViewModel,
                            categoryViewModel: categoryViewModel)
         }

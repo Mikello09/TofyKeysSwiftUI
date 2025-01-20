@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22225" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ClaveDB" representedClassName="ClaveDB" syncable="YES" codeGenerationType="class">
-        <attribute name="actualizado" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="fecha" optional="YES" attributeType="String"/>
-        <attribute name="idClave" optional="YES" attributeType="String"/>
-        <attribute name="isFavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="titulo" optional="YES" attributeType="String"/>
-        <attribute name="tokenUsuario" optional="YES" attributeType="String"/>
-        <attribute name="valores" optional="YES" attributeType="Transformable" valueTransformerName="NSAttributedStringTransformer" customClassName="Valores"/>
-    </entity>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23507" systemVersion="24B83" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Objetivos" representedClassName="Objetivos" syncable="YES" codeGenerationType="class"/>
     <entity name="ProductoDB" representedClassName="ProductoDB" syncable="YES" codeGenerationType="class">
         <attribute name="accion" optional="YES" attributeType="String"/>

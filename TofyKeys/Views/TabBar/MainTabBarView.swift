@@ -11,14 +11,14 @@ import SwiftUI
 struct MainTabBarView: View {
     // ViewModels
     @ObservedObject var userViewModel: UserViewModel
-    @ObservedObject var claveViewModel: ClaveViewModel
+    @ObservedObject var recordarViewModel: RecordarViewModel
     @ObservedObject var economyViewModel: EconomyViewModel
     @ObservedObject var categoryViewModel: TransactionCategoryViewModel
     
     var body: some View {
         TabView {
             Group {
-                RecordarView(claveViewModel: claveViewModel)
+                RecordarView(viewModel: recordarViewModel)
                     .tabItem {
                         Label("Recordar", systemImage: "key.fill")
                     }
