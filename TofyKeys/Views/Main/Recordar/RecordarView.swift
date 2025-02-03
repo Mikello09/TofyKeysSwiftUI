@@ -7,20 +7,21 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 struct RecordarView: View {
+    // BBDD
+    @Environment(\.modelContext) private var modelContext
+    @Query private var claves: [Clave]
     
     @ObservedObject var viewModel: RecordarViewModel
-    
-    @State var lastItems: [Clave] = []
-    @State var allItems: [Clave] = []
     
     @State var addClave: Bool = false
     
     var body: some View {
         TofyNavigation {
             ZStack {
-                if allItems.isEmpty {
+                if claves.isEmpty {
                     Text("Start adding items to remember")
                 } else {
                     VStack {
@@ -29,7 +30,7 @@ struct RecordarView: View {
                                 Text("Últimos añadidos")
                                 ScrollView(.horizontal) {
                                     HStack {
-                                        ForEach(lastItems, id: \.id) { item in
+                                        ForEach(claves, id: \.id) { item in
                                             Text(item.titulo)
                                         }
                                     }
@@ -39,7 +40,7 @@ struct RecordarView: View {
                                 Text("Todos")
                                 ScrollView(.horizontal) {
                                     HStack {
-                                        ForEach(allItems, id: \.id) { item in
+                                        ForEach(claves, id: \.id) { item in
                                             Text(item.titulo)
                                         }
                                     }
@@ -53,8 +54,8 @@ struct RecordarView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button {
-                            addClave = true
+                        NavigationLink {
+                            ClaveSelectionView()
                         } label: {
                             Image(systemName: "plus")
                                 .background(Circle().fill(.blue).frame(width: 48, height: 48))
@@ -62,9 +63,6 @@ struct RecordarView: View {
                         }
                         .padding()
                     }
-                }
-                .sheet(isPresented: $addClave) {
-                    LienzoView()
                 }
             }
             .navigationTitle("Para recordar")

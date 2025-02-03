@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftData
 
 @main
 struct TofyKeysApp: App {
@@ -51,5 +51,6 @@ struct TofyKeysApp: App {
         .onChange(of: scenePhase) { // App to background
             persistenceController.save()
         }
+        .modelContainer(sharedModelContainer)
     }
 }

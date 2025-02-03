@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,9 @@
 		970F981727F1C7B700FAE05B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F981627F1C7B700FAE05B /* Colors.swift */; };
 		970F983227F6409200FAE05B /* TofyKeys.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */; };
 		970F983827F6456300FAE05B /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F983727F6456300FAE05B /* PersistenceController.swift */; };
+		971209FF2D50F0CF00D3F159 /* ClaveOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 971209FE2D50F0CC00D3F159 /* ClaveOptions.swift */; };
+		97120A022D50F6DF00D3F159 /* ClaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97120A012D50F6D400D3F159 /* ClaveModel.swift */; };
+		97120A042D50F88300D3F159 /* TofySchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97120A032D50F87F00D3F159 /* TofySchema.swift */; };
 		97129C462ADDCBD600870E8F /* TransferDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97129C452ADDCBD600870E8F /* TransferDetail.swift */; };
 		97324F062A813A5600AE050F /* ProductoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97324F052A813A5600AE050F /* ProductoView.swift */; };
 		97354B3B2B11503D0024B3FF /* ContabilidadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97354B3A2B11503D0024B3FF /* ContabilidadView.swift */; };
@@ -54,6 +57,9 @@
 		977F493B280D95AC00DE9BEC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493A280D95AC00DE9BEC /* LoginView.swift */; };
 		977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977F493C280D9F2500DE9BEC /* TofyTextField.swift */; };
 		979B9399295AF7740034827D /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979B9398295AF7740034827D /* Animations.swift */; };
+		97B5FAEE2D42808400411167 /* ClaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B5FAED2D42807C00411167 /* ClaveView.swift */; };
+		97BE84FB2D324D7700061A38 /* LienzoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE84FA2D324D7700061A38 /* LienzoView.swift */; };
+		97BE85022D42623400061A38 /* ClaveSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BE85012D424E3000061A38 /* ClaveSelectionView.swift */; };
 		97BFA28E2A7A913F00022312 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA28D2A7A913F00022312 /* UserSettings.swift */; };
 		97BFA2922A7BDD9D00022312 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */; };
 		97BFA2942A7BE44100022312 /* CategoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BFA2932A7BE44100022312 /* CategoryDB.swift */; };
@@ -82,6 +88,9 @@
 		970F981627F1C7B700FAE05B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		970F983127F6409200FAE05B /* UserDatabase.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserDatabase.xcdatamodel; sourceTree = "<group>"; };
 		970F983727F6456300FAE05B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		971209FE2D50F0CC00D3F159 /* ClaveOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveOptions.swift; sourceTree = "<group>"; };
+		97120A012D50F6D400D3F159 /* ClaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveModel.swift; sourceTree = "<group>"; };
+		97120A032D50F87F00D3F159 /* TofySchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofySchema.swift; sourceTree = "<group>"; };
 		97129C452ADDCBD600870E8F /* TransferDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferDetail.swift; sourceTree = "<group>"; };
 		97324F052A813A5600AE050F /* ProductoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductoView.swift; sourceTree = "<group>"; };
 		97354B3A2B11503D0024B3FF /* ContabilidadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContabilidadView.swift; sourceTree = "<group>"; };
@@ -115,6 +124,9 @@
 		977F493C280D9F2500DE9BEC /* TofyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TofyTextField.swift; sourceTree = "<group>"; };
 		977F493F2811F48B00DE9BEC /* TofyKeys.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TofyKeys.entitlements; sourceTree = "<group>"; };
 		979B9398295AF7740034827D /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		97B5FAED2D42807C00411167 /* ClaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveView.swift; sourceTree = "<group>"; };
+		97BE84FA2D324D7700061A38 /* LienzoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LienzoView.swift; sourceTree = "<group>"; };
+		97BE85012D424E3000061A38 /* ClaveSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaveSelectionView.swift; sourceTree = "<group>"; };
 		97BFA28D2A7A913F00022312 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		97BFA2912A7BDD9D00022312 /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		97BFA2932A7BE44100022312 /* CategoryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDB.swift; sourceTree = "<group>"; };
@@ -124,10 +136,6 @@
 		97D9E81B2B76753E007A2B92 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		F206E6162BB5928700798229 /* EstadisticaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstadisticaViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		9760B8EA2CF4C19D00B15996 /* Lienzo */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Lienzo; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		970F97E427F1B1B700FAE05B /* Frameworks */ = {
@@ -275,6 +283,8 @@
 		970F982E27F6406300FAE05B /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				97120A032D50F87F00D3F159 /* TofySchema.swift */,
+				97120A002D50F6C700D3F159 /* Recordar */,
 				970F983027F6409200FAE05B /* TofyKeys.xcdatamodeld */,
 				970F983727F6456300FAE05B /* PersistenceController.swift */,
 				975C73852A36232400CDB280 /* UserDB.swift */,
@@ -290,6 +300,21 @@
 				974E3D24281988D800C5CA1F /* ApiManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		971209FD2D50EF6200D3F159 /* Lista */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lista;
+			sourceTree = "<group>";
+		};
+		97120A002D50F6C700D3F159 /* Recordar */ = {
+			isa = PBXGroup;
+			children = (
+				97120A012D50F6D400D3F159 /* ClaveModel.swift */,
+			);
+			path = Recordar;
 			sourceTree = "<group>";
 		};
 		97324F042A813A4D00AE050F /* Detalle */ = {
@@ -435,7 +460,7 @@
 		9774068929FFF40900802B25 /* Recordar */ = {
 			isa = PBXGroup;
 			children = (
-				9760B8EA2CF4C19D00B15996 /* Lienzo */,
+				97BE85002D424E2900061A38 /* Lienzo */,
 				9760B8E82CF4BC0C00B15996 /* RecordarViewModel.swift */,
 				9760B8E62CF08A8600B15996 /* RecordarModel.swift */,
 				9774068D29FFF46B00802B25 /* RecordarView.swift */,
@@ -467,6 +492,34 @@
 				970F97EE27F1B1B900FAE05B /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		97B5FAF32D50EF2600411167 /* Clave */ = {
+			isa = PBXGroup;
+			children = (
+				971209FE2D50F0CC00D3F159 /* ClaveOptions.swift */,
+				97B5FAED2D42807C00411167 /* ClaveView.swift */,
+			);
+			path = Clave;
+			sourceTree = "<group>";
+		};
+		97B5FAF42D50EF3A00411167 /* Nota */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Nota;
+			sourceTree = "<group>";
+		};
+		97BE85002D424E2900061A38 /* Lienzo */ = {
+			isa = PBXGroup;
+			children = (
+				971209FD2D50EF6200D3F159 /* Lista */,
+				97B5FAF42D50EF3A00411167 /* Nota */,
+				97B5FAF32D50EF2600411167 /* Clave */,
+				97BE85012D424E3000061A38 /* ClaveSelectionView.swift */,
+				97BE84FA2D324D7700061A38 /* LienzoView.swift */,
+			);
+			path = Lienzo;
 			sourceTree = "<group>";
 		};
 		97BFA28C2A7A913300022312 /* User */ = {
@@ -516,9 +569,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				9760B8EA2CF4C19D00B15996 /* Lienzo */,
-			);
 			name = TofyKeys;
 			packageProductDependencies = (
 				974E3D2028197CE700C5CA1F /* Lottie */,
@@ -539,6 +589,7 @@
 				TargetAttributes = {
 					970F97E627F1B1B700FAE05B = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1610;
 					};
 				};
 			};
@@ -589,10 +640,13 @@
 				9774068229D1AFD900802B25 /* EconomyLanding.swift in Sources */,
 				9750FDF42B309B920035F543 /* EditingCategoryCell.swift in Sources */,
 				975C738D2A4891FB00CDB280 /* AddProductoView.swift in Sources */,
+				97B5FAEE2D42808400411167 /* ClaveView.swift in Sources */,
 				9774068529D1B9E200802B25 /* TofyNavigation.swift in Sources */,
+				97BE85022D42623400061A38 /* ClaveSelectionView.swift in Sources */,
 				970F981127F1C5D700FAE05B /* NoLoggedUser.swift in Sources */,
 				97324F062A813A5600AE050F /* ProductoView.swift in Sources */,
 				974E3D2328197DAE00C5CA1F /* LottieView.swift in Sources */,
+				97120A042D50F88300D3F159 /* TofySchema.swift in Sources */,
 				F206E6172BB5928700798229 /* EstadisticaViewModel.swift in Sources */,
 				970F981727F1C7B700FAE05B /* Colors.swift in Sources */,
 				974E3D2C281BF7A800C5CA1F /* RegisterView.swift in Sources */,
@@ -619,9 +673,12 @@
 				97BFA2942A7BE44100022312 /* CategoryDB.swift in Sources */,
 				974E3D25281988D800C5CA1F /* ApiManager.swift in Sources */,
 				977F493D280D9F2500DE9BEC /* TofyTextField.swift in Sources */,
+				971209FF2D50F0CF00D3F159 /* ClaveOptions.swift in Sources */,
 				970F980F27F1C5CB00FAE05B /* LoggedUser.swift in Sources */,
+				97BE84FB2D324D7700061A38 /* LienzoView.swift in Sources */,
 				97D9E8192B767381007A2B92 /* ProductoMenu.swift in Sources */,
 				97354B3B2B11503D0024B3FF /* ContabilidadView.swift in Sources */,
+				97120A022D50F6DF00D3F159 /* ClaveModel.swift in Sources */,
 				97BFA2922A7BDD9D00022312 /* AddCategoryView.swift in Sources */,
 				9760B8E72CF08A8C00B15996 /* RecordarModel.swift in Sources */,
 				970F97FF27F1B71E00FAE05B /* TopView.swift in Sources */,
@@ -774,6 +831,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeysDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -789,7 +847,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -799,6 +857,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -809,6 +869,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TofyKeys/TofyKeys.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -825,7 +886,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -836,6 +897,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "TofyKeys Development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

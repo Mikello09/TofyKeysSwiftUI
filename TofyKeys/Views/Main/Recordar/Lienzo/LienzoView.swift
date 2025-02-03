@@ -8,65 +8,50 @@
 import SwiftUI
 
 struct LienzoView: View {
+    @Environment(\.modelContext) private var modelContext
     
-    @State var claveTitulo: String = ""
+    var tipo: TipoClave
     
-    @State var showingItems: [ClaveItem] = []
+    @State var titulo: String = ""
+    
+    // Clave
+    @State var claveItems: [ClaveItem] = []
     
     var body: some View {
         ZStack {
             VStack {
                 HStack {
-                    TextField("Nueva clave", text: $claveTitulo)
+                    TextField(tipo.title(), text: $titulo)
                         .font(Font.system(size: 22, weight: .semibold))
                         .padding()
                         .frame(maxWidth: .infinity)
                     Spacer()
                     Button {
-                        print(showingItems)
+                        switch tipo {
+                        case .clave:
+                            print(claveItems)
+                            let newClave = Clave(id: UUID(), titulo: titulo, creationDate: Date(), lastModified: Date(), items: claveItems)
+                            modelContext.insert(newClave)
+                        case .nota: ()
+                        case .list: ()
+                        }
                     } label: {
                         Text("Guardar")
                     }
                     .padding()
                 }
                 
-                VStack {
-                    ScrollView {
-                        ForEach($showingItems, id: \.id) { $item in
-                            ClaveItemView(clave: $item) { claveToDelete in
-                                showingItems.removeAll(where: { $0.id == claveToDelete.id })
-                            }
-                        }
-                    }
-                    .scrollBounceBehavior(.basedOnSize)
-                    Spacer()
-                    LienzoToolbar() { selectedItem in
-                        showingItems.append(ClaveItem(tipo: selectedItem))
-                    }
+                switch tipo {
+                case .clave:
+                    ClaveView(values: $claveItems)
+                case .nota:
+                    EmptyView()
+                case .list:
+                    EmptyView()
                 }
-                .padding()
             }
         }
     }
 }
 
-struct LienzoToolbar: View {
-    
-    var onSelect: (TipoClave) -> Void
-    
-    var body: some View {
-        HStack(spacing: 16) {
-            ForEach(TipoClave.allCases, id: \.self) { tipo in
-                Button {
-                    onSelect(tipo)
-                } label: {
-                    tipo.icon()
-                        .frame(width: 32, height: 32)
-                        .background(RoundedRectangle(cornerRadius: 4).fill(.gray).shadow(radius: 1))
-                }
-            }
-        }
-        .padding()
-        .border(.black)
-    }
-}
+
